@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="stuf">
-    <output-path>$PROJECT_DIR$/out/artifacts/stuf</output-path>
-    <root id="archive" name="StuFunding_war.war">
-      <element id="artifact" artifact-name="StuFunding:war exploded" />
-    </root>
-  </artifact>
-</component>
