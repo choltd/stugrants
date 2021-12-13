@@ -5,7 +5,13 @@
 
 <mapper namespace="com.jjugrants.dao.StuDao">
     <select id="login" resultType="com.jjugrants.domain.Student">
-        select * from users where userName = #{uname} and password = #{pwd}
+        select * from student where sequence = #{sequence } and password = #{pwd}
+    </select>
+    <select id="count" resultType="map">
+        select count(*) as value from student
+    </select>
+    <select id="countFiled" resultType="map">
+        select count(*) as value from filed
     </select>
 </mapper>
 

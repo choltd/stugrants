@@ -8,7 +8,7 @@ import com.jjugrants.utils.SqlSessionUtil;
 public class StuServiceImpl implements StuService {
     private StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
     @Override
-    public Student login(String userName, String password) {
-        return stuDao.login(userName,password);
+    public Student login(String sequence, String password) {
+        return stuDao.login(sequence,password);
     }
 }

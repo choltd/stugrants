@@ -1,5 +1,5 @@
 $(function () {
-    $("#username").focus();
+    $("#account").focus();
     $("#wjmm").click(function () {
         alert("请向管理员确认！");
     })
@@ -11,24 +11,34 @@ $(function () {
         $('.drxx').addClass('byzs');
     })
     $("#dlBtn").click(function () {
-        if ($("#username").val() === "") {
-            $("#usernameError").css("display", "block");
-        } else if ($("#password").val() === "") {
-            $("#passwordError").text("请输入密码").css("display", "block");
-        } else{
-            $.ajax({
-                url:"/stu?action=login",
-                data:{"userName":$("#username").val(),"password":$("#password").val()},
-                dataType:"json",
-                type:"post",
-                success:function(data){
-                    if (data !== null) {
-                        window.location.href = "static/Student/test.html";
-                    } else { 
-                        $("#passwordError").text("用户名或密码错误").css("display", "block");
-                    }
-                }
-            })
+        sign();
+    })
+    $("#password").keydown(function (event) {
+        if(event.keyCode === 13){
+            sign();
         }
     })
+
 });
+
+function sign() {
+    if ($("#account").val() === "") {
+        $("#accountError").css("display", "block");
+    } else if ($("#password").val() === "") {
+        $("#passwordError").text("请输入密码").css("display", "block");
+    } else{
+        $.ajax({
+            url:"/stu?action=login",
+            data:{"account":$("#account").val(),"password":$("#password").val()},
+            dataType:"json",
+            type:"post",
+            success:function(data){
+                if (data !== null) {
+                    window.location.href = "../student/stu.jsp";
+                } else {
+                    $("#passwordError").text("用户名或密码错误").css("display", "block");
+                }
+            }
+        })
+    }
+}

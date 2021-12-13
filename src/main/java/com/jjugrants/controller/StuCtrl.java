@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 @WebServlet("/stu")
 public class StuCtrl extends HttpServlet {
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) {
         String action = req.getParameter("action");
         Method method = null;
         try {
@@ -31,10 +31,11 @@ public class StuCtrl extends HttpServlet {
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) {
-        String userName = req.getParameter("userName");
+        String sequence = req.getParameter("account");
         String password = req.getParameter("password");
-        StuService ss = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        Student stu = ss.login(userName, password);
-        PrintJson.printJsonObj(resp, stu);
+        StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
+        Student student = stuService.login(sequence, password);
+        PrintJson.printJsonObj(resp, student);
     }
+
 }

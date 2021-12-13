@@ -9,7 +9,7 @@ body {
     min-height: 600px;
     overflow: auto;
     position: relative;
-    background: url(/static/image/dbg2.jpg) no-repeat;
+    background: url(../../image/bg6.jpg) no-repeat;
     background-size: 100% 1080px;
 }
 
@@ -95,7 +95,7 @@ body {
 
 .dlsm {
     width: 100%;
-    min-height: 400px;
+    height: 400px;
     display: block;
 }
 
