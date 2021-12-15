@@ -1,11 +1,15 @@
 package com.jjugrants.controller;
 
 import com.jjugrants.domain.Admin;
+import com.jjugrants.domain.PageBean;
 import com.jjugrants.domain.Student;
+import com.jjugrants.domain.Teacher;
 import com.jjugrants.service.AdminService;
 import com.jjugrants.service.StuService;
+import com.jjugrants.service.TchService;
 import com.jjugrants.service.impl.AdminServiceImpl;
 import com.jjugrants.service.impl.StuServiceImpl;
+import com.jjugrants.service.impl.TchServiceImpl;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
 
@@ -20,13 +24,13 @@ import java.util.Map;
 public class AdminCtrl extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setContentType("application/json;charset=UTF-8");
         String action = req.getParameter("act");
         Method method = null;
         try {
-            method = getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);//反射获取方法名
-            if (method != null) {
-                method.invoke(this, req, resp);//调用方法
-            }
+            method = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
+            method.setAccessible(true);
+            method.invoke(this, req, resp);//调用方法
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,8 +46,30 @@ public class AdminCtrl extends HttpServlet {
 
     private void getCharts(HttpServletRequest request, HttpServletResponse response){
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        Map<String,Object> map =  adminService.getCharts();
-        PrintJson.printJsonObj(response,map);
+        Map<String, Object> map = adminService.getCharts();
+        PrintJson.printJsonObj(response, map);
+    }
+
+    private void stuPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String pageNum = request.getParameter("pageNum");
+        String pageSize = request.getParameter("pageSize");
+        PageBean<Student> pageBean = new PageBean<>();
+        pageBean.setPageNum(Integer.parseInt(pageNum));
+        pageBean.setPageSize(Integer.parseInt(pageSize));
+        StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
+        PageBean<Student> studentPageBean = stuService.queryList(pageBean);
+        PrintJson.printJsonObj(response, studentPageBean);
+    }
+
+    private void tchPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String pageNum = request.getParameter("pageNum");
+        String pageSize = request.getParameter("pageSize");
+        PageBean<Teacher> pageBean = new PageBean<>();
+        pageBean.setPageNum(Integer.parseInt(pageNum));
+        pageBean.setPageSize(Integer.parseInt(pageSize));
+        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
+        PageBean<Teacher> teacherPageBean = tchService.queryList(pageBean);
+        PrintJson.printJsonObj(response, teacherPageBean);
     }
 
 }

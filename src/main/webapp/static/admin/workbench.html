@@ -1,15 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
-%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <base href="<%=basePath%>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/css/admin/workbench.css" type="text/css" rel="stylesheet">
+    <link href="../css/admin/workbench.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -44,8 +39,8 @@
     </div>
 </div>
 </body>
-<script src="static/js/jquery.min.js"></script>
-<script src="static/js/echarts.min.js"></script>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/echarts.min.js"></script>
 <script>
     $(function () {
         getCharts();
@@ -53,14 +48,14 @@
 
     function getCharts() {
         $.ajax({
-            url: "admin?act=getCharts",
+            url: "/admin?act=getCharts",
             dataType: "json",
             type: "get",
             success: function (data) {
                 var html = "<tr>";
-                var arr = new Array();
+                var arr = [];
                 $.each(data.dataList, function (i, e) {
-                    html += "<td><a href=''>" + e.value + "</a></td>";
+                    html += "<td><a href='javascript:void(0);' onclick='goto(\""+e.name+"\");'>" + e.value + "</a></td>";
                     arr.push(e.name);
                 })
                 $("#tjb").append(html);
@@ -107,10 +102,20 @@
 
                 window.addEventListener("resize", function () {
                     myChart.resize();
-                })
-                $("#ec").css({"background-color": "#fff", "margin-top": "15px"})
+                });
+                $("#ec").css({"background-color": "#fff", "margin-top": "15px"});
             }
         })
+    }
+
+    function goto(name){
+        switch (name) {
+            case 'student':window.location.href = "stuInfo.html";break;
+            case 'teacher':window.location.href = "tchInfo.html";break;
+            case 'filed':window.location.href = "fieldInfo.html";break;
+            case 'review':window.location.href = "reviewInfo.html";break;
+            case 'grants':window.location.href = "grantsInfo.html";break;
+        }
     }
 
 </script>

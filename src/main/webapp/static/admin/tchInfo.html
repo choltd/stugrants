@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h1>教师信息</h1>
+    </div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>工号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>联系电话</td>
+                <td>院系</td>
+            </tr>
+            </thead>
+            <tbody id="tchList">
+
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jq-paginator.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+    var pageInfo = {"pageNum": 1, "pageSize": 10}
+    $(function () {
+        pageShow(1, true);
+    })
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/admin?act=tchPage",
+            data: pageInfo,
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var $tbody = $("#tchList");
+                var html = "";
+                $tbody.html(html);
+                $.each(data.list, function (i, e) {
+                    html += "<tr>";
+                    html += "<td>" + e.workId + "</td>";
+                    html += "<td>" + e.name + "</td>";
+                    html += "<td>" + (e.sex === 0 ? '女' : '男') + "</td>";
+                    html += "<td>" + e.phone + "</td>";
+                    html += "<td>" + e.faculty + "</td>";
+                    html += "</tr>";
+                })
+                $tbody.html(html);
+
+                if (isFirst) {
+                    $.jqPaginator("#pagination",{
+                        totalPages: data.totalPage,
+                        visiblePages: 10,
+                        currentPage: num,
+                        first: '<li class="page-item"><a class="page-link">首页</a></li>',
+                        prev: '<li class="page-item"><a class="page-link">上一页</a></li>',
+                        next: '<li class="page-item"><a class="page-link">下一页</a></li>',
+                        last: '<li class="page-item"><a class="page-link">末页</a></li>',
+                        page: '<li class="page-item"><a class="page-link">{{page}}</a></li>',
+                        onPageChange: function (num) {
+                            pageShow(num, false);
+                        }
+                    })
+                };
+            }
+        })
+    }
+</script>
+
+</html>

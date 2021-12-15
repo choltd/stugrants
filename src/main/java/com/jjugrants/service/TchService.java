@@ -1,7 +1,10 @@
 package com.jjugrants.service;
 
+import com.jjugrants.domain.PageBean;
 import com.jjugrants.domain.Teacher;
 
 public interface TchService {
-    Teacher login(String workId, String password);
+    Teacher query(Teacher teacher);
+
+    PageBean<Teacher> queryList(PageBean<Teacher> pageBean);
 }

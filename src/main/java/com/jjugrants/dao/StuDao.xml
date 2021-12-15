@@ -4,14 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jjugrants.dao.StuDao">
-    <select id="login" resultType="com.jjugrants.domain.Student">
-        select * from student where sequence = #{sequence } and password = #{pwd}
+    <select id="query" resultType="student">
+        select * from student
+        <where>
+            <if test="sequence != null and sequence != ''">
+                and sequence like '%' #{sequence} '%'
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                and name like '%' #{name} '%'
+            </if>
+        </where>
+
     </select>
     <select id="count" resultType="map">
-        select count(*) as value from student
+        select count(*) as value
+        from student
     </select>
     <select id="countFiled" resultType="map">
-        select count(*) as value from filed
+        select count(*) as value
+        from filed
+    </select>
+    <select id="pageCount" resultType="student">
+        select *
+        from student
+        order by id limit #{startIndex}, #{pageSize}
     </select>
 </mapper>
 

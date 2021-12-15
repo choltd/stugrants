@@ -1,7 +1,7 @@
 package com.jjugrants.domain;
 
 public class Teacher {
-    private String id;
+    private int id;
     private String workId;
     private String name;
     private int sex;
@@ -9,24 +9,11 @@ public class Teacher {
     private String faculty;
     private String password;
 
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "id='" + id + '\'' +
-                ", workId='" + workId + '\'' +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", phone='" + phone + '\'' +
-                ", faculty='" + faculty + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -76,5 +63,18 @@ public class Teacher {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", workId='" + workId + '\'' +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", phone='" + phone + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

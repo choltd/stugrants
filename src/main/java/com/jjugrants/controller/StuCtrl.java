@@ -6,12 +6,10 @@ import com.jjugrants.service.impl.StuServiceImpl;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.lang.reflect.Method;
 
 @WebServlet("/stu")
@@ -33,9 +31,12 @@ public class StuCtrl extends HttpServlet {
     private void login(HttpServletRequest req, HttpServletResponse resp) {
         String sequence = req.getParameter("account");
         String password = req.getParameter("password");
+        Student student = new Student();
+        student.setSequence(sequence);
+        student.setPassword(password);
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        Student student = stuService.login(sequence, password);
-        PrintJson.printJsonObj(resp, student);
+        Student stu = stuService.query(student);
+        PrintJson.printJsonObj(resp, stu);
     }
 
 }

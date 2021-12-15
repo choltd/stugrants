@@ -31,9 +31,13 @@ public class TchCtrl extends HttpServlet {
     private void login(HttpServletRequest req, HttpServletResponse resp) {
         String workId = req.getParameter("account");
         String password = req.getParameter("password");
+        Teacher tch = new Teacher();
+        tch.setWorkId(workId);
+        tch.setPassword(password);
         TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
-        Teacher teacher = tchService.login(workId, password);
+        Teacher teacher = tchService.query(tch);
         PrintJson.printJsonObj(resp, teacher);
     }
+
 
 }

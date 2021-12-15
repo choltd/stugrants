@@ -52,26 +52,26 @@ $(function () {
         var $signin = $(".signin");
         $(".form").hide();
         $("#vb").hide();
-        $signin.css("left","44%");
-        $signin.css("top", "40%");
-        $signin.attr("id","active");
+        $signin.css({"left": "44%", "top": "40%"});
+        $signin.attr("id", "active");
         $.ajax({
-            url:"/admin?act=login",
-            data:{"account":$("#account").val(),"password":$("#password").val()},
-            dataType:"json",
-            type:"get",
-            success:function(data){
-                if(data !== null){
+            url: "/admin?act=login",
+            data: {"account": $("#account").val(), "password": $("#password").val()},
+            dataType: "json",
+            type: "get",
+            success: function (data) {
+                if (data !== null) {
+                    $("#txt").text("loading").css({"display":"block","color":"#fff"});
                     var delay = setTimeout(function () {
-                        window.location.href = "workspace.jsp";
+                        window.location.href = "../admin/workspace.html";
                         clearTimeout(delay);
-                    },1000)
-                } else{
-                    $("#txt").css("display","block");
+                    }, 1000)
+                } else {
+                    $("#txt").text("error").css("display", "block");
                     var time = setTimeout(function () {
                         location.reload();
                         clearTimeout(time);
-                    },3000);
+                    }, 3000);
                 }
             }
         });
