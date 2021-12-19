@@ -34,7 +34,10 @@ function sign() {
             type:"post",
             success:function(data){
                 if (data !== null) {
-                    window.location.href = "../student/stu.jsp";
+                    if(window.localStorage){
+                        localStorage.setItem("student",JSON.stringify(data));
+                        window.location.href = "student.html";
+                    }
                 } else {
                     $("#passwordError").text("用户名或密码错误").css("display", "block");
                 }

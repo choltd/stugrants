@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TchServiceImpl implements TchService {
-    private TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
+    private final TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
     @Override
     public Teacher query(Teacher teacher) {
         return tchDao.query(teacher);

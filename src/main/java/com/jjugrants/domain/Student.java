@@ -67,11 +67,11 @@ public class Student {
         this.phone = phone;
     }
 
-    public String getBankcard() {
+    public String getbankcard() {
         return bankcard;
     }
 
-    public void setBankcard(String bankcard) {
+    public void setbankcard(String bankcard) {
         this.bankcard = bankcard;
     }
 

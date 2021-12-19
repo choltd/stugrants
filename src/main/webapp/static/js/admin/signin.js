@@ -56,7 +56,10 @@ $(function () {
         $signin.attr("id", "active");
         $.ajax({
             url: "/admin?act=login",
-            data: {"account": $("#account").val(), "password": $("#password").val()},
+            data: {
+                "account": $("#account").val(),
+                "password": $("#password").val()
+            },
             dataType: "json",
             type: "get",
             success: function (data) {

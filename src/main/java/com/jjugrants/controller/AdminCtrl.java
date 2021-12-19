@@ -24,7 +24,6 @@ import java.util.Map;
 public class AdminCtrl extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setContentType("application/json;charset=UTF-8");
         String action = req.getParameter("act");
         Method method = null;
         try {

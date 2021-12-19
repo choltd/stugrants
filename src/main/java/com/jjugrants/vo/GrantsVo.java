@@ -1,20 +1,24 @@
-package com.jjugrants.domain;
+package com.jjugrants.vo;
 
-public class Grants {
+public class GrantsVo {
     private int id;
-    private int sequence;
-    private int workId;
+    private String sequence;
+    private String workId;
     private int adminId;
     private int filedId;
+    private String phone;
+    private String illustrate;
 
     @Override
     public String toString() {
-        return "grants{" +
+        return "GrantsVo{" +
                 "id=" + id +
                 ", sequence=" + sequence +
                 ", workId=" + workId +
                 ", adminId=" + adminId +
                 ", filedId=" + filedId +
+                ", phone='" + phone + '\'' +
+                ", illustrate='" + illustrate + '\'' +
                 '}';
     }
 
@@ -26,19 +30,19 @@ public class Grants {
         this.id = id;
     }
 
-    public int getsequence() {
+    public String getSequence() {
         return sequence;
     }
 
-    public void setsequence(int sequence) {
+    public void setSequence(String sequence) {
         this.sequence = sequence;
     }
 
-    public int getworkId() {
+    public String getWorkId() {
         return workId;
     }
 
-    public void setworkId(int workId) {
+    public void setWorkId(String workId) {
         this.workId = workId;
     }
 
@@ -56,5 +60,21 @@ public class Grants {
 
     public void setFiledId(int filedId) {
         this.filedId = filedId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIllustrate() {
+        return illustrate;
+    }
+
+    public void setIllustrate(String illustrate) {
+        this.illustrate = illustrate;
     }
 }

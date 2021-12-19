@@ -284,3 +284,19 @@ $.fn.jqPaginator = function () {
     return new $.jqPaginator(this, args[0])
   }
 }
+
+function pagination(selector,data) {
+  $.jqPaginator(selector,{
+    totalPages: data.totalPage,
+    visiblePages: data.pageSize,
+    currentPage: 1,
+    first: '<li class="page-item"><a class="page-link">首页</a></li>',
+    prev: '<li class="page-item"><a class="page-link">上一页</a></li>',
+    next: '<li class="page-item"><a class="page-link">下一页</a></li>',
+    last: '<li class="page-item"><a class="page-link">末页</a></li>',
+    page: '<li class="page-item"><a class="page-link">{{page}}</a></li>',
+    onPageChange: function (page,type) {
+      pageShow(page, false);
+    }
+  })
+}

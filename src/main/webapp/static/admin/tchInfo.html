@@ -64,20 +64,8 @@
                 $tbody.html(html);
 
                 if (isFirst) {
-                    $.jqPaginator("#pagination",{
-                        totalPages: data.totalPage,
-                        visiblePages: 10,
-                        currentPage: num,
-                        first: '<li class="page-item"><a class="page-link">首页</a></li>',
-                        prev: '<li class="page-item"><a class="page-link">上一页</a></li>',
-                        next: '<li class="page-item"><a class="page-link">下一页</a></li>',
-                        last: '<li class="page-item"><a class="page-link">末页</a></li>',
-                        page: '<li class="page-item"><a class="page-link">{{page}}</a></li>',
-                        onPageChange: function (num) {
-                            pageShow(num, false);
-                        }
-                    })
-                };
+                    pagination("#pagination", data, num);
+                }
             }
         })
     }

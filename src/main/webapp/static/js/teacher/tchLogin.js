@@ -34,7 +34,7 @@ function sign() {
             type:"post",
             success:function(data){
                 if (data !== null) {
-                    window.location.href = "../teacher/tch.jsp";
+                    window.location.href = "teacher.html";
                 } else {
                     $("#passwordError").text("用户名或密码错误").css("display", "block");
                 }

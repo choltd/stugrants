@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminServiceImpl implements AdminService {
-    private AdminDao adminDao = SqlSessionUtil.getSqlSession().getMapper(AdminDao.class);
-    private StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
-    private TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
+    private final AdminDao adminDao = SqlSessionUtil.getSqlSession().getMapper(AdminDao.class);
+    private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
+    private final TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
 
     @Override
     public Admin login(String account, String password) {
@@ -26,10 +26,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Map<String, Object> getCharts() {
-        List<Map<String, Object>> dataList = new ArrayList();
+        List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> stuMap = stuDao.count();
         stuMap.put("name", "student");
-        Map<String, Object> filedMap = stuDao.countFiled();
+        Map<String, Object> filedMap = stuDao.filedCount();
         filedMap.put("name", "filed");
         Map<String, Object> tchMap = tchDao.count();
         tchMap.put("name", "teacher");

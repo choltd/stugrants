@@ -23,15 +23,88 @@
         select count(*) as value
         from student
     </select>
-    <select id="countFiled" resultType="map">
+    <select id="filedCount" resultType="map">
         select count(*) as value
         from filed
     </select>
-    <select id="pageCount" resultType="student">
+    <select id="stuPage" resultType="student">
         select *
         from student
         order by id limit #{startIndex}, #{pageSize}
     </select>
+
+    <insert id="filedAdd">
+        insert into filed(studentId, illustrate, time, rating, remark)
+        values (#{studentId}, #{illustrate}, #{time}, #{rating}, #{remark})
+    </insert>
+
+    <select id="filedVoPage" resultType="com.jjugrants.vo.FiledVo">
+        select f.id,
+               f.studentId,
+               f.illustrate,
+               f.time,
+               f.rating,
+               f.remark,
+               s.sequence,
+               s.name,
+               s.phone
+        from filed f
+                 join student s on f.studentId = s.id
+        order by f.time desc limit #{startIndex}, #{pageSize}
+    </select>
+
+    <delete id="filedDel">
+        delete
+        from filed
+        where id = #{id}
+    </delete>
+
+    <select id="getFiled" resultType="com.jjugrants.vo.FiledVo">
+        select f.id,
+               f.illustrate,
+               f.rating,
+               f.time,
+               f.remark,
+               s.name,
+               s.sequence,
+               s.sex,
+               s.phone,
+               s.idcard,
+               s.bankcard
+        from filed f
+                 join student s on f.studentId = s.id
+        where f.id = #{id}
+    </select>
+
+    <update id="update">
+        update filed
+        set illustrate=#{illustrate},
+            rating=#{rating},
+            time=#{time},
+            remark=#{remark}
+        where id = #{id}
+    </update>
+
+    <select id="grantsCount" resultType="map">
+        select count(*) as value
+        from grants
+    </select>
+
+    <select id="grantsVoPage" resultType="com.jjugrants.vo.GrantsVo">
+        select g.id, g.sequence, g.workId, g.adminId, g.filedId, s.phone, f.illustrate
+        from grants g
+                 join filed f on g.filedId = f.id
+                 join student s on g.sequence = s.sequence
+        order by g.id limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="verify" resultType="integer">
+        select count(*)
+        from student where id=#{id} and password=#{pwd};
+    </select>
+    <update id="pwdUpdate">
+        update student set password=#{chg} where id=#{id}
+    </update>
 </mapper>
 
 
