@@ -1,9 +1,6 @@
 package com.jjugrants.controller;
 
-import com.jjugrants.domain.Admin;
-import com.jjugrants.domain.PageBean;
-import com.jjugrants.domain.Student;
-import com.jjugrants.domain.Teacher;
+import com.jjugrants.domain.*;
 import com.jjugrants.service.AdminService;
 import com.jjugrants.service.StuService;
 import com.jjugrants.service.TchService;
@@ -12,6 +9,7 @@ import com.jjugrants.service.impl.StuServiceImpl;
 import com.jjugrants.service.impl.TchServiceImpl;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
+import com.jjugrants.vo.ReviewVo;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,6 +58,12 @@ public class AdminCtrl extends HttpServlet {
         PrintJson.printJsonObj(response, studentPageBean);
     }
 
+    private void stuDel(HttpServletRequest request, HttpServletResponse response){
+        StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
+        boolean flag = stuService.stuDel(request.getParameter("id"));
+        PrintJson.printJsonFlag(response, flag);
+    }
+
     private void tchPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String pageNum = request.getParameter("pageNum");
         String pageSize = request.getParameter("pageSize");
@@ -69,6 +73,29 @@ public class AdminCtrl extends HttpServlet {
         TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
         PageBean<Teacher> teacherPageBean = tchService.queryList(pageBean);
         PrintJson.printJsonObj(response, teacherPageBean);
+    }
+
+    private void tchDel(HttpServletRequest request, HttpServletResponse response){
+        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
+        boolean flag = tchService.tchDel(request.getParameter("id"));
+        PrintJson.printJsonFlag(response, flag);
+    }
+
+    private void reviewVoPage(HttpServletRequest request, HttpServletResponse response){
+        String pageSize = request.getParameter("pageSize");
+        String pageNum = request.getParameter("pageNum");
+        PageBean<ReviewVo> rvpb = new PageBean<>();
+        rvpb.setPageSize(Integer.parseInt(pageSize));
+        rvpb.setPageNum(Integer.parseInt(pageNum));
+        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
+        PageBean<ReviewVo> reviewPageBean = tchService.reviewVoPage(rvpb);
+        PrintJson.printJsonObj(response,reviewPageBean);
+    }
+
+    private void reviewDel(HttpServletRequest request, HttpServletResponse response){
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        boolean flag = adminService.reviewDel(request.getParameter("id"));
+        PrintJson.printJsonFlag(response,flag);
     }
 
 }

@@ -3,14 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
     <properties resource="mysql/db.properties"></properties>
+
+    <settings>
+        <!--开启驼峰命名转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
     <!--设置别名-->
     <typeAliases>
         <!--为实体类设置别名-->
         <package name="com.jjugrants.domain"/>
     </typeAliases>
-
-    <!--mapper文件位置-->
 
     <environments default="development">
         <environment id="development">
@@ -24,6 +29,7 @@
         </environment>
     </environments>
 
+    <!--mapper文件位置-->
     <mappers>
         <package name="com.jjugrants.dao"/>
     </mappers>

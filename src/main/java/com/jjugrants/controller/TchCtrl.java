@@ -39,5 +39,4 @@ public class TchCtrl extends HttpServlet {
         PrintJson.printJsonObj(resp, teacher);
     }
 
-
 }

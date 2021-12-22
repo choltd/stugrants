@@ -24,4 +24,6 @@ public interface StuService {
     PageBean<GrantsVo> grantsPage(PageBean<GrantsVo> pageBean);
 
     boolean pwdUpdate(String id, String password, String change);
+
+    boolean stuDel(String id);
 }

@@ -36,4 +36,6 @@ public interface StuDao {
     int verify(@Param("id") String id, @Param("pwd") String change);
 
     int pwdUpdate(@Param("id") String id, @Param("chg") String change);
+
+    int stuDel(String id);
 }

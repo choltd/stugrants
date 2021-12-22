@@ -1,506 +1,213 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <base href="<%=basePath%>">
-
-    <meta charset="UTF-8">
-
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css"
           rel="stylesheet"/>
-    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript"
-            src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript"
-            src="../bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
-
-    <script type="text/javascript">
-
-        $(function () {
-            $(".time").datetimepicker({
-                minView: "month",
-                language: 'zh-CN',
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayBtn: true,
-                pickerPosition: "top-left"
-            });
-
-            //定制字段
-            $("#definedumns > li").click(function (e) {
-                //防止下拉菜单消失
-                e.stopPropagation();
-            });
-
-            $("#addCus").click(function () {
-                $.get("workbench/customer/getUserList", function (data) {
-                   var html = "<option></option>"
-                    $.each(data, function (i, e) {
-                       html += "<option value='" + e.id + "'>" + e.name + "</option>"
-                    })
-                  $("#create-customerOwner").html(html);
-                
-                 customerList(1, $("#cusPage").bs_pagination('getOption', 'rowsPerPage'));
-
-            })
-
-                var htm = UserList();
-                $("#create-customerOwner").html(htm);
-                $("#createCustomerModal").modal("show");
-            })
-
-
-
-            $("#saveCus").click(function () {
-                $.ajax({
-                    url: "workbench/customer/saveCus",
-                    data: {
-                        "owner": $("#create-customerOwner").val(),
-                        "name": $("#create-customerName").val(),
-                        "website": $("#create-website").val(),
-                        "phone": $("#create-phone").val(),
-                        "description": $("#create-describe").val(),
-                        "contactSummary": $("#create-contactSummary").val(),
-                        "nextContactTime": $("#create-nextContactTime").val(),
-                        "address": $("#create-address").val()
-                    },
-                    dataType: "json",
-                    type: "post",
-                    success: function (data) {
-                        if (data === true) {
-                            alert("客户保存成功");
-                            customerList(1, $("#cusPage").bs_pagination('getOption', 'rowsPerPage'));
-                            $("#createCustomerModal").modal("hide");
-                            // $("#create-customerOwner").val("");
-                            $("#create-customerName").val("");
-                            $("#create-website").val("");
-                            $("#create-phone").val("");
-                            $("#create-describe").val("");
-                            $("#create-contactSummary").val("");
-                            $("#create-nextContactTime").val("");
-                            $("#create-address").val("");
-                        } else {
-                            alert("客户保存失败");
-
-                        }
-                    }
-                })
-            })
-
-            $("#editCus").click(function () {
-                var $xz = $("input[name=xz]:checked");
-                if ($xz.length === 0) {
-                    alert("请选择要修改的客户");
-                } else if ($xz.length > 1) {
-                    alert("只能同时修改一项");
-                } else {
-                    var id = $xz.val();
-                    $.ajax({
-                        url: "workbench/customer/queryCus",
-                        data: {"id": id},
-                        dataType: "json",
-                        type: "get",
-                        success: function (data) {
-                            $("#edit-customerOwner").html(UserList());
-                            $("#edit-customerOwner option").each(function () {
-                                if ($(this).text() === data.owner) {
-                                    $(this).attr("selected", "selected");
-                                }
-                            });
-                            // alert(data.owner);
-                            $("#edit-customerName").val(data.name);
-                            $("#edit-website").val(data.website);
-                            $("#edit-phone").val(data.phone);
-                            $("#edit-describe").val(data.description);
-                            $("#edit-contactSummary").val(data.contactSummary);
-                            $("#edit-nextContactTime").val(data.nextContactTime);
-                            $("#edit-address").val(data.address);
-
-                            $("#editCustomerModal").modal("show");
-                        }
-                    })
-                    // alert(owner);
-
-                }
-            })
-
-            $("#updateCus").click(function () {
-                var id = $("input[name=xz]:checked").val();
-                $.ajax({
-                    url:"workbench/customer/update",
-                    data:{
-                        "id":id,
-                        "owner":$("#edit-customerOwner").val(),
-                        "name":$("#edit-customerName").val(),
-                        "website":$("#edit-website").val(),
-                        "phone":$("#edit-phone").val(),
-                        "description":$("#edit-describe").val(),
-                        "contactSummary":$("#edit-contactSummary").val(),
-                        "nextContactTime":$("#edit-nextContactTime").val(),
-                        "address":$("#edit-address").val()
-                    },
-                    dataType:"json",
-                    type:"post",
-                    success:function (data) {
-                        if(data === true){
-                            alert("更新成功");
-                            customerList(1,2);
-                            $("#editCustomerModal").modal("hide");
-                        }else{
-                            alert("更新失败");
-                        }
-                    }
-                })
-            })
-
-            customerList(1, 2);
-
-            $("#queryCus").click(function () {
-                $("#hidden-name").val($("#cus-name").val());
-                $("#hidden-owner").val($("#cus-owner").val());
-                $("#hidden-phone").val($("#cus-phone").val());
-                $("#hidden-website").val($("#cus-website").val());
-                customerList(1, 2);
-            });
-
-
-            $("#qx").click(function () {
-                $("input[name=xz]").prop("checked", this.checked);
-            })
-            $("#customerBody").on("click", $("input[name=xz]"), function () {
-                $("#qx").prop("checked", $("input[name=xz]").length === $("input[name=xz]:checked").length);
-            })
-
-        });
-
-        function UserList() {
-            var html = "<option></option>"
-            $.ajax({
-                url: "workbench/customer/getUserList",
-                async: false,
-                dataType: "json",
-                type: "get",
-                success: function (data) {
-                    $.each(data, function (i, e) {
-                        html += "<option value='" + e.id + "'>" + e.name + "</option>";
-                    })
-                }
-            });
-            return html;
-        };
-        function customerList(pageNo, pageSize) {
-            var name = $("#cus-name").val();
-            var owner = $("#cus-owner").val();
-            var phone = $("#cus-phone").val();
-            var website = $("#cus-website").val();
-            $.ajax({
-                url: "workbench/customer/cusList",
-                data: {
-                    "pageNo": pageNo,
-                    "pageSize": pageSize,
-                    "name": name,
-                    "owner": owner,
-                    "phone": phone,
-                    "website": website
-                },
-                dataType: "json",
-                type: "get",
-                success: function (data) {
-                    var html = "";
-                    $.each(data.dataList, function (i, e) {
-                        html += '<tr>';
-                        html += '<td><input type="checkbox" name="xz" value="' + e.id + '"/></td>';
-                        html += '<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'workbench/customer/detail?id=' + e.id + '\';">' + e.name + '</a></td>';
-                        html += '<td>' + e.owner + '</td>';
-                        html += '<td>' + e.phone + '</td>';
-                        html += '<td>' + e.website + '</td>';
-                        html += '</tr>';
-
-                    })
-                    $("#customerBody").html(html);
-                    var totalPages = data.total % pageSize === 0 ? data.total / pageSize : parseInt(data.total / pageSize) + 1;
-                    //数据处理后结合分页查询，展示分页信息
-                    $("#cusPage").bs_pagination({
-                        currentPage: pageNo, // 页码
-                        rowsPerPage: pageSize, // 每页显示的记录条数
-                        maxRowsPerPage: 20, // 每页最多显示的记录条数
-                        totalPages: totalPages, // 总页数
-                        totalRows: data.total, // 总记录条数
-
-                        visiblePageLinks: 3, // 显示几个卡片
-
-                        showGoToPage: true,
-                        showRowsPerPage: true,
-                        showRowsInfo: false,
-                        showRowsDefaultInfo: true,
-
-                        //该回调函数，在点击分页组件时触发
-                        onChangePage: function (event, data) {
-                            customerList(data.currentPage, data.rowsPerPage);
-                        }
-                    });
-                }
-            })
-        };
-
-    </script>
+    <title></title>
 </head>
 <body>
-<input type="hidden" id="hidden-name">
-<input type="hidden" id="hidden-owner">
-<input type="hidden" id="hidden-phone">
-<input type="hidden" id="hidden-website">
-<!-- 创建客户的模态窗口 -->
-<div class="modal fade" id="createCustomerModal" role="dialog">
-    <div class="modal-dialog" role="document" style="width: 85%;">
+
+<!-- 资助审核的模态窗口 -->
+<div class="modal fade" id="examineModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 60%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">申请资助</h4>
+                <h4 class="modal-title">资助审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
-
                     <div class="form-group">
-                        <label for="create-customerOwner" class="col-sm-2 control-label">姓名</label>
+                        <label for="examine-name" class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-customerOwner">
-
-                            </input>
+                            <input type="text" class="form-control" id="examine-name"/>
                         </div>
-                        <label for="create-customerName" class="col-sm-2 control-label">学号</label>
+                        <label for="examine-sequence" class="col-sm-2 control-label">学号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-customerName">
+                            <input type="text" class="form-control" id="examine-sequence">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="create-website" class="col-sm-2 control-label">性别</label>
+                        <label for="examine-sex" class="col-sm-2 control-label">性别</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-website">
+                            <input type="text" class="form-control" id="examine-sex">
                         </div>
-                        
-                        <label for="create-phone" class="col-sm-2 control-label">在校联系电话</label>
+
+                        <label for="examine-phone" class="col-sm-2 control-label">联系电话</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-phone">
+                            <input type="text" class="form-control" id="examine-phone">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="create-identity" class="col-sm-2 control-label">身份证号</label>
+                        <label for="examine-idcard" class="col-sm-2 control-label">身份证号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-identity">
+                            <input type="text" class="form-control" id="examine-idcard">
                         </div>
-                        
-                        <label for="create-" class="col-sm-2 control-label">银行卡号</label>
+
+                        <label for="examine-bankcard" class="col-sm-2 control-label">银行卡号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-card">
+                            <input type="text" class="form-control" id="examine-bankcard">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="create-time" class="col-sm-2 control-label">提交时间</label>
+                        <label for="examine-time" class="col-sm-2 control-label">提交时间</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control time" id="create-time">
-                            
+                            <input type="text" class="form-control time" id="examine-time">
+
                         </div>
-                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">成绩</label>
-                            <div class="col-sm-10" style="width: 200px;">
-                                <select class="form-control" id="edit-marketActivityOwner">
-                                    <option selected="selected"></option>
-                                    <option>A</option>
-                                    <option>B</option>  
-                                    <option>C</option>
-                                    <option>D</option>     
-                                </select>   
-                            </div>
-                    </div>                    
-                    <div class="form-group">
-                        <label for="create-describe" class="col-sm-2 control-label">申请理由</label>
-                        <div class="col-sm-10" style="width: 58.5%;">
-                            <textarea class="form-control" rows="3" id="create-describe" ></textarea>
+                        <label for="examine-rating" class="col-sm-2 control-label">成绩</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <select class="form-control" id="examine-rating">
+                                <option selected="selected"></option>
+                                <option>优</option>
+                                <option>良</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="create-time" class="col-sm-2 control-label">备注</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-card">       
-                            
+                        <label for="examine-illustrate" class="col-sm-2 control-label">申请理由</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="examine-illustrate"></textarea>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="examine-remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="examine-remark"></textarea>
                         </div>
-                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>                   
+                    </div>
+                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="saveCus">提交</button>
+                <button type="button" class="btn btn-primary" id="filedPass">通过</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 修改客户的模态窗口 -->
-<div class="modal fade" id="editCustomerModal" role="dialog">
-    <div class="modal-dialog" role="document" style="width: 85%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel1">申请资助</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h3>申请记录</h3>
+    </div>
+    <div style="position: relative; height: 30px; width: 250px;  top: -72px; left: 920px;">
+    </div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>联系电话</td>
+                <td>审核状态</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="filedList">
 
-                    <div class="form-group">
-                        <label for="create-customerOwner" class="col-sm-2 control-label">姓名</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-customerOwner">
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
 
-                            </input>
-                        </div>
-                        <label for="create-customerName" class="col-sm-2 control-label">学号</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-customerName">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="create-website" class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-website">
-                        </div>
-                        
-                        <label for="create-phone" class="col-sm-2 control-label">在校联系电话</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-phone">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="create-identity" class="col-sm-2 control-label">身份证号</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-identity">
-                        </div>
-                        
-                        <label for="create-" class="col-sm-2 control-label">银行卡号</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-card">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="create-time" class="col-sm-2 control-label">提交时间</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control time" id="create-time">
-                            
-                        </div>
-                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">成绩</label>
-                            <div class="col-sm-10" style="width: 200px;">
-                                <select class="form-control" id="edit-marketActivityOwner">
-                                    <option selected="selected"></option>
-                                    <option>A</option>
-                                    <option>B</option>  
-                                    <option>C</option>
-                                    <option>D</option>     
-                                </select>   
-                            </div>
-                    </div>                    
-                    <div class="form-group">
-                        <label for="create-describe" class="col-sm-2 control-label">申请理由</label>
-                        <div class="col-sm-10" style="width: 58.5%;">
-                            <textarea class="form-control" rows="3" id="create-describe" ></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="create-time" class="col-sm-2 control-label">备注</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="create-card">       
-                            
-                        </div>
-                        </div>
-                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>                   
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="saveCus">更新</button>
-            </div>
-        </div>
+        </ul>
     </div>
 </div>
-<!-- 返回按钮 -->
-<div style="position: relative; top: 35px; left: 10px;">
-    <a href="javascript:void(0);" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left" style="font-size: 20px; color: #DDDDDD"></span></a>
-</div>
+<input type="hidden" id="pass-id">
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="../js/jq-paginator.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    var pageInfo = {"pageNum": 1, "pageSize": 5}
+    $(function () {
+        $(".time").datetimepicker({
+            minView: "month",
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "bottom-right"
+        });
 
-<!-- 大标题 -->
-<div style="position: relative; left: 40px; top: -30px;">
-    <div class="page-header">
-        <h3>审核记录</h3>
-    </div>
-    <div style="position: relative; height: 0px; width: 250px;  top: -72px; left: 700px;">
-        
-    </div>
-</div>
+        pageShow(1, true);
 
-<div style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
+        $("#filedPass").click(function(){
+            $.post("/tch?action=examine",{"id":$("#pass-id").val()},function(data){
+                if(JSON.parse(data).success){
+                    alert("操作成功")
+                    $("#examineModal").modal("hide")
+                    pageShow(1,false)
+                }
+            })
+        })
+    });
 
-    <div style="width: 100%; position: absolute;top: 5px; left: 10px;">
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/tch?action=filedVoPage",
+            data: pageInfo,
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var html = "";
+                $("#filedList").html(html);
+                $.each(data.list, function (i, e) {
+                    html += '<tr className="active">';
+                    html += '<td><input type="checkbox" name="xz" value="' + e.id + '" stuId="' + e.studentId + '"/></td>';
+                    html += '<td>' + e.sequence + '</td>';
+                    html += '<td>' + e.name + '</td>';
+                    html += '<td>' + e.phone + '</td>';
+                    html += '<td>' + convert(e.time) + '</td>';
+                    html += '<td>' + e.status + '</td>'
+                    html += '<td><button onclick="filedShow('+e.id+')">查看</button><button onclick="">通过</button></td>';
+                    html += '</tr>';
+                })
+                $("#filedList").html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                }
+            }
+        })
+    }
 
-       
-        
-        <div style="position: relative;top: 10px;">
-            <table class="table table-hover">
-                <thead>
-                <tr style="color: #B3B3B3;">
-                    <td><input type="checkbox" id="qx"/></td>
-                    <td>学号</td>
-                    <td>姓名</td>
-                    <td>电话</td>
-                    <td>提交时间</td>
-                    <td>    </td>
-                </tr>
-                </thead>
-                <tbody id="customerBody">
-
-                 						<!-- <tr>  
-                 							<td><input type="checkbox" /></td>  
-                 							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">动力节点</a></td>  
-                 							<td>zhangsan</td>  
-                 							<td>010-84846003</td>  
-                 							<td>http://www.bjpowernode.com</td>  
-                 						</tr>   -->
-                                         <tr class="active">  
-                                             <td><input type="checkbox" /></td>  
-                                             <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">动力节点</a></td>  
-                                             <td>zhangsan</td>  
-                                             <td>010-84846003</td>  
-                                             <td>http://www.bjpowernode.com</td>
-                                             <td>
-                                               <div class="btn-group" style="top: 18%;">
-                                                   <button type="button" style="border-radius: 0.5rem;">
-                                                       查看
-                                                   </button>
-                                                   <button  style="border-radius: 0.5rem;" >
-                                                       修改
-                                                   </button>
-                                                   <button type="button" style="border-radius: 0.5rem;"> 删除</button>
-                                               </div>
-                                               
-                                               
-                                   
-                                           </div></td>  
-                                         </tr>  
-                </tbody>
-            </table>
-        </div>
-
-        
-        </div>
-
-    </div>
-
-</div>
+    function filedShow(id) {
+        $.ajax({
+            url:"/tch?action=filedShow",
+            data:{"id":id},
+            dataType:"json",
+            type:"get",
+            success:function(data){
+                if(data !== null){
+                    $("#examineModal").modal("show")
+                    $("#pass-id").val(data.id)
+                    $("#examine-name").val(data.name)
+                    $("#examine-sequence").val(data.sequence)
+                    $("#examine-sex").val((data.sex === 0 ? "女" : "男"))
+                    $("#examine-phone").val(data.phone)
+                    $("#examine-idcard").val(data.idcard)
+                    $("#examine-bankcard").val(data.bankcard)
+                    $("#examine-time").val(convert(data.time))
+                    $("#examine-rating").val(data.rating)
+                    $("#examine-illustrate").val(data.illustrate)
+                    $("#examine-remark").val(data.remark)
+                }else{
+                    alert("暂时无法操作，请联系管理员")
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

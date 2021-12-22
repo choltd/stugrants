@@ -100,11 +100,21 @@
 
     <select id="verify" resultType="integer">
         select count(*)
-        from student where id=#{id} and password=#{pwd};
+        from student
+        where id = #{id}
+          and password = #{pwd};
     </select>
     <update id="pwdUpdate">
-        update student set password=#{chg} where id=#{id}
+        update student
+        set password=#{chg}
+        where id = #{id}
     </update>
+
+    <delete id="stuDel">
+        delete
+        from student
+        where id = #{id}
+    </delete>
 </mapper>
 
 

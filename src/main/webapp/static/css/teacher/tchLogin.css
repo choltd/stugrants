@@ -138,7 +138,9 @@ body {
     width: 100%;
     margin-top: 40px;
 }
-
+.tch_login_btn:active{
+    opacity: 0.3;
+}
 .primary {
     background-color: #017575;
     border-color: #017575;

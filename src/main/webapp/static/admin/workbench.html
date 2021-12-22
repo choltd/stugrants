@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/admin/workbench.css" type="text/css" rel="stylesheet">
+    <style>
+        div button:active {
+            opacity: 0.3;
+        }
+
+        div button {
+            border-radius: 2rem;
+            height: 3rem;
+            width: 11.6rem;
+            border: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,22 +40,38 @@
     </div>
     <div class="right">
         <p>系统信息</p>
-        <ul>
+        <ul id="info">
             <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助申请，请查看...</li>
             <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助申请，请查看...</li>
             <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助申请，请查看...</li>
             <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助审核，请查看...</li>
             <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助审核，请查看...</li>
-            <li><span style="margin-left: 45%;">......</span></li>
+            <li><span style="margin-left: 42%;">......</span></li>
         </ul>
+        <div style="position: absolute;bottom: 50px;">
+            <button id="pg">发布资助</button>
+            <button id="pl" disabled="disabled">发布名单</button>
+        </div>
     </div>
 </div>
 </body>
 <script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
 <script src="../js/echarts.min.js"></script>
 <script>
     $(function () {
         getCharts();
+        if($("#info li").length > 10){
+            $("#pl").removeAttr("disabled")
+        }
+        $("#pg").click(function () {
+            $.cookie("grants", "begin", {expires: 1, path: "/"})
+            alert("已发布资助信息")
+        })
+        $("#pl").click(function () {
+            $.cookie("roster", "begin", {expires: 1, path: "/"})
+            alert("已发布资助名单")
+        })
     })
 
     function getCharts() {
@@ -55,7 +83,7 @@
                 var html = "<tr>";
                 var arr = [];
                 $.each(data.dataList, function (i, e) {
-                    html += "<td><a href='javascript:void(0);' onclick='goto(\""+e.name+"\");'>" + e.value + "</a></td>";
+                    html += "<td><a href='javascript:void(0);' onclick='goto('" + e.name + "');'>" + e.value + "</a></td>";
                     arr.push(e.name);
                 })
                 $("#tjb").append(html);
@@ -108,13 +136,23 @@
         })
     }
 
-    function goto(name){
+    function goto(name) {
         switch (name) {
-            case 'student':window.location.href = "stuInfo.html";break;
-            case 'teacher':window.location.href = "tchInfo.html";break;
-            case 'filed':window.location.href = "fieldInfo.html";break;
-            case 'review':window.location.href = "reviewInfo.html";break;
-            case 'grants':window.location.href = "grantsInfo.html";break;
+            case 'student':
+                window.location.href = "stuInfo.html";
+                break;
+            case 'teacher':
+                window.location.href = "tchInfo.html";
+                break;
+            case 'filed':
+                window.location.href = "fieldInfo.html";
+                break;
+            case 'review':
+                window.location.href = "reviewInfo.html";
+                break;
+            case 'grants':
+                window.location.href = "grantsInfo.html";
+                break;
         }
     }
 

@@ -11,4 +11,6 @@ public interface AdminDao {
 
 
     Map<String, Object> countGrants();
+
+    int reviewDel(String id);
 }

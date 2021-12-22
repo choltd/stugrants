@@ -12,8 +12,12 @@ filedAdd = function (data){
     })
     return flag
 };
-function info() {
+
+function stuInfo() {
     return JSON.parse(localStorage.getItem("student"));
+}
+function tchInfo(){
+    return JSON.parse(localStorage.getItem("teacher"));
 }
 function convert(time){
     var date = new Date(time)

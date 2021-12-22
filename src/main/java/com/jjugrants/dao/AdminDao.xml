@@ -11,6 +11,10 @@
     <select id="countGrants" resultType="map">
         select count(*) as value from grants
     </select>
+
+    <delete id="reviewDel">
+        delete from review where id=#{id}
+    </delete>
 </mapper>
 
 

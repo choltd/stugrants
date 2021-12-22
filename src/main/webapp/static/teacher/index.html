@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="../css/student/main.css"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <title>教师</title>
 </head>
 <body class="is-preload">
 
@@ -31,7 +32,7 @@
             <section id="banner">
                 <div class="content" style="margin-top: 40px">
                     <header>
-                        <h2>Hi, Handsome Boy<br/>
+                        <h2>Hi, Darling <span id="tchName"></span><br/>
                             from JiuJiang University</h2>
 
                     </header>
@@ -48,4 +49,8 @@
 </div>
 </body>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+    $("#tchName").text(tchInfo().name)
+</script>
 </html>

@@ -34,7 +34,12 @@ function sign() {
             type:"post",
             success:function(data){
                 if (data !== null) {
-                    window.location.href = "teacher.html";
+                    if(window.localStorage) {
+                        localStorage.setItem("teacher", JSON.stringify(data))
+                        window.location.href = "teacher.html";
+                    }else {
+                        alert("当前环境不支持该操作")
+                    }
                 } else {
                     $("#passwordError").text("用户名或密码错误").css("display", "block");
                 }

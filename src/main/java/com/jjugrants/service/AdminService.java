@@ -8,4 +8,6 @@ public interface AdminService {
     Admin login(String account, String password);
 
     Map<String, Object> getCharts();
+
+    boolean reviewDel(String id);
 }

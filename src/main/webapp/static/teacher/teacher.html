@@ -1,14 +1,10 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 	request.getServerPort() + request.getContextPath() + "/";
-%> -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <!-- <base href="<%=basePath%>"> -->
     <meta charset="UTF-8">
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <title>教师中心</title>
 </head>
 
 <body>
@@ -87,7 +83,7 @@
                 <li class="dropdown user-dropdown" style="list-style-type: none;">
                     <a href="javascript:void(0)" style="text-decoration: none; color: white;" class="dropdown-toggle"
                         data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-user"></span ><span id="teacher"></span><span class="caret"></span>
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<span id="teacher"></span><span class="caret"></span>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
                     <ul class="dropdown-menu" style="min-width: 100px;">
@@ -110,8 +106,6 @@
             <ul id="no1" class="nav nav-pills nav-stacked">
                 <li class="liClass"><a href="index.html" target="workareaFrame"><span class="glyphicon glyphicon-home"></span>
                         首页</a></li>
-                
-                
                 <li class="liClass">
                     <a href="#no3" class="collapsed" data-toggle="collapse"><span
                             class="glyphicon glyphicon-user"></span> 教师</a>
@@ -120,15 +114,11 @@
                                     class="glyphicon glyphicon-chevron-right"></span> 个人信息</a></li>
                         <li class="liClass"><a href="review.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span
                                     class="glyphicon glyphicon-time"></span> 审核</a></li>
-                
-                        
-
                     </ul>
-                <li class="liClass"><a href="review.html" target="workareaFrame"><span
-                    class="glyphicon glyphicon-chevron-right"></span>
+                <li class="liClass"><a href="records.html" target="workareaFrame"><span
+                    class="glyphicon glyphicon-bookmark"></span>
                         审核记录</a></li>
                 </li>
-
             </ul>
 
             <!-- 分割线 -->
@@ -179,6 +169,28 @@
             $(this).children("a").css("color", "white");
         });
         window.open("index.html", "workareaFrame");
+        var tch = JSON.parse(localStorage.getItem("teacher"));
+        $("#teacher").text(tch.name)
+
+        $("#pwdUpdate").click(function () {
+            var old = $("#oldPwd").val()
+            var edit = $("#newPwd").val()
+            var confirm = $("#confirmPwd").val()
+            if (old === "" || old === null) {
+                alert("请输入原密码")
+            } else if (edit !== confirm || edit === "" || confirm === "") {
+                alert("两次输入密码不一致")
+            } else {
+                $.post("/tch?action=pwdUpdate", {"id": stu.id, "password": old, "change": confirm}, function (data) {
+                    if ((JSON.parse(data)).success) {
+                        alert("修改成功")
+                        location.href = "tchLogin.html"
+                    } else {
+                        alert("修改失败")
+                    }
+                })
+            }
+        })
 
     });
 

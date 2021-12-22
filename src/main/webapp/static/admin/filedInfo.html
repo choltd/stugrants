@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css"
           rel="stylesheet"/>
     <title></title>
 </head>
 <body>
-
 <!-- 申请资助的模态窗口 -->
 <div class="modal fade" id="filedModal" role="dialog">
     <div class="modal-dialog" role="document" style="width: 60%;">
@@ -282,21 +281,6 @@
                 alert("失败")
             }
         });
-
-        $("#filedList").on("click", $("input[name=xz]"), function () {
-            var $xz = $("input[name=xz]:checked")
-            if ($xz.length === 1) {
-                var del = $("#filedDel")
-                var edit = $("#filedEdit")
-                if ((stuInfo().id) != $xz.attr("stuId")) {
-                    del.attr("disabled", "disabled")
-                    edit.attr("disabled", "disabled")
-                } else {
-                    del.removeAttr("disabled")
-                    edit.removeAttr("disabled")
-                }
-            }
-        })
 
         $("#filedDel").click(function (api) {
             var $xz = $("input[name=xz]:checked")

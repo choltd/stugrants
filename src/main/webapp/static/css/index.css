@@ -1,9 +1,10 @@
 /* CSS Document */
-*{
+* {
     margin: 0;
     padding: 0;
     text-decoration: none;
 }
+
 /*边框*/
 .bor {
     border: 1px solid #0000FF;
@@ -19,6 +20,7 @@ input {
     background: none;
     vertical-align: center;
 }
+
 /*颜色*/
 .red {
     color: #F00;
@@ -49,16 +51,19 @@ input {
 }
 
 /*清除浮动*/
-/*.cle{ clear:both;}*/
+.cle {
+    clear: both;
+}
+
 /*a标签*/
 td a, li a {
     text-decoration: none;
     color: #333;
 }
 
-div a {
+/* div a {
     text-decoration: none;
-}
+} */
 
 a:hover {
     text-decoration: none;
@@ -78,6 +83,7 @@ body {
     font-size: 12px;
     font-family: 宋体;
 }
+
 .header {
     width: 1200px;
     height: 161px;
@@ -136,7 +142,7 @@ body {
 }
 
 .EditSearch {
-    width: 100%;
+    width: 256px;
     height: 25px;
     border: 0px;
     background-color: transparent;
@@ -147,12 +153,13 @@ body {
     left: 0px;
 }
 
-#rpcontent{
+#rpcontent {
     display: none;
     width: auto;
     height: 100px;
 }
-#rpcontent p{
+
+#rpcontent p {
     margin: 20px;
     font-size: 2rem;
     margin-bottom: 100px;
@@ -202,7 +209,7 @@ element.style {
 body, div, a, ul, li {
     margin: 0;
     padding: 0;
-}   
+}
 
 
 *:before, *:after {
@@ -210,24 +217,28 @@ body, div, a, ul, li {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 #container {
     width: 1225px;
     height: 359px;
-    overflow:hidden;
+    overflow: hidden;
     position: relative;
-    box-shadow:0px -5px 3px #333;
+    box-shadow: 0px -5px 3px #333;
 
 }
+
 #list {
     width: 8575px;
     height: 359px;
     position: absolute;
     z-index: 1;
 }
+
 #list img {
     float: left;
 }
-#buttons{
+
+#buttons {
     position: absolute;
     text-align: center;
     width: 100px;
@@ -237,18 +248,20 @@ body, div, a, ul, li {
     left: 571px;
     z-index: 2;
 }
-#buttons span{
+
+#buttons span {
     cursor: pointer;
     float: left;
     width: 10px;
     height: 10px;
     border: 1px solid #fff;
     border-radius: 50%;
-    background:#ccc;
+    background: #ccc;
     margin-right: 8px;
 }
-#buttons .on{
-    background:#18884b;
+
+#buttons .on {
+    background: #18884b;
 }
 
 .arrow {
@@ -263,56 +276,59 @@ body, div, a, ul, li {
     position: absolute;
     z-index: 2;
     top: 160px;
-    background-color: RGBA(199,237,204,.9);
-    color: #fff;}
-.arrow:hover {
-    background-color: RGBA(0,255,0,.4);
+    background-color: RGBA(199, 237, 204, .9);
+    color: #fff;
 }
+
+.arrow:hover {
+    background-color: RGBA(0, 255, 0, .4);
+}
+
 #container:hover .arrow {
     display: block;
 }
+
 #prev {
     left: 20px;
 }
+
 #next {
     right: 20px;
 }
 
 .content1 {
     width: 1180px;
-    height: 365px;
+    height: 265px;
     margin: 0 auto;
     margin-top: 20px;
 }
-.Notice {
+
+.contents_l {
     width: 550px;
-    height: 365px;
+    height: 265px;
     float: left;
 }
-.notice1_T {
-    width: 550px;
-    height: 36px;
-    border-bottom: 3px solid #18884b;
-    line-height: 36px;
-}
-.notice1_T span {
+
+.section_top span {
     font-size: 17px;
     float: left;
 }
-.notice1_T a {
+
+.section_top a {
+    color: black;
     font-size: 17px;
     float: right;
     margin-right: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.notice1_T a:hover {
+.section_top a:hover {
     color: red;
 }
 
 .notice1_M {
     width: 100%;
-    height: 300px;
+    height: 200px;
     margin-top: 10px;
     overflow: hidden;
 
@@ -324,164 +340,183 @@ body, div, a, ul, li {
 
 .notice1_M ul {
     width: 100%;
-    height: 300px;
+    height: 200px;
     margin-left: 2px;
     overflow: hidden;
     line-height: 25px;
 }
-.notice1_M ul li .no{
-    display:inline-block ;
+.notice1_M ul li{
+    padding: 7px 0;
+}
+
+.notice1_M ul li .no {
+    display: inline-block;
     width: 350px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
 }
-.information {
+
+.contents_r {
     width: 550px;
-    height: 365px;
+    height: 265px;
     float: right;
 }
-.information_T {
+
+.section_top {
     width: 550px;
     height: 36px;
     border-bottom: 3px solid rgb(59, 177, 112);
     line-height: 36px;
 }
 
-.information_T span {
+.policy_T span {
     font-size: 17px;
     float: left;
     color: black;
     margin-left: 4px;
 }
 
-.information_T a {
+.policy_T a {
     font-size: 17px;
     float: right;
     margin-right: 23px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.information_T a:hover {
+.policy_T a:hover {
     text-decoration: none;
     color: #FFFF00;
 }
-.information_M {
+
+.policy_M {
     width: 550px;
-    height: 300px;
-    margin-top: 12px;
+    height: 200px;
+    margin-top: 14px;
     overflow: hidden;
 }
-.information_M ul {
+
+.policy_M ul {
     width: 100%;
-    height: 300px;
-    margin-left: 12px;
+    height: 200px;
+    margin-left: 14px;
     overflow: hidden;
     line-height: 24px;
 }
-.information_M ul li .im{
-    display:inline-block ;
+.policy_M ul li{
+    padding:7px 0;
+}
+.policy_M ul li .im {
+    display: inline-block;
     width: 350px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
 }
-.information_M ul li a {
+
+.policy_M ul li a {
     color: #000;
 }
-.information_M ul li a:hover {
+
+.policy_M ul li a:hover {
     color: #FFFF00;
 }
-.information_M ul li span {
+
+.policy_M ul li span {
     font-family: 宋体;
 }
-#information_M_a a:hover {
+
+#policy_M_a a:hover {
     color: #F00;
 }
-#information_M ul li a:hover {
+
+#policy_M ul li a:hover {
     color: #F00;
 }
+
 .content2 {
     width: 1180px;
-    height: 365px;
+    height: 265px;
     margin: 0 auto;
     margin-top: 15px;
 
 }
-.organization {
-    width: 550px;
-    height: 365px;
-    float: right;
+
+.content3 {
+    width: 1180px;
+    height: 265px;
+    margin: 0 auto;
+    margin-top: 15px;
+
 }
-.organization_S {
-    border-bottom: 3px solid rgb(59, 177, 112);
-    width: 546px;
-    height: 36px;
-    line-height: 36px;
-}
-.organization_S span {
+
+.information_S span {
     font-size: 17px;
     color: black;
     float: left;
     margin-left: 14px;
 }
 
-.organization_S a {
+.information_S a {
     font-size: 17px;
     color: black;
     float: right;
     margin-right: 23px;
     font-family: Arial, Helvetica, sans-serif;
 }
-.organization_S a:hover {
+
+.information_S a:hover {
     text-decoration: none;
     color: red;
 }
-.organization_I {
+
+.information_I {
     width: 550px;
-    height: 300px;
+    height: 200px;
     margin-top: 7px;
     overflow: hidden;
 
 }
-.organization_I ul {
+
+.information_I ul {
     width: 100%;
-    height: 300px;
-    margin-top: 10px;
-    margin-left: 20px;
+    height: 200px;
+    /* margin-top: 10px; */
+    margin-left: 15px;
     overflow: hidden;
     line-height: 24px;
 
 }
-.organization_I ul li .dl{
-    display:inline-block ;
+.information_I ul li{
+    padding: 7px 0;
+}
+
+.information_I ul li .dl {
+    display: inline-block;
     width: 350px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
 }
-.organization_I ul li span {
+
+.information_I ul li span {
     font-family: 宋体;
 }
-.organization_I ul li a:hover {
+
+.information_I ul li a:hover {
     color: red;
 }
 
-.publish_T {
-    width: 550px;
-    height: 36px;
-    border-bottom: 3px solid rgb(59, 177, 112);
-    line-height: 36px;
-}
 .publish_T span {
     color: black;
     font-size: 17px;
     float: left;
     margin-left: 14px;
 }
+
 .publish_T a {
     font-size: 17px;
     float: right;
@@ -489,20 +524,24 @@ body, div, a, ul, li {
     margin-right: 23px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .publish_T a:hover {
     text-decoration: none;
     color: red;
 }
-.publish_M{
+
+.publish_M {
     width: 550px;
     height: 336px;
     overflow: hidden;
 
 }
-.publish_M ul{
+
+.publish_M ul {
     width: 100%;
     height: 336px;
 }
+
 .friendlink {
     width: 1225px;
     height: 48px;
@@ -510,6 +549,7 @@ body, div, a, ul, li {
     margin: 0 auto;
     margin-top: 24px;
 }
+
 .friendlink_M {
     width: 100%;
     height: 48px;
@@ -517,9 +557,11 @@ body, div, a, ul, li {
     line-height: 48px;
     background-color: #d3d3d3;
 }
+
 .friendlink_M ul {
     margin-left: 100px;
 }
+
 .friendlink_M ul li {
     display: inline-block;
     float: left;
@@ -542,17 +584,20 @@ body, div, a, ul, li {
     background: white;
     margin: 0 auto;
 }
+
 .footer_M {
     width: 820px;
     height: 155px;
     margin: 0 auto;
     position: relative;
 }
+
 .logo1 {
     position: absolute;
     left: 145px;
     top: 20px;
 }
+
 .footer_t {
     width: 500px;
     height: 78px;
@@ -561,23 +606,76 @@ body, div, a, ul, li {
     left: 270px;
     top: 40px;
 }
+
 .flexslider {
     width: 1225px;
     margin: 0 auto;
 }
-.organization_I li, .information_M li {
+
+.information_I li, .policy_M li {
     clear: both;
 }
+
 a {
     text-decoration: none;
 }
+
 li a {
     font-size: 14px;
 }
+
 li span {
     font-size: 14px;
 }
+
 a:visited {
     color: #000;
 }
 
+.ideological_T ul {
+    margin-top: 10px;
+}
+
+.iapt li {
+    background-color: #efeff4;
+    padding: 10px 15px;
+    margin-bottom: 12px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.iapt li a {
+    margin-left: 115px;
+    line-height: 24px;
+    height: 48px;
+    overflow: hidden;
+    display: block;
+    /*overflow: hidden;*/
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.iapt li:hover {
+    background: no-repeat right bottom #1d8181;
+    /*box-shadow: 0 5px 10px rgb(1 117 117 / 20%);*/
+}
+
+.iapt li span {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    border-right: 1px solid #ddd;
+    padding: 0 18px 0 0;
+    margin-top: 5px;
+}
+
+.iapt li:hover a, .iapt li:hover span {
+    color: #fff;
+    border-color: #2dd8d8;
+}
+#bulletin li{
+    color: red;
+    font-size: 35px;
+    padding: 12px 0;
+    text-align: center;
+}

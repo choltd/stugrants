@@ -46,4 +46,9 @@ public class AdminServiceImpl implements AdminService {
         map.put("dataList",dataList);
         return map;
     }
+
+    @Override
+    public boolean reviewDel(String id) {
+        return adminDao.reviewDel(id) == 1;
+    }
 }

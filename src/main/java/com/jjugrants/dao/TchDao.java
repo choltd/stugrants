@@ -2,6 +2,7 @@ package com.jjugrants.dao;
 
 import com.jjugrants.domain.PageBean;
 import com.jjugrants.domain.Teacher;
+import com.jjugrants.vo.ReviewVo;
 
 import java.util.List;
 import java.util.Map;
@@ -13,5 +14,9 @@ public interface TchDao {
 
     Map<String, Object> countReview();
 
-    List<Teacher> pageCount(PageBean<Teacher> pageBean);
+    List<Teacher> tchPage(PageBean<Teacher> pageBean);
+
+    int tchDel(String id);
+
+    List<ReviewVo> reviewPage(PageBean<ReviewVo> rvpb);
 }

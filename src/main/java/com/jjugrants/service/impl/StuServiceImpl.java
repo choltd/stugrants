@@ -93,4 +93,9 @@ public class StuServiceImpl implements StuService {
             return false;
         }
     }
+
+    @Override
+    public boolean stuDel(String id) {
+        return stuDao.stuDel(id) == 1;
+    }
 }
