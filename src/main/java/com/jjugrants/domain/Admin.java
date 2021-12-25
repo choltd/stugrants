@@ -1,26 +1,32 @@
 package com.jjugrants.domain;
 
 
+import java.util.Date;
+
 public class Admin {
-    private int id;
+    private int adminId;
     private String account;
     private String password;
+    private Date startTime;
+    private Date endTime;
 
     @Override
     public String toString() {
         return "Admin{" +
-                "id='" + id + '\'' +
+                "adminId=" + adminId +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getAdminId() {
+        return adminId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 
     public String getAccount() {
@@ -37,5 +43,21 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

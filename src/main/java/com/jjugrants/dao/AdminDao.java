@@ -1,16 +1,26 @@
 package com.jjugrants.dao;
 
-import com.jjugrants.domain.Admin;
-import org.apache.ibatis.annotations.Param;
+import com.jjugrants.domain.*;
 
+import java.util.List;
 import java.util.Map;
 
 public interface AdminDao {
 
-    Admin login(@Param("account") String account, @Param("pwd") String password);
+    Admin login(Admin admin);
 
+    Map<String, Object> subsidizeCount();
 
-    Map<String, Object> countGrants();
+    int examineDel(String id);
 
-    int reviewDel(String id);
+    List<ViewResult> vrPage(PageBean<ViewResult> pageBean);
+
+    int subsidizeDel(String id);
+
+    Map<String, Object> vaCount();
+
+    List<ViewApply> vaPage(PageBean<ViewApply> vaPageBean);
+
+    List<Tips> tips();
+
 }

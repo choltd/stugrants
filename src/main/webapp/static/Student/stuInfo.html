@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 </head>
+
 <body>
 
 <!-- 申请的模态窗口 -->
@@ -53,13 +55,9 @@
                         <div class="col-sm-10" style="width: 200px;">
                             <input type="text" class="form-control time" id="info-time">
                         </div>
-                        <label for="info-rating" class="col-sm-2 control-label">成绩</label>
+                        <label for="info-year" class="col-sm-2 control-label">学年</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <select class="form-control" id="info-rating">
-                                <option selected="selected"></option>
-                                <option>优</option>
-                                <option>良</option>
-                            </select>
+                            <input type="text" class="form-control" id="info-year">
                         </div>
                     </div>
                     <div class="form-group">
@@ -76,71 +74,75 @@
                     </div>
                     <div style="position: relative;top: 15px;">
                     </div>
-<!--                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>-->
+                    <!--                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>-->
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="filedAdd">保存</button>
+                <button type="button" class="btn btn-primary" id="applyAdd">保存</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 大标题 -->
-<div style="position: relative; left: 40px; top: -15px;">
-    <div class="page-header">
+<div style="position: relative;margin-left: 100px; top: 10px;">
+    <div class="page-header" style="border: none;">
         <h3>个人信息</h3>
     </div>
-    <div style="position: relative; height: 50px; width: 250px;  top: -72px; left: 920px;">
-        <button type="button" class="btn btn-default" id="filed"><span
-                class="glyphicon glyphicon-edit"></span> 申请
+    <div style="position: relative; height: 50px; width: 250px;  top: -70px; left: 888px;">
+        <button type="button" class="btn btn-default" id="apply"><span class="glyphicon glyphicon-edit"></span> 申请
         </button>
 
     </div>
 </div>
 
 <!-- 详细信息 -->
-<div style="position: relative;left: 5rem;top: 2rem">
-    <div style="position: relative; left: 40px; height: 70px;">
+<div style="position: relative;top: 5rem;right: 10rem">
+    <div style="position: relative; height: 70px;margin-left: 250px;">
         <div style="width: 300px; color: gray;">姓名</div>
         <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-name"></b></div>
         <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">学号</div>
-        <div style="width: 300px;position: relative; left: 750px; top: -60px;"><b id="xx-sequence"></b></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+        <div style="width: 300px;position: absolute;left: 660px;top:0;"><b id="xx-sequence"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
     </div>
-    <div style="position: relative; left: 40px; height: 70px;">
+    <div style="position: relative; height: 70px;margin-left: 250px;">
         <div style="width: 300px; color: gray;">性別</div>
         <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-sex"></b></div>
         <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">身份证号</div>
-        <div style="width: 300px;position: relative; left: 750px; top: -60px;"><b id="xx-idcard"></b></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+        <div style=" width: 300px;position: absolute;left: 660px;top:0;"><b id="xx-idcard"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
     </div>
-    <div style="position: relative; left: 40px; height: 70px;">
+    <div style="position: relative;height: 70px;margin-left: 250px;">
         <div style="width: 300px; color: gray;">电话</div>
         <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-phone"></b></div>
         <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">银行卡号</div>
-        <div style="width: 300px;position: relative; left: 750px; top: -60px;"><b id="xx-bankcard"></b></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+        <div style="width: 300px;position: absolute; left: 660px;top: 0;"><b id="xx-bankcard"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
     </div>
-    <div style="position: relative; left: 40px; height: 70px;">
+    <div style="position: relative;height: 70px;margin-left: 250px;">
         <div style="width: 300px; color: gray;">民族</div>
         <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>汉族</b></div>
         <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">学院</div>
-        <div style="width: 300px;position: relative; left: 750px; top: -60px;"><b>信息与大数据科学学院</b></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+        <div style=" width: 300px;position: absolute; left: 660px; top:0;"><b>信息与大数据科学学院</b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
     </div>
-    <div style="position: relative; left: 40px; height: 70px;">
+    <div style="position: relative; height: 70px;margin-left: 250px;">
         <div style="width: 300px; color: gray;">年级</div>
         <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>2019</b></div>
         <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">专业</div>
-        <div style="width: 300px;position: relative; left: 750px; top: -60px;"><b>计算机科学与技术</b></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+        <div style=" width: 300px;position: absolute; left: 660px;top:  0;"><b>计算机科学与技术</b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
     </div>
 
 
@@ -150,8 +152,7 @@
 </body>
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-        src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript"
         src="../bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
@@ -160,10 +161,10 @@
         var stu = stuInfo();
         $("#xx-name").text(stu.name);
         $("#xx-sequence").text(stu.sequence);
-        $("#xx-sex").text((stu.sex === 0 ? "女" : "男"));
+        $("#xx-sex").text(stu.sex);
         $("#xx-idcard").text(stu.idcard);
-        $("#xx-phone").text(stu.phone);
-        $("#xx-bankcard").text(stu.bankcard);
+        $("#xx-phone").text(stu.telephone);
+        $("#xx-bankcard").text(stu.banknumber);
 
         $(".time").datetimepicker({
             minView: "month",
@@ -174,33 +175,34 @@
             pickerPosition: "top-left"
         });
 
-        $("#filed").click(function(){
+        $("#apply").click(function () {
             $("#infoModal").modal("show");
             $("#info-name").val(stu.name);
             $("#info-sequence").val(stu.sequence)
-            $("#info-sex").val((stu.sex === 0?"女":"男"))
-            $("#info-phone").val(stu.phone)
+            $("#info-sex").val(stu.sex)
+            $("#info-phone").val(stu.telephone)
             $("#info-idcard").val(stu.idcard)
-            $("#info-bankcard").val(stu.bankcard)
+            $("#info-bankcard").val(stu.banknumber)
         })
 
-        $("#filedAdd").click(function(){
-            if(filedAdd({
-                "studentId":stu.id,
-                "illustrate":$("#info-illustrate").val(),
-                "rating":$("#info-rating").val(),
-                "remark":$("#info-remark").val()
-            })){
+        $("#applyAdd").click(function () {
+            if (applyAdd({
+                "studentId": stu.id,
+                "illustrate": $("#info-illustrate").val(),
+                "year": $("#info-year").val(),
+                "remark": $("#info-remark").val()
+            })) {
                 $("#infoModal").modal("hide")
                 $("#info-time").val("")
                 $("#info-illustrate").val("")
-                $("#info-rating").val("")
+                $("#info-year").val("")
                 $("#info-remark").val("")
-            }else{
+            } else {
                 alert("申请失败")
             }
 
         })
     });
 </script>
+
 </html>

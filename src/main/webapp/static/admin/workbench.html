@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/admin/workbench.css" type="text/css" rel="stylesheet">
+    <title></title>
     <style>
         div button:active {
             opacity: 0.3;
@@ -24,7 +25,8 @@
     <div class="left">
         <div class="form">
             <p>统计</p>
-            <table id="tjb">
+            <table>
+                <thead>
                 <tr>
                     <td>学生</td>
                     <td>申请</td>
@@ -32,6 +34,10 @@
                     <td>审核</td>
                     <td>资助</td>
                 </tr>
+                </thead>
+                <tbody id="tjb">
+
+                </tbody>
             </table>
         </div>
         <div id="ec" class="echarts">
@@ -41,16 +47,11 @@
     <div class="right">
         <p>系统信息</p>
         <ul id="info">
-            <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助申请，请查看...</li>
-            <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助申请，请查看...</li>
-            <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助申请，请查看...</li>
-            <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助审核，请查看...</li>
-            <li><span style="display: inline-block;width: 20px;"> > </span>新增了一条资助审核，请查看...</li>
-            <li><span style="margin-left: 42%;">......</span></li>
+            <li><span id="dot" style="margin-left: 42%;">......</span></li>
         </ul>
         <div style="position: absolute;bottom: 50px;">
             <button id="pg">发布资助</button>
-            <button id="pl" disabled="disabled">发布名单</button>
+            <button id="pl">发布名单</button>
         </div>
     </div>
 </div>
@@ -60,16 +61,25 @@
 <script src="../js/echarts.min.js"></script>
 <script>
     $(function () {
+        if ($("#info li").length < 10) {
+            $("#pl").attr("disabled", "disabled")
+            setInterval(function () {
+                getCharts();
+                tips();
+            }, 5000)
+        }
         getCharts();
-        if($("#info li").length > 10){
-            $("#pl").removeAttr("disabled")
+        tips();
+        if ($.cookie("subsidize") != null) {
+            $("#pg").attr("disabled", "disabled")
         }
         $("#pg").click(function () {
-            $.cookie("grants", "begin", {expires: 1, path: "/"})
+            $.cookie("subsidize", "begin", {expires: 1, path: "/"})
             alert("已发布资助信息")
         })
         $("#pl").click(function () {
             $.cookie("roster", "begin", {expires: 1, path: "/"})
+            $.removeCookie("subsidize")
             alert("已发布资助名单")
         })
     })
@@ -83,10 +93,10 @@
                 var html = "<tr>";
                 var arr = [];
                 $.each(data.dataList, function (i, e) {
-                    html += "<td><a href='javascript:void(0);' onclick='goto('" + e.name + "');'>" + e.value + "</a></td>";
+                    html += '<td><a class="tja" href="javascript:void(0);" onclick="goto(\'' + e.name + '\')">' + e.value + '</a></td>';
                     arr.push(e.name);
                 })
-                $("#tjb").append(html);
+                $("#tjb").html(html);
                 var chartDom = document.getElementById('ec');
                 var myChart = echarts.init(chartDom);
                 var option;
@@ -144,17 +154,28 @@
             case 'teacher':
                 window.location.href = "tchInfo.html";
                 break;
-            case 'filed':
-                window.location.href = "fieldInfo.html";
+            case 'apply':
+                window.location.href = "applyInfo.html";
                 break;
-            case 'review':
-                window.location.href = "reviewInfo.html";
+            case 'examine':
+                window.location.href = "examineInfo.html";
                 break;
-            case 'grants':
-                window.location.href = "grantsInfo.html";
+            case 'subsidize':
+                window.location.href = "subsidizeInfo.html";
                 break;
         }
     }
+
+    function tips() {
+        $.get("/admin?act=tips", function (data) {
+            var html = "";
+            $.each(data, function (i, e) {
+                html += '<li><span style="display: inline-block;width: 20px;"> > </span>' + e.content + '</li>'
+            })
+            $("#dot").before(html)
+        })
+    }
+
 
 </script>
 

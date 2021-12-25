@@ -2,32 +2,30 @@ package com.jjugrants.domain;
 
 import java.util.Date;
 
-public class Filed {
-    private int id;
+public class Apply {
+    private int applyId;
     private int studentId;
     private String illustrate;
     private Date time;
-    private String rating;
     private String remark;
 
     @Override
     public String toString() {
-        return "Filed{" +
-                "id=" + id +
+        return "Apply{" +
+                "applyId=" + applyId +
                 ", studentId=" + studentId +
                 ", illustrate='" + illustrate + '\'' +
                 ", time=" + time +
-                ", rating='" + rating + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getApplyId() {
+        return applyId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setApplyId(int applyId) {
+        this.applyId = applyId;
     }
 
     public int getStudentId() {
@@ -52,14 +50,6 @@ public class Filed {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
     }
 
     public String getRemark() {

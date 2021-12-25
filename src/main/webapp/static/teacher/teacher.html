@@ -112,10 +112,10 @@
                     <ul id="no3" class="nav nav-pills nav-stacked collapse">
                         <li class="liClass"><a href="tchInfo.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span
                                     class="glyphicon glyphicon-chevron-right"></span> 个人信息</a></li>
-                        <li class="liClass"><a href="review.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span
+                        <li class="liClass"><a href="apply2examine.html" target="workareaFrame">&nbsp;&nbsp;&nbsp;<span
                                     class="glyphicon glyphicon-time"></span> 审核</a></li>
                     </ul>
-                <li class="liClass"><a href="records.html" target="workareaFrame"><span
+                <li class="liClass"><a href="examine.html" target="workareaFrame"><span
                     class="glyphicon glyphicon-bookmark"></span>
                         审核记录</a></li>
                 </li>
@@ -143,6 +143,7 @@
 </body>
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript">
 
     //页面加载完毕
@@ -169,8 +170,7 @@
             $(this).children("a").css("color", "white");
         });
         window.open("index.html", "workareaFrame");
-        var tch = JSON.parse(localStorage.getItem("teacher"));
-        $("#teacher").text(tch.name)
+        $("#teacher").text(tchInfo().teacherName)
 
         $("#pwdUpdate").click(function () {
             var old = $("#oldPwd").val()

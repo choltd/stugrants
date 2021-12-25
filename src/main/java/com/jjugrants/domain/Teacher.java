@@ -1,60 +1,63 @@
 package com.jjugrants.domain;
 
 public class Teacher {
-    private int id;
-    private String workId;
-    private String name;
-    private int sex;
-    private String phone;
-    private String faculty;
+    private int teacherId;
+    private String worknumber;
+    private String teacherName;
+    private String sex;
+    private String telephone;
     private String password;
 
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "teacherId=" + teacherId +
+                ", worknumber='" + worknumber + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getTeacherId() {
+        return teacherId;
     }
 
-    public String getWorkId() {
-        return workId;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public void setWorkId(String workId) {
-        this.workId = workId;
+    public String getWorknumber() {
+        return worknumber;
     }
 
-    public String getName() {
-        return name;
+    public void setWorknumber(String worknumber) {
+        this.worknumber = worknumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public int getSex() {
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getPassword() {
@@ -63,18 +66,5 @@ public class Teacher {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "id=" + id +
-                ", workId='" + workId + '\'' +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", phone='" + phone + '\'' +
-                ", faculty='" + faculty + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

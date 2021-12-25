@@ -71,8 +71,8 @@ a:hover {
 }
 
 ul, li, dl, dd, dt, p, input, span, form, h1 {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     list-style: none;
 }
 
@@ -93,7 +93,7 @@ body {
 
 .logo {
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 24px;
 }
 
@@ -101,7 +101,7 @@ body {
     position: absolute;
     left: 135px;
     top: 60px;
-    font-family: "STXingkai";
+    font-family: "STXingkai", cursive;
     font-size: 30px;
     color: #18884b;
 }
@@ -122,7 +122,7 @@ body {
 
 .header_T a {
     font-size: 14px;
-    margin: 0px 4px 0px 4px;
+    margin: 0 4px 0 4px;
 }
 
 .header_T span {
@@ -144,13 +144,13 @@ body {
 .EditSearch {
     width: 256px;
     height: 25px;
-    border: 0px;
+    border: 0;
     background-color: transparent;
-    padding: 2px 0px 0px 5px;
+    padding: 2px 0 0 5px;
     line-height: 22px;
     z-index: 2;
     position: absolute;
-    left: 0px;
+    left: 0;
 }
 
 #rpcontent {
@@ -223,7 +223,7 @@ body, div, a, ul, li {
     height: 359px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0px -5px 3px #333;
+    box-shadow: 0 -5px 3px #333;
 
 }
 
@@ -323,7 +323,7 @@ body, div, a, ul, li {
 }
 
 .section_top a:hover {
-    color: red;
+    color: #ff0000;
 }
 
 .notice1_M {

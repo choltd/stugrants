@@ -1,18 +1,18 @@
 package com.jjugrants.service.impl;
 
+import com.jjugrants.dao.StuDao;
 import com.jjugrants.dao.TchDao;
-import com.jjugrants.domain.PageBean;
-import com.jjugrants.domain.Review;
-import com.jjugrants.domain.Teacher;
+import com.jjugrants.domain.*;
 import com.jjugrants.service.TchService;
 import com.jjugrants.utils.SqlSessionUtil;
-import com.jjugrants.vo.ReviewVo;
 
 import java.util.List;
 import java.util.Map;
 
 public class TchServiceImpl implements TchService {
     private final TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
+    private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
+
     @Override
     public Teacher query(Teacher teacher) {
         return tchDao.query(teacher);
@@ -40,18 +40,54 @@ public class TchServiceImpl implements TchService {
     }
 
     @Override
-    public PageBean<ReviewVo> reviewVoPage(PageBean<ReviewVo> rvpb) {
+    public PageBean<ViewResult> examinePage(PageBean<ViewResult> vePageBean) {
         int count = 0;
-        Map<String, Object> map = tchDao.countReview();
+        Map<String, Object> map = tchDao.examineCount();
         for (Object value : map.values()) {
             count = Integer.parseInt(String.valueOf(value));
         }
 
         if (count != 0) {
-            rvpb.setTotalRecord(count);
+            vePageBean.setTotalRecord(count);
         }
-        List<ReviewVo> reviewVos = tchDao.reviewPage(rvpb);
-        rvpb.setList(reviewVos);
-        return rvpb;
+        List<ViewResult> viewExamines = tchDao.examinePage(vePageBean);
+        vePageBean.setList(viewExamines);
+        return vePageBean;
+    }
+
+    @Override
+    public PageBean<ViewApply> viewApplyPage(PageBean<ViewApply> vaPageBean, String teacherId) {
+        int count = 0;
+        Map<String, Object> map = stuDao.applyCountTeacherId(teacherId);
+        for (Object value : map.values()) {
+            count = Integer.parseInt(String.valueOf(value));
+        }
+
+        if (count != 0) {
+            vaPageBean.setTotalRecord(count);
+        }
+        List<ViewApply> viewApplies = tchDao.viewApplyPage(vaPageBean,teacherId);
+        vaPageBean.setList(viewApplies);
+        return vaPageBean;
+    }
+
+    @Override
+    public ViewApply applyShow(String applyId) {
+        return tchDao.applyShow(applyId);
+    }
+
+    @Override
+    public boolean applyFail(Examine examine) {
+        return tchDao.applyFail(examine) == 1;
+    }
+
+    @Override
+    public boolean examine(Examine examine) {
+        return tchDao.examine(examine) == 1;
+    }
+
+    @Override
+    public List<ViewResult> searchClassname(String classname) {
+        return tchDao.searchClassname(classname);
     }
 }

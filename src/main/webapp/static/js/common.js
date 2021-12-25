@@ -1,7 +1,7 @@
-filedAdd = function (data){
+applyAdd = function (data){
     var flag = ""
     $.ajax({
-        url:"/stu?action=filedAdd",
+        url:"/stu?action=applyAdd",
         async:false,
         data:data,
         dataType:"json",
@@ -16,11 +16,11 @@ filedAdd = function (data){
 function stuInfo() {
     return JSON.parse(localStorage.getItem("student"));
 }
-function tchInfo(){
+function tchInfo() {
     return JSON.parse(localStorage.getItem("teacher"));
 }
 function convert(time){
     var date = new Date(time)
-    var datetime = date.toLocaleString()//.toLocaleDateString() + date.toLocaleTimeString();
+    var datetime = date.toLocaleDateString() // date.toLocaleTimeString();
     return datetime.replace(/\//g,"-")//.replace(/[\u4e00-\u9fa5]{2}/," ")
 }

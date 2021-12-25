@@ -3,32 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title></title>
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css"
           rel="stylesheet">
-    <link href="../css/common.css"
-          rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <div class="container-fluid">
     <div class="head" style="margin: 30px 20px;">
-        <h1>学生信息</h1>
+        <h1>资助信息</h1>
     </div>
     <div class="content">
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <td>学号</td>
-                <td>姓名</td>
-                <td>性别</td>
-                <td>联系电话</td>
-                <td>身份证号</td>
-                <td>银行卡号</td>
+                <td>学生学号</td>
+                <td>学生姓名</td>
+                <td>教师工号</td>
+                <td>教师姓名</td>
+                <td>通过</td>
                 <td>操作</td>
             </tr>
             </thead>
-            <tbody id="stuList">
+            <tbody id="subsidizeList">
 
             </tbody>
         </table>
@@ -50,23 +48,22 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/admin?act=stuPage",
+            url: "/admin?act=vrPage",
             data: pageInfo,
             dataType: "json",
             type: "post",
             success: function (data) {
-                var $tbody = $("#stuList");
+                var $tbody = $("#subsidizeList");
                 var html = "";
                 $tbody.html(html);
                 $.each(data.list, function (i, e) {
                     html += "<tr>";
                     html += "<td>" + e.sequence + "</td>";
-                    html += "<td>" + e.name + "</td>";
-                    html += "<td>" + e.sex + "</td>";
-                    html += "<td>" + e.telephone + "</td>";
-                    html += "<td>" + e.idcard + "</td>";
-                    html += "<td>" + e.banknumber + "</td>";
-                    html +="<td><button class='b-delete' onclick='stuDel("+e.id+")'></button></td>";
+                    html += "<td>" + e.studentName + "</td>";
+                    html += "<td>" + e.worknumber + "</td>";
+                    html += "<td>" + e.teacherName + "</td>";
+                    html += "<td>" + e.state + "</td>";
+                    html +="<td><button class='b-delete' onclick='subsidizeDel("+e.id+")'></button></td>";
                     html += "</tr>";
                 })
                 $tbody.html(html);
@@ -77,9 +74,9 @@
         })
     }
 
-    function stuDel(id) {
+    function subsidizeDel(id) {
         if(confirm("确认删除?")) {
-            $.post("/admin?act=stuDel", {"id": id}, function (data) {
+            $.post("/admin?act=subsidizeDel", {"id": id}, function (data) {
                 if (!(JSON.parse(data).success)) {
                     alert("删除失败")
                 }

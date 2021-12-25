@@ -5,6 +5,7 @@
     <title>Title</title>
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css"
           rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container-fluid">
@@ -19,7 +20,6 @@
                 <td>姓名</td>
                 <td>性别</td>
                 <td>联系电话</td>
-                <td>院系</td>
                 <td>操作</td>
             </tr>
             </thead>
@@ -55,12 +55,11 @@
                 $tbody.html(html);
                 $.each(data.list, function (i, e) {
                     html += "<tr>";
-                    html += "<td>" + e.workId + "</td>";
-                    html += "<td>" + e.name + "</td>";
-                    html += "<td>" + (e.sex === 0 ? '女' : '男') + "</td>";
-                    html += "<td>" + e.phone + "</td>";
-                    html += "<td>" + e.faculty + "</td>";
-                    html +="<td><button onclick='tchDel("+e.id+")'>删除</button></td>";
+                    html += "<td>" + e.worknumber + "</td>";
+                    html += "<td>" + e.teacherName + "</td>";
+                    html += "<td>" + e.sex + "</td>";
+                    html += "<td>" + e.telephone + "</td>";
+                    html +="<td><button class='b-delete' onclick='tchDel("+e.id+")'></button></td>";
                     html += "</tr>";
                 })
                 $tbody.html(html);

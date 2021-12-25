@@ -23,98 +23,88 @@
         select count(*) as value
         from student
     </select>
-    <select id="filedCount" resultType="map">
+    <select id="applyCount" resultType="map">
         select count(*) as value
-        from filed
+        from apply
     </select>
     <select id="stuPage" resultType="student">
         select *
         from student
-        order by id limit #{startIndex}, #{pageSize}
+        order by student_id limit #{startIndex}, #{pageSize}
     </select>
 
-    <insert id="filedAdd">
-        insert into filed(studentId, illustrate, time, rating, remark)
-        values (#{studentId}, #{illustrate}, #{time}, #{rating}, #{remark})
+    <insert id="applyAdd">
+        insert into apply(student_id, illustrate, time, remark)
+        values (#{studentId}, #{illustrate}, #{time}, #{remark})
     </insert>
 
-    <select id="filedVoPage" resultType="com.jjugrants.vo.FiledVo">
-        select f.id,
-               f.studentId,
-               f.illustrate,
-               f.time,
-               f.rating,
-               f.remark,
-               s.sequence,
-               s.name,
-               s.phone
-        from filed f
-                 join student s on f.studentId = s.id
-        order by f.time desc limit #{startIndex}, #{pageSize}
+    <select id="viewApplyPage" resultType="viewApply">
+        select *
+        from viewapply
+        where sequence = #{sq} limit #{va.startIndex}
+            , #{va.pageSize}
     </select>
 
-    <delete id="filedDel">
+    <delete id="applyDel">
         delete
-        from filed
-        where id = #{id}
+        from apply
+        where apply_id = #{id}
     </delete>
 
-    <select id="getFiled" resultType="com.jjugrants.vo.FiledVo">
-        select f.id,
-               f.illustrate,
-               f.rating,
-               f.time,
-               f.remark,
-               s.name,
-               s.sequence,
-               s.sex,
-               s.phone,
-               s.idcard,
-               s.bankcard
-        from filed f
-                 join student s on f.studentId = s.id
-        where f.id = #{id}
+    <select id="getApply" resultType="viewApply">
+        select *
+        from viewapply
+        where apply_id = #{id}
     </select>
 
     <update id="update">
-        update filed
+        update apply
         set illustrate=#{illustrate},
-            rating=#{rating},
             time=#{time},
             remark=#{remark}
-        where id = #{id}
+        where apply_id = #{id}
     </update>
 
-    <select id="grantsCount" resultType="map">
+    <select id="subsidizeCount" resultType="map">
         select count(*) as value
-        from grants
+        from subsidize
     </select>
 
-    <select id="grantsVoPage" resultType="com.jjugrants.vo.GrantsVo">
-        select g.id, g.sequence, g.workId, g.adminId, g.filedId, s.phone, f.illustrate
-        from grants g
-                 join filed f on g.filedId = f.id
-                 join student s on g.sequence = s.sequence
-        order by g.id limit #{startIndex}, #{pageSize}
+    <select id="viewResultPage" resultType="viewresult">
+        select *
+        from viewresult
+        order by subsidize_id limit #{startIndex}, #{pageSize}
     </select>
 
     <select id="verify" resultType="integer">
         select count(*)
         from student
-        where id = #{id}
+        where student_id = #{id}
           and password = #{pwd};
     </select>
     <update id="pwdUpdate">
         update student
         set password=#{chg}
-        where id = #{id}
+        where student_id = #{id}
     </update>
 
     <delete id="stuDel">
         delete
         from student
-        where id = #{id}
+        where student_id = #{id}
     </delete>
+
+    <select id="vaCount" resultType="map">
+        select count(*) as value
+        from viewApply
+        where sequence=#{sequence}
+    </select>
+
+    <select id="applyCountTeacherId" resultType="map">
+        select count(*) as value
+        from apply
+        where student_id in (select student_id from stuclass sc join student s on s.stuclass_id=sc.stuclass_id where teacher_id=#{teacherId})
+    </select>
 </mapper>
 
 

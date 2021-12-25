@@ -1,0 +1,22 @@
+.b-show{
+    border: 0;
+    background: url("../image/view.png") 0 0 / 20px 20px no-repeat;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+.b-no{
+    border: 0;
+    background: url("../image/passnot.png") 0 0 / 20px 20px no-repeat;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: 30px;
+}
+.b-delete{
+    border: 0;
+    background: url("../image/delete.png") 0 0 / 20px 20px no-repeat;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}

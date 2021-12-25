@@ -11,20 +11,20 @@
 <body>
 <div class="container-fluid">
     <div class="head" style="margin: 30px 20px;">
-        <h1>资助</h1>
+        <h1>资助结果</h1>
     </div>
     <div class="content">
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <td>学生学号</td>
-                <td>教师工号</td>
-                <td>管理员</td>
-                <td>联系电话</td>
-                <td>申请理由</td>
+                <td>学生姓名</td>
+                <td>学年</td>
+                <td>学院</td>
+                <td>通过</td>
             </tr>
             </thead>
-            <tbody id="grantsList">
+            <tbody id="subsidizeList">
 
             </tbody>
         </table>
@@ -46,21 +46,21 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/stu?action=grantsPage",
+            url: "/stu?action=viewResultPage",
             data: pageInfo,
             dataType: "json",
             type: "post",
             success: function (data) {
-                var $tbody = $("#grantsList");
+                var $tbody = $("#subsidizeList");
                 var html = "";
                 $tbody.html(html);
                 $.each(data.list, function (i, e) {
                     html += "<tr>";
                     html += "<td>" + e.sequence + "</td>";
-                    html += "<td>" + e.workId + "</td>";
-                    html += "<td>" + e.adminId + "</td>";
-                    html += "<td>" + e.phone + "</td>";
-                    html += "<td>" + e.illustrate + "</td>";
+                    html += "<td>" + e.studentName + "</td>";
+                    html += "<td>" + e.year + "</td>";
+                    html += "<td>" + e.college + "</td>";
+                    html += "<td>" + e.state + "</td>";
                     html += "</tr>";
                 })
                 $tbody.html(html);

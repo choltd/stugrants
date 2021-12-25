@@ -5,19 +5,48 @@
 
 <mapper namespace="com.jjugrants.dao.AdminDao">
     <select id="login" resultType="admin">
-        select * from admin where account = #{account } and password = #{pwd}
+        select *
+        from admin
+        where account = #{account }
+          and password = #{password}
     </select>
 
-    <select id="countGrants" resultType="map">
-        select count(*) as value from grants
+    <select id="subsidizeCount" resultType="map">
+        select count(*) as value
+        from subsidize
     </select>
 
-    <delete id="reviewDel">
-        delete from review where id=#{id}
+    <delete id="examineDel">
+        delete
+        from examine
+        where examine_id = #{id}
     </delete>
+
+    <select id="vrPage" resultType="viewResult">
+        select *
+        from viewresult
+        order by subsidize_id limit #{startIndex}, #{pageSize}
+    </select>
+
+    <delete id="subsidizeDel">
+        delete
+        from subsidize
+        where examine_id = #{examineId}
+    </delete>
+
+    <select id="vaCount" resultType="map">
+        select count(*) as value
+        from viewApply
+    </select>
+
+    <select id="vaPage" resultType="viewApply">
+        select *
+        from viewApply
+        order by time limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="tips" resultType="tips">
+        select *
+        from tips
+    </select>
 </mapper>
-
-
-
-
-

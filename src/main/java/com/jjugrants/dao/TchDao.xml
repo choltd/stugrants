@@ -7,17 +7,14 @@
     <select id="query" resultType="teacher">
         select * from teacher
         <where>
-            <if test="workId != null and workId != ''">
-                and workId like '%' #{workId} '%'
+            <if test="worknumber != null and worknumber != ''">
+                and worknumber like '%' #{worknumber} '%'
             </if>
             <if test="password != null and password != ''">
                 and password = #{password}
             </if>
-            <if test="name != null and name != ''">
-                and name like '%' #{name} '%'
-            </if>
-            <if test="faculty != null and faculty != ''">
-                and faculty = #{faculty}
+            <if test="teacherName != null and teacherName != ''">
+                and teacher_name like '%' #{teacherName} '%'
             </if>
         </where>
     </select>
@@ -25,23 +22,61 @@
         select count(*) as value
         from teacher
     </select>
-    <select id="countReview" resultType="map">
+    <select id="examineCount" resultType="map">
         select count(*) as value
-        from review
+        from examine
     </select>
     <select id="tchPage" resultType="teacher">
         select *
         from teacher
-        order by id limit #{startIndex}, #{pageSize}
+        order by teacher_id limit #{startIndex}, #{pageSize}
     </select>
 
     <delete id="tchDel">
-        delete from teacher where id=#{id}
+        delete
+        from teacher
+        where teacherId = #{id}
     </delete>
 
-    <select id="reviewPage" resultType="com.jjugrants.vo.ReviewVo">
-        select r.id,s.sequence,s.name stuName,s.sex,s.phone stuPhone,t.workId,t.name tchName,t.phone tchPhone
-        from review r join student s on r.studentId=s.id join teacher t on r.teacherId=t.id
-        order by r.time desc limit #{startIndex}, #{pageSize}
+    <select id="examinePage" resultType="viewResult">
+        select *
+        from viewresult limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="viewApplyPage" resultType="viewApply">
+        select *
+        from viewapply
+        where sequence in (select s.sequence
+                           from stuclass sc
+                                    join student s on sc.stuclass_id = s.stuclass_id
+                           where teacher_id = #{teacherId})
+          and apply_id not in (select apply_id from examine)
+        order by time
+            limit #{va.startIndex}, #{va.pageSize}
+    </select>
+
+    <select id="applyShow" resultType="viewApply">
+        select *
+        from viewApply
+        where apply_id = #{applyId}
+    </select>
+
+    <insert id="applyFail">
+        insert into examine(teacher_id, apply_id, state, time)
+        values (#{teacherId}, #{applyId}, #{state}, #{time})
+    </insert>
+
+    <insert id="examine">
+        insert into examine(teacher_id, apply_id, state, time)
+        values (#{teacherId}, #{applyId}, #{state}, #{time})
+    </insert>
+
+    <select id="searchClassname" resultType="viewResult">
+        SELECT *
+        from viewresult
+        where examine_id in (SELECT e.examine_id
+                             from stuclass sc
+                                      join examine e on sc.teacher_id = e.teacher_id
+                             where classname = #{classname})
     </select>
 </mapper>

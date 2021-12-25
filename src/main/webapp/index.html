@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="nav">
-                <ul id="Top_navigation" style='background: url("static/image/li_bf.png");'>
-                    <li name='nav'><a href='javascript:void(0)' onclick="front();" style='color: #ffff00;'>首页</a></li>
-                    <li name='nav'><a href='javascript:void(0)' onclick="bulid();">中心概况</a></li>
+                <ul id="Top_navigation">
+                    <li name='nav'><a href='javascript:void(0)' onclick="front();" style='color: #ffff00;background:url("static/image/li_bf.png")'>首页</a></li>
+                    <li name='nav'><a href='static/html/center.html' onclick="bulid();">中心概况</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">勤工助学</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">助学金</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">助学贷款</a></li>
@@ -77,7 +77,7 @@
                     <div class="notice1_M">
                         <ul id="notice">
                             <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href='' title='关于办理2021-2022学年校园地贷款新贷及提额协议的通知'
+                                <div class="no" style='float:left;'><a href='static/html/href.html' title='关于办理2021-2022学年校园地贷款新贷及提额协议的通知'
                                         target='_blank' class='black'>【贷】
                                         关于办理2021-2022学年校园地贷款</a></div>
                                 <div style='float:right;margin-right:20px;'><span class="black">2021-11-24</span>
@@ -304,7 +304,7 @@
         var $bulletin = $("#bulletin")
         if($.cookie() == null){
             $bulletin.html("")
-        } else if($.cookie("grants") == "begin"){
+        } else if($.cookie("subsidize") == "begin"){
             $bulletin.append("<li>新的资助已发布，申请通道已开启</li>")
         } else if($.cookie("roster") == "begin"){
             $bulletin.html("<li>资助结果已发布，请自行登录查看</li>>")

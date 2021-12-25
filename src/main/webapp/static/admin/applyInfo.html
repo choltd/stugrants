@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css"
           rel="stylesheet"/>
     <title></title>
 </head>
 <body>
-
 <!-- 申请资助的模态窗口 -->
-<div class="modal fade" id="filedModal" role="dialog">
+<div class="modal fade" id="applyModal" role="dialog">
     <div class="modal-dialog" role="document" style="width: 60%;">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,47 +21,47 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="filed-name" class="col-sm-2 control-label">姓名</label>
+                        <label for="apply-name" class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="filed-name"/>
+                            <input type="text" class="form-control" id="apply-name"/>
                         </div>
-                        <label for="filed-sequence" class="col-sm-2 control-label">学号</label>
+                        <label for="apply-sequence" class="col-sm-2 control-label">学号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="filed-sequence">
+                            <input type="text" class="form-control" id="apply-sequence">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="filed-sex" class="col-sm-2 control-label">性别</label>
+                        <label for="apply-sex" class="col-sm-2 control-label">性别</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="filed-sex">
+                            <input type="text" class="form-control" id="apply-sex">
                         </div>
 
-                        <label for="filed-phone" class="col-sm-2 control-label">联系电话</label>
+                        <label for="apply-phone" class="col-sm-2 control-label">联系电话</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="filed-phone">
+                            <input type="text" class="form-control" id="apply-phone">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="filed-idcard" class="col-sm-2 control-label">身份证号</label>
+                        <label for="apply-idcard" class="col-sm-2 control-label">身份证号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="filed-idcard">
+                            <input type="text" class="form-control" id="apply-idcard">
                         </div>
 
-                        <label for="filed-bankcard" class="col-sm-2 control-label">银行卡号</label>
+                        <label for="apply-bankcard" class="col-sm-2 control-label">银行卡号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="filed-bankcard">
+                            <input type="text" class="form-control" id="apply-bankcard">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="filed-time" class="col-sm-2 control-label">提交时间</label>
+                        <label for="apply-time" class="col-sm-2 control-label">提交时间</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control time" id="filed-time">
+                            <input type="text" class="form-control time" id="apply-time">
 
                         </div>
-                        <label for="filed-rating" class="col-sm-2 control-label">成绩</label>
+                        <label for="apply-rating" class="col-sm-2 control-label">成绩</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <select class="form-control" id="filed-rating">
+                            <select class="form-control" id="apply-rating">
                                 <option selected="selected"></option>
                                 <option>优</option>
                                 <option>良</option>
@@ -70,15 +69,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="filed-illustrate" class="col-sm-2 control-label">申请理由</label>
+                        <label for="apply-illustrate" class="col-sm-2 control-label">申请理由</label>
                         <div class="col-sm-10" style="width: 70.5%;">
-                            <textarea class="form-control" rows="3" id="filed-illustrate"></textarea>
+                            <textarea class="form-control" rows="3" id="apply-illustrate"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="filed-remark" class="col-sm-2 control-label">备注</label>
+                        <label for="apply-remark" class="col-sm-2 control-label">备注</label>
                         <div class="col-sm-10" style="width: 70.5%;">
-                            <textarea class="form-control" rows="3" id="filed-remark"></textarea>
+                            <textarea class="form-control" rows="3" id="apply-remark"></textarea>
                         </div>
                     </div>
                     <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>
@@ -191,13 +190,13 @@
         <div class="btn-toolbar" role="toolbar"
              style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
             <div class="btn-group" style="position: relative; top: 18%;">
-                <button type="button" class="btn btn-primary" id="filedAdd">
+                <button type="button" class="btn btn-primary" id="applyAdd">
                     <span class="glyphicon glyphicon-plus"></span> 创建
                 </button>
-                <button type="button" class="btn btn-default" id="filedEdit"><span
+                <button type="button" class="btn btn-default" id="applyEdit"><span
                         class="glyphicon glyphicon-pencil"></span> 修改
                 </button>
-                <button type="button" class="btn btn-danger" id="filedDel"><span
+                <button type="button" class="btn btn-danger" id="applyDel"><span
                         class="glyphicon glyphicon-minus"></span> 删除
                 </button>
             </div>
@@ -214,7 +213,7 @@
                     <td>提交时间</td>
                 </tr>
                 </thead>
-                <tbody id="filedList">
+                <tbody id="applyList">
 
                 </tbody>
             </table>
@@ -224,7 +223,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="hidden-id">
+<input type="hidden" id="hidden-edit-applyId">
 <input type="hidden" id="hidden-stuId">
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
@@ -249,56 +248,41 @@
         $("#qx").click(function () {
             $("input[name=xz]").prop("checked", this.checked);
         })
-        $("#filedList").on("click", $("input[name=xz]"), function () {
+        $("#applyList").on("click", $("input[name=xz]"), function () {
             $("#qx").prop("checked", $("input[name=xz]").length === $("input[name=xz]:checked").length);
         })
 
         pageShow(1, true);
 
-        $("#filedAdd").click(function () {
-            $("#filedModal").modal("show")
-            $("#filed-name").val(stuInfo().name)
-            $("#filed-sequence").val(stuInfo().sequence)
-            $("#filed-sex").val((stuInfo().sex === 0 ? "女" : "男"))
-            $("#filed-phone").val(stuInfo().phone)
-            $("#filed-idcard").val(stuInfo().idcard)
-            $("#filed-bankcard").val(stuInfo().bankcard)
+        $("#applyAdd").click(function () {
+            $("#applyModal").modal("show")
+            $("#apply-name").val(stuInfo().name)
+            $("#apply-sequence").val(stuInfo().sequence)
+            $("#apply-sex").val((stuInfo().sex === 0 ? "女" : "男"))
+            $("#apply-phone").val(stuInfo().phone)
+            $("#apply-idcard").val(stuInfo().idcard)
+            $("#apply-bankcard").val(stuInfo().bankcard)
         });
 
         $("#save").click(function () {
-            if (filedAdd({
+            if (applyAdd({
                 "studentId": stuInfo().id,
-                "illustrate": $("#filed-illustrate").val(),
-                "rating": $("#filed-rating").val(),
-                "remark": $("#filed-remark").val()
+                "illustrate": $("#apply-illustrate").val(),
+                "rating": $("#apply-rating").val(),
+                "remark": $("#apply-remark").val()
             })) {
-                $("#filedModal").modal("hide")
-                $("#filed-time").val("")
-                $("#filed-illustrate").val("")
-                $("#filed-rating").val("")
-                $("#filed-remark").val("")
+                $("#applyModal").modal("hide")
+                $("#apply-time").val("")
+                $("#apply-illustrate").val("")
+                $("#apply-rating").val("")
+                $("#apply-remark").val("")
                 pageShow(1, false)
             } else {
                 alert("失败")
             }
         });
 
-        $("#filedList").on("click", $("input[name=xz]"), function () {
-            var $xz = $("input[name=xz]:checked")
-            if ($xz.length === 1) {
-                var del = $("#filedDel")
-                var edit = $("#filedEdit")
-                if ((stuInfo().id) != $xz.attr("stuId")) {
-                    del.attr("disabled", "disabled")
-                    edit.attr("disabled", "disabled")
-                } else {
-                    del.removeAttr("disabled")
-                    edit.removeAttr("disabled")
-                }
-            }
-        })
-
-        $("#filedDel").click(function (api) {
+        $("#applyDel").click(function () {
             var $xz = $("input[name=xz]:checked")
             if ($xz.length < 1) {
                 alert("请选择要删除项")
@@ -306,7 +290,7 @@
                 alert("只能同时删除一项")
             } else {
                 if(confirm("确认删除?")) {
-                    $.post("/stu?action=filedDel", {"id": $xz.val()}, function (data) {
+                    $.post("/stu?action=applyDel", {"id": $xz.val()}, function (data) {
                         if (!(JSON.parse(data)).success) {
                             alert("删除失败")
                         } else {
@@ -317,15 +301,15 @@
             }
         })
 
-        $("#filedEdit").click(function () {
+        $("#applyEdit").click(function () {
             var $xz = $("input[name=xz]:checked")
             if ($xz.length < 1) {
                 alert("请选择要修改项")
             } else if ($xz.length > 1) {
                 alert("只能同时修改一项")
             } else {
-                $.get("/stu?action=filedEdit", {"id": $xz.val()}, function (data) {
-                    $("#hidden-id").val(data.id)
+                $.get("/stu?action=applyEdit", {"id": $xz.val()}, function (data) {
+                    $("#hidden-edit-applyId").val(data.id)
                     $("#edit-name").val(data.name)
                     $("#edit-sequence").val(data.sequence)
                     $("#edit-sex").val((data.sex === 0 ? "女" : "男"))
@@ -344,7 +328,7 @@
 
         $("#update").click(function () {
             $.post("/stu?action=update", {
-                "id": $("#hidden-id").val(),
+                "id": $("#hidden-edit-applyId").val(),
                 "illustrate": $("#edit-illustrate").val(),
                 "rating": $("#edit-rating").val(),
                 "remark": $("#edit-remark").val(),
@@ -363,23 +347,23 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/stu?action=filedVoPage",
-            data: pageInfo,
+            url: "/admin?act=viewApplyPage",
+            data: {"pageNum":pageInfo.pageNum,"pageSize":pageInfo.pageSize,"sequence":stuInfo().sequence},
             dataType: "json",
             type: "post",
             success: function (data) {
                 var html = "";
-                $("#filedList").html(html);
+                $("#applyList").html(html);
                 $.each(data.list, function (i, e) {
                     html += '<tr className="active">';
                     html += '<td><input type="checkbox" name="xz" value="' + e.id + '" stuId="' + e.studentId + '"/></td>';
                     html += '<td>' + e.sequence + '</td>';
                     html += '<td>' + e.name + '</td>';
-                    html += '<td>' + e.phone + '</td>';
+                    html += '<td>' + e.telephone + '</td>';
                     html += '<td>' + convert(e.time) + '</td>';
                     html += '</tr>';
                 })
-                $("#filedList").html(html);
+                $("#applyList").html(html);
                 if (isFirst) {
                     pagination("#pagination", data);
                 }

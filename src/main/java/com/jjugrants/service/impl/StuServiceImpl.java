@@ -1,13 +1,9 @@
 package com.jjugrants.service.impl;
 
 import com.jjugrants.dao.StuDao;
-import com.jjugrants.domain.Filed;
-import com.jjugrants.domain.PageBean;
-import com.jjugrants.domain.Student;
+import com.jjugrants.domain.*;
 import com.jjugrants.service.StuService;
 import com.jjugrants.utils.SqlSessionUtil;
-import com.jjugrants.vo.FiledVo;
-import com.jjugrants.vo.GrantsVo;
 
 import java.util.List;
 import java.util.Map;
@@ -36,52 +32,52 @@ public class StuServiceImpl implements StuService {
     }
 
     @Override
-    public boolean filedAdd(Filed filed) {
-        return stuDao.filedAdd(filed) == 1;
+    public boolean applydAdd(Apply apply) {
+        return stuDao.applyAdd(apply) == 1;
     }
 
     @Override
-    public PageBean<FiledVo> filedList(PageBean<FiledVo> pageBean) {
+    public PageBean<ViewApply> viewApplyPage(PageBean<ViewApply> pageBean, String sequence) {
         int count = 0;
-        Map<String, Object> map = stuDao.filedCount();
+        Map<String, Object> map = stuDao.vaCount(sequence);
         for (Object value : map.values()) {
             count = Integer.parseInt(String.valueOf(value));
         }
         if (count != 0) {
             pageBean.setTotalRecord(count);
         }
-        List<FiledVo> filedVos = stuDao.filedVoPage(pageBean);
-        pageBean.setList(filedVos);
+        List<ViewApply> viewApplies = stuDao.viewApplyPage(pageBean,sequence);
+        pageBean.setList(viewApplies);
         return pageBean;
     }
 
     @Override
-    public boolean filedDel(String id) {
-        return stuDao.filedDel(id) == 1;
+    public boolean applyDel(String id) {
+        return stuDao.applyDel(id) == 1;
     }
 
     @Override
-    public FiledVo getFiled(String id) {
-        return stuDao.getFiled(id);
+    public ViewApply getApply(String id) {
+        return stuDao.getApply(id);
     }
 
     @Override
-    public boolean update(Filed filed) {
-        return stuDao.update(filed) == 1;
+    public boolean update(Apply apply) {
+        return stuDao.update(apply) == 1;
     }
 
     @Override
-    public PageBean<GrantsVo> grantsPage(PageBean<GrantsVo> pageBean) {
+    public PageBean<ViewResult> viewResultPage(PageBean<ViewResult> pageBean) {
         int count = 0;
-        Map<String, Object> map = stuDao.grantsCount();
+        Map<String, Object> map = stuDao.subsidizeCount();
         for (Object value : map.values()) {
             count = Integer.parseInt(String.valueOf(value));
         }
         if (count != 0) {
             pageBean.setTotalRecord(count);
         }
-        List<GrantsVo> grantsVos = stuDao.grantsVoPage(pageBean);
-        pageBean.setList(grantsVos);
+        List<ViewResult> viewResults = stuDao.viewResultPage(pageBean);
+        pageBean.setList(viewResults);
         return pageBean;
     }
 

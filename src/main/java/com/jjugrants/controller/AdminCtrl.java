@@ -9,13 +9,14 @@ import com.jjugrants.service.impl.StuServiceImpl;
 import com.jjugrants.service.impl.TchServiceImpl;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
-import com.jjugrants.vo.ReviewVo;
+
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/admin")
@@ -36,9 +37,12 @@ public class AdminCtrl extends HttpServlet {
     private void login(HttpServletRequest req, HttpServletResponse resp) {
         String account = req.getParameter("account");
         String password = req.getParameter("password");
+        Admin admin = new Admin();
+        admin.setAccount(account);
+        admin.setPassword(password);
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        Admin admin = adminService.login(account, password);
-        PrintJson.printJsonObj(resp, admin);
+        boolean flag =  adminService.login(admin);
+        PrintJson.printJsonFlag(resp,flag);
     }
 
     private void getCharts(HttpServletRequest request, HttpServletResponse response){
@@ -81,21 +85,56 @@ public class AdminCtrl extends HttpServlet {
         PrintJson.printJsonFlag(response, flag);
     }
 
-    private void reviewVoPage(HttpServletRequest request, HttpServletResponse response){
+    private void examinePage(HttpServletRequest request, HttpServletResponse response){
         String pageSize = request.getParameter("pageSize");
         String pageNum = request.getParameter("pageNum");
-        PageBean<ReviewVo> rvpb = new PageBean<>();
-        rvpb.setPageSize(Integer.parseInt(pageSize));
-        rvpb.setPageNum(Integer.parseInt(pageNum));
+        PageBean<ViewResult> vePageBean = new PageBean<>();
+        vePageBean.setPageSize(Integer.parseInt(pageSize));
+        vePageBean.setPageNum(Integer.parseInt(pageNum));
         TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
-        PageBean<ReviewVo> reviewPageBean = tchService.reviewVoPage(rvpb);
-        PrintJson.printJsonObj(response,reviewPageBean);
+        PageBean<ViewResult> examinePageBean = tchService.examinePage(vePageBean);
+        PrintJson.printJsonObj(response,examinePageBean);
     }
 
-    private void reviewDel(HttpServletRequest request, HttpServletResponse response){
+    private void examineDel(HttpServletRequest request, HttpServletResponse response){
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.reviewDel(request.getParameter("id"));
+        boolean flag = adminService.examineDel(request.getParameter("id"));
         PrintJson.printJsonFlag(response,flag);
+    }
+
+    private void vrPage(HttpServletRequest request, HttpServletResponse response){
+        String pageSize = request.getParameter("pageSize");
+        String pageNum = request.getParameter("pageNum");
+        PageBean<ViewResult> pageBean = new PageBean<>();
+        pageBean.setPageNum(Integer.parseInt(pageNum));
+        pageBean.setPageSize(Integer.parseInt(pageSize));
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        PageBean<ViewResult> vrPageBean = adminService.vrPage(pageBean);
+        PrintJson.printJsonObj(response,vrPageBean);
+    }
+
+    private void subsidizeDel(HttpServletRequest request, HttpServletResponse response){
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        boolean flag = adminService.subsidizeDel(request.getParameter("id"));
+        PrintJson.printJsonFlag(response,flag);
+    }
+
+    private void viewApplyPage(HttpServletRequest request, HttpServletResponse response){
+        String pageNum = request.getParameter("pageNum");
+        String pageSize = request.getParameter("pageSize");
+        PageBean<ViewApply> vaPageBean = new PageBean<>();
+        vaPageBean.setPageSize(Integer.parseInt(pageSize));
+        vaPageBean.setPageNum(Integer.parseInt(pageNum));
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        PageBean<ViewApply> pageBean = adminService.vaPage(vaPageBean);
+        PrintJson.printJsonObj(response,pageBean);
+    }
+
+    private void tips(HttpServletRequest request, HttpServletResponse response){
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        List<Tips> tips = adminService.tips();
+        PrintJson.printJsonObj(response, tips);
+
     }
 
 }

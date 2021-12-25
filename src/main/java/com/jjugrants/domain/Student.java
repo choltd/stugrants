@@ -1,30 +1,47 @@
 package com.jjugrants.domain;
 
 public class Student {
-    private int id;
-    private String sequence;
+    private int studentId;
+    private int stuclassId;
     private String name;
-    private int sex;
-    private String score;
-    private String idcard;
-    private String phone;
-    private String bankcard;
+    private String sequence;
     private String password;
+    private String sex;
+    private String idcard;
+    private String telephone;
+    private String banknumber;
+    private String year;
 
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", stuclassId=" + stuclassId +
+                ", name='" + name + '\'' +
+                ", sequence='" + sequence + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", banknumber='" + banknumber + '\'' +
+                ", year='" + year + '\'' +
+                '}';
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public String getSequence() {
-        return sequence;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
-    public void setSequence(String sequence) {
-        this.sequence = sequence;
+    public int getStuclassId() {
+        return stuclassId;
+    }
+
+    public void setStuclassId(int stuclassId) {
+        this.stuclassId = stuclassId;
     }
 
     public String getName() {
@@ -35,44 +52,12 @@ public class Student {
         this.name = name;
     }
 
-    public int getSex() {
-        return sex;
+    public String getSequence() {
+        return sequence;
     }
 
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
-
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
-
-    public String getIdcard() {
-        return idcard;
-    }
-
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getbankcard() {
-        return bankcard;
-    }
-
-    public void setbankcard(String bankcard) {
-        this.bankcard = bankcard;
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
     }
 
     public String getPassword() {
@@ -83,18 +68,43 @@ public class Student {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", sequence='" + sequence + '\'' +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", score='" + score + '\'' +
-                ", idcard='" + idcard + '\'' +
-                ", phone='" + phone + '\'' +
-                ", bankcard='" + bankcard + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getBanknumber() {
+        return banknumber;
+    }
+
+    public void setBanknumber(String banknumber) {
+        this.banknumber = banknumber;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

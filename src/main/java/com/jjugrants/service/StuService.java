@@ -1,27 +1,23 @@
 package com.jjugrants.service;
 
-import com.jjugrants.domain.Filed;
-import com.jjugrants.domain.PageBean;
-import com.jjugrants.domain.Student;
-import com.jjugrants.vo.FiledVo;
-import com.jjugrants.vo.GrantsVo;
+import com.jjugrants.domain.*;
 
 public interface StuService {
     Student query(Student student);
 
     PageBean<Student> queryList(PageBean<Student> pageBean) throws Exception;
 
-    boolean filedAdd(Filed filed);
+    boolean applydAdd(Apply apply);
 
-    PageBean<FiledVo> filedList(PageBean<FiledVo> pageBean);
+    PageBean<ViewApply> viewApplyPage(PageBean<ViewApply> pageBean, String sequence);
 
-    boolean filedDel(String id);
+    boolean applyDel(String id);
 
-    FiledVo getFiled(String id);
+    ViewApply getApply(String id);
 
-    boolean update(Filed filed);
+    boolean update(Apply apply);
 
-    PageBean<GrantsVo> grantsPage(PageBean<GrantsVo> pageBean);
+    PageBean<ViewResult> viewResultPage(PageBean<ViewResult> pageBean);
 
     boolean pwdUpdate(String id, String password, String change);
 
