@@ -1,9 +1,10 @@
 package com.jjugrants.service;
 
 import com.jjugrants.domain.*;
+import com.jjugrants.vo.StudentVo;
 
 public interface StuService {
-    Student query(Student student);
+    StudentVo query(Student student);
 
     PageBean<Student> queryList(PageBean<Student> pageBean) throws Exception;
 

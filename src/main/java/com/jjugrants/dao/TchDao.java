@@ -1,13 +1,14 @@
 package com.jjugrants.dao;
 
 import com.jjugrants.domain.*;
+import com.jjugrants.vo.TeacherVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
 public interface TchDao {
-    Teacher query(Teacher teacher);
+    TeacherVo query(Teacher teacher);
 
     Map<String, Object> count();
 
@@ -28,4 +29,7 @@ public interface TchDao {
     int examine(Examine examine);
 
     List<ViewResult> searchClassname(String classname);
+
+    Map<String, Object> viewResultCount();
+
 }

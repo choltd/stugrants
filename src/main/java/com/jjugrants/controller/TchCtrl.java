@@ -6,6 +6,7 @@ import com.jjugrants.service.impl.TchServiceImpl;
 import com.jjugrants.utils.DateTimeUtil;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
+import com.jjugrants.vo.TeacherVo;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,8 +38,8 @@ public class TchCtrl extends HttpServlet {
         tch.setWorknumber(Worknumber);
         tch.setPassword(password);
         TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
-        Teacher teacher = tchService.query(tch);
-        PrintJson.printJsonObj(resp, teacher);
+        TeacherVo teacherVo = tchService.query(tch);
+        PrintJson.printJsonObj(resp, teacherVo);
     }
 
     private void viewApplyPage(HttpServletRequest request, HttpServletResponse response){
@@ -78,7 +79,7 @@ public class TchCtrl extends HttpServlet {
         examine.setTime(DateTimeUtil.getTimestamp());
         examine.setState("是");
         boolean flag = tchService.examine(examine);
-        PrintJson.printJsonObj(response,flag);
+        PrintJson.printJsonFlag(response,flag);
     }
 
     private void examinePage(HttpServletRequest request, HttpServletResponse response){

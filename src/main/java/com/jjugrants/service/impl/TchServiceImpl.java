@@ -5,6 +5,7 @@ import com.jjugrants.dao.TchDao;
 import com.jjugrants.domain.*;
 import com.jjugrants.service.TchService;
 import com.jjugrants.utils.SqlSessionUtil;
+import com.jjugrants.vo.TeacherVo;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class TchServiceImpl implements TchService {
     private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
 
     @Override
-    public Teacher query(Teacher teacher) {
+    public TeacherVo query(Teacher teacher) {
         return tchDao.query(teacher);
     }
 
@@ -42,7 +43,7 @@ public class TchServiceImpl implements TchService {
     @Override
     public PageBean<ViewResult> examinePage(PageBean<ViewResult> vePageBean) {
         int count = 0;
-        Map<String, Object> map = tchDao.examineCount();
+        Map<String, Object> map = tchDao.viewResultCount();
         for (Object value : map.values()) {
             count = Integer.parseInt(String.valueOf(value));
         }

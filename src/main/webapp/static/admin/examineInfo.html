@@ -70,6 +70,8 @@
                 $("#examineList").html(html);
                 if (isFirst) {
                     pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
                 }
             }
         })

@@ -49,4 +49,10 @@
         select *
         from tips
     </select>
+
+    <insert id="applyAdd">
+        insert into apply(student_id, illustrate, time, remark)
+        values ((select student_id from student where sequence = #{sequence}), #{apply.illustrate}, #{apply.time},
+                #{apply.remark})
+    </insert>
 </mapper>

@@ -156,13 +156,13 @@ body {
 #rpcontent {
     display: none;
     width: auto;
-    height: 100px;
+    height: 200px;
 }
 
 #rpcontent p {
     margin: 20px;
     font-size: 2rem;
-    margin-bottom: 100px;
+    display: inline-block;
 }
 
 .nav {

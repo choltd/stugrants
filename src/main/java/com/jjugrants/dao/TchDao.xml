@@ -4,19 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jjugrants.dao.TchDao">
-    <select id="query" resultType="teacher">
-        select * from teacher
-        <where>
-            <if test="worknumber != null and worknumber != ''">
-                and worknumber like '%' #{worknumber} '%'
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-            <if test="teacherName != null and teacherName != ''">
-                and teacher_name like '%' #{teacherName} '%'
-            </if>
-        </where>
+    <select id="query" resultType="com.jjugrants.vo.TeacherVo">
+        select t.teacher_id,t.teacher_name, t.worknumber, t.sex, t.telephone, sc.major, sc.college, sc.classname
+        from teacher t
+                 join stuclass sc on t.teacher_id = sc.teacher_id
+        where worknumber = #{worknumber}
+          and password = #{password}
     </select>
     <select id="count" resultType="map">
         select count(*) as value
@@ -78,5 +71,9 @@
                              from stuclass sc
                                       join examine e on sc.teacher_id = e.teacher_id
                              where classname = #{classname})
+    </select>
+
+    <select id="viewResultCount" resultType="map">
+        select count(*) as value from viewResult
     </select>
 </mapper>

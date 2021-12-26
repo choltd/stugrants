@@ -6,6 +6,7 @@ import com.jjugrants.service.impl.StuServiceImpl;
 import com.jjugrants.utils.DateTimeUtil;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
+import com.jjugrants.vo.StudentVo;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,11 +38,11 @@ public class StuCtrl extends HttpServlet {
         student.setSequence(sequence);
         student.setPassword(password);
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        Student stu = stuService.query(student);
-        PrintJson.printJsonObj(resp, stu);
+        StudentVo studentVo = stuService.query(student);
+        PrintJson.printJsonObj(resp, studentVo);
     }
 
-    private void applydAdd(HttpServletRequest request, HttpServletResponse response){
+    private void applyAdd(HttpServletRequest request, HttpServletResponse response){
         String studentId = request.getParameter("studentId");
         String illustrate = request.getParameter("illustrate");
         String remark = request.getParameter("remark");
@@ -69,19 +70,19 @@ public class StuCtrl extends HttpServlet {
 
     private void applyDel(HttpServletRequest request, HttpServletResponse response){
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        boolean flag = stuService.applyDel(request.getParameter("id"));
+        boolean flag = stuService.applyDel(request.getParameter("applyId"));
         PrintJson.printJsonFlag(response,flag);
     }
 
     private void applyEdit(HttpServletRequest request, HttpServletResponse response){
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        ViewApply viewApply = stuService.getApply(request.getParameter("id"));
+        ViewApply viewApply = stuService.getApply(request.getParameter("applyId"));
         PrintJson.printJsonObj(response,viewApply);
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response){
         Apply apply = new Apply();
-        apply.setApplyId(Integer.parseInt(request.getParameter("id")));
+        apply.setApplyId(Integer.parseInt(request.getParameter("applyId")));
         apply.setIllustrate(request.getParameter("illustrate"));
         apply.setRemark(request.getParameter("remark"));
         apply.setTime(DateTimeUtil.getTimestamp());
@@ -104,7 +105,7 @@ public class StuCtrl extends HttpServlet {
 
     private void pwdUpdate(HttpServletRequest request, HttpServletResponse response){
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        boolean flag = stuService.pwdUpdate(request.getParameter("id"),request.getParameter("password"),request.getParameter("change"));
+        boolean flag = stuService.pwdUpdate(request.getParameter("studentId"),request.getParameter("password"),request.getParameter("change"));
         PrintJson.printJsonFlag(response,flag);
     }
 }

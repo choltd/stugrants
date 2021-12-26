@@ -40,9 +40,9 @@
                             <input type="text" class="form-control" id="examine-sex">
                         </div>
 
-                        <label for="examine-phone" class="col-sm-2 control-label">联系电话</label>
+                        <label for="examine-telephone" class="col-sm-2 control-label">联系电话</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="examine-phone">
+                            <input type="text" class="form-control" id="examine-telephone">
                         </div>
                     </div>
                     <div class="form-group">
@@ -51,9 +51,9 @@
                             <input type="text" class="form-control" id="examine-idcard">
                         </div>
 
-                        <label for="examine-bankcard" class="col-sm-2 control-label">银行卡号</label>
+                        <label for="examine-banknumber" class="col-sm-2 control-label">银行卡号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="examine-bankcard">
+                            <input type="text" class="form-control" id="examine-banknumber">
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,7 +90,6 @@
                             <textarea class="form-control" rows="3" id="examine-remark"></textarea>
                         </div>
                     </div>
-<!--                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>-->
                 </form>
             </div>
             <div class="modal-footer">
@@ -120,11 +119,9 @@
             </tr>
             </thead>
             <tbody id="applyList">
-
             </tbody>
         </table>
         <ul class="pagination" id="pagination" style="cursor: pointer">
-
         </ul>
     </div>
 </div>
@@ -151,12 +148,15 @@
 
         pageShow(1, true);
 
-        $("#applyPass").click(function(){
-            $.post("/tch?action=examine",{"applyId":$("#pass-id").val(),"teacherId":tchInfo().teacherId},function(data){
-                if(JSON.parse(data).success){
+        $("#applyPass").click(function () {
+            $.post("/tch?action=examine", {
+                "applyId": $("#pass-id").val(),
+                "teacherId": tchInfo().teacherId
+            }, function (data) {
+                if (JSON.parse(data).success) {
                     alert("操作成功")
                     $("#examineModal").modal("hide")
-                    pageShow(1,false)
+                    pageShow(1, false)
                 }
             })
         })
@@ -166,7 +166,7 @@
         pageInfo.pageNum = num;
         $.ajax({
             url: "/tch?action=viewApplyPage",
-            data: {"pageSize":pageInfo.pageSize,"pageNum":pageInfo.pageNum,"teacherId":tchInfo().teacherId},
+            data: {"pageSize": pageInfo.pageSize, "pageNum": pageInfo.pageNum, "teacherId": tchInfo().teacherId},
             dataType: "json",
             type: "post",
             success: function (data) {
@@ -179,12 +179,14 @@
                     html += '<td>' + e.sex + '</td>';
                     html += '<td>' + e.telephone + '</td>';
                     html += '<td>' + e.illustrate + '</td>';
-                    html += '<td><button class="b-show" onclick="applyShow('+e.applyId+')"></button><button class="b-no" onclick="applyFail('+e.applyId+')"></button></td>';
+                    html += '<td><button class="b-show" onclick="applyShow(' + e.applyId + ')"></button><button class="b-no" onclick="applyFail(' + e.applyId + ')"></button></td>';
                     html += '</tr>';
                 })
                 $("#applyList").html(html);
                 if (isFirst) {
                     pagination("#pagination", data);
+                } else if (data.list.length < 1) {
+                    $("#pagination").html("")
                 }
             }
         })
@@ -192,27 +194,27 @@
 
     function applyShow(applyId) {
         $.ajax({
-            url:"/tch?action=applyShow",
-            data:{"applyId":applyId},
-            dataType:"json",
-            type:"get",
-            success:function(data){
-                if(data !== null){
+            url: "/tch?action=applyShow",
+            data: {"applyId": applyId},
+            dataType: "json",
+            type: "get",
+            success: function (data) {
+                if (data !== null) {
                     $("#examineModal").modal("show")
                     $("#pass-id").val(data.applyId)
                     $("#examine-name").val(data.name)
                     $("#examine-sequence").val(data.sequence)
                     $("#examine-sex").val(data.sex)
-                    $("#examine-phone").val(data.telephone)
+                    $("#examine-telephone").val(data.telephone)
                     $("#examine-idcard").val(data.idcard)
-                    $("#examine-bankcard").val(data.banknumber)
+                    $("#examine-banknumber").val(data.banknumber)
                     $("#examine-time").val(convert(data.time))
                     $("#examine-year").val(data.year)
                     $("#examine-college").val(data.college)
                     $("#examine-major").val(data.major)
                     $("#examine-illustrate").val(data.illustrate)
                     $("#examine-remark").val(data.remark)
-                }else{
+                } else {
                     alert("暂时无法操作，请联系管理员")
                 }
             }
@@ -220,7 +222,9 @@
     }
 
     function applyFail(applyId) {
-        $.post("/tch?action=applyFail",{"applyId":applyId,"teacherId":tchInfo().teacherId})
+        $.post("/tch?action=applyFail", {"applyId": applyId, "teacherId": tchInfo().teacherId}, function () {
+            pageShow(1, false)
+        })
     }
 </script>
 </body>

@@ -88,4 +88,9 @@ public class AdminServiceImpl implements AdminService {
     public List<Tips> tips() {
         return adminDao.tips();
     }
+
+    @Override
+    public boolean applyAdd(Apply apply, String sequence) {
+        return adminDao.applyAdd(apply,sequence) == 1;
+    }
 }

@@ -19,4 +19,6 @@ public interface AdminService {
     PageBean<ViewApply> vaPage(PageBean<ViewApply> vaPageBean);
 
     List<Tips> tips();
+
+    boolean applyAdd(Apply apply, String sequence);
 }

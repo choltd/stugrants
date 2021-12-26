@@ -7,6 +7,7 @@ import com.jjugrants.service.TchService;
 import com.jjugrants.service.impl.AdminServiceImpl;
 import com.jjugrants.service.impl.StuServiceImpl;
 import com.jjugrants.service.impl.TchServiceImpl;
+import com.jjugrants.utils.DateTimeUtil;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
 
@@ -64,7 +65,7 @@ public class AdminCtrl extends HttpServlet {
 
     private void stuDel(HttpServletRequest request, HttpServletResponse response){
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        boolean flag = stuService.stuDel(request.getParameter("id"));
+        boolean flag = stuService.stuDel(request.getParameter("studentId"));
         PrintJson.printJsonFlag(response, flag);
     }
 
@@ -135,6 +136,16 @@ public class AdminCtrl extends HttpServlet {
         List<Tips> tips = adminService.tips();
         PrintJson.printJsonObj(response, tips);
 
+    }
+
+    private void applyAdd(HttpServletRequest request, HttpServletResponse response){
+        Apply apply = new Apply();
+        apply.setIllustrate(request.getParameter("illustrate"));
+        apply.setTime(DateTimeUtil.getTimestamp());
+        apply.setRemark(request.getParameter("remark"));
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        boolean flag = adminService.applyAdd(apply,request.getParameter("sequence"));
+        PrintJson.printJsonFlag(response,flag);
     }
 
 }

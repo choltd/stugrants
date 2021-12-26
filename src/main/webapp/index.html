@@ -5,6 +5,12 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>学生资助管理系统</title>
     <link rel="stylesheet" href="static/css/index.css">
+    <style>
+        .active{
+            background:url("static/image/li_bf.png");
+            color:#ffff00;
+        }
+    </style>
 </head>
 
 <body style="width: 1225px; margin: 0 auto">
@@ -37,234 +43,21 @@
             </div>
             <div class="nav">
                 <ul id="Top_navigation">
-                    <li name='nav'><a href='javascript:void(0)' onclick="front();" style='color: #ffff00;background:url("static/image/li_bf.png")'>首页</a></li>
-                    <li name='nav'><a href='static/html/center.html' onclick="bulid();">中心概况</a></li>
+                    <li name='nav'><a class="active" style="color: #ffff00;" href='static/html/iframe.html' target="workframe" onclick="front();">首页</a></li>
+                    <li name='nav'><a href='static/html/center.html' target="workframe" onclick="front();">中心概况</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">勤工助学</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">助学金</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">助学贷款</a></li>
                     <li name='nav'><a href='javascript:void(0)' onclick="bulid();">办事指南</a></li>
                 </ul>
             </div>
-            <div id="container">
-                <div id="list" style="left: -1225px;">
-                    <img src="static/image/7.jpg" alt="1" />
-                    <img src="static/image/22.jpg" alt="1" />
-                    <img src="static/image/66.jpg" alt="2" />
-                    <img src="static/image/e.jpg" alt="3" />
-                    <img src="static/image/33.jpg" alt="4" />
-                    <img src="static/image/7.jpg" alt="5" />
-                    <img src="static/image/22.jpg" alt="5" />
-                </div>
-                <div id="buttons">
-                    <span index="1" class="on"></span>
-                    <span index="2"></span>
-                    <span index="3"></span>
-                    <span index="4"></span>
-                    <span index="5"></span>
-                </div>
-                <a href="#" id="prev" class="arrow">&lt;</a>
-                <a href="#" id="next" class="arrow">&gt;</a>
-
-            </div>
-        </div>
-        <div id="content">
-            <div class="content1">
-                <div class="contents_l">
-                    <div class="section_top">
-                        <span>通知公告</span>
-                        <a href="javascript:void(0);" target="_blank">more >></a>
-                    </div>
-                    <div class="notice1_M">
-                        <ul id="notice">
-                            <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href='static/html/href.html' title='关于办理2021-2022学年校园地贷款新贷及提额协议的通知'
-                                        target='_blank' class='black'>【贷】
-                                        关于办理2021-2022学年校园地贷款</a></div>
-                                <div style='float:right;margin-right:20px;'><span class="black">2021-11-24</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href='' title='九江学院应征入伍学生申请国家资助须知'
-                                        target='_blank' class='black'>【通】 九江学院应征入伍学生申请国家资助须知</a></div>
-                                <div style='float:right;margin-right:20px;'><span class="black">2019-06-06</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href='' title='江西省农商银行生源地信用助学贷款系统业务流程'
-                                        target='_blank' class='black'>【其他】 江西省农商银行生源地信用助学贷款系统业务流程</a></div>
-                                <div style='float:right;margin-right:20px;'><span class="black">2019-02-10</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href='' title='九江学院2014年陈江和育鹰奖学金获奖学生名单公示'
-                                        target='_blank' class='black'>【奖】 九江学院2014年陈江和育鹰奖学金获奖学生名单公示</a></div>
-                                <div style='float:right;margin-right:20px;'><span class="black">2018-12-10</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href='' title='全国学生资助管理中心致高中毕业生的一封信'
-                                        target='_blank' class='black'>【其他】 全国学生资助管理中心致高中毕业生的一封信</a></div>
-                                <div style='float:right;margin-right:20px;'><span class="black">2017-12-10</span>
-                                </div>
-                            </li>
-
-                            <li style='width:100%;clear:both;'>
-                                <div class="no" style='float:left;'><a href=''
-                                        title='转发《江西省教育厅关于组织在校贫困大学生参加阿里云计算人才培训的通知》' target='_blank' class='black'>【其他】
-                                        转发《江西省教育厅关于组织在校贫困大学生参加阿里云计算人才培训的通知》</a></div>
-                                <div style='float:right;margin-right:20px;'><span class="black">2016-12-10</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="contents_r">
-                    <div class="section_top" id="policy_M_a">
-                        <span>政策制度</span>
-                        <a href="javascript:void(0);" target="_blank">more >></a>
-                    </div>
-                    <div class="policy_M" id="policy_M">
-                        <ul>
-                            <li style='width:100%;clear:both;'>
-                                <div class="im" style='float:left;'><span>* </span><a href='' title='九江学院勤工助学管理办法（修订）'
-                                        target='_blank' class='black'>九江学院勤工助学管理办法（修订）</a>
-                                </div>
-                                <!--27-->
-                                <div style='float:right;margin-right:40px;'><span class="black">2020-11-24</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="im" style='float:left;'><span>* </span><a href=''
-                                        title='关于办理2021-2022学年校园地贷款新贷及提额协议的通知' target='_blank'
-                                        class='black'>关于办理2021-2022学年校园地贷款新贷及提额协议的通知</a></div>
-                                <!--27-->
-                                <div style='float:right;margin-right:40px;'><span class="black">2020-09-24</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="im" style='float:left;'><span>* </span><a href='' title='2019高校学生资助政策简介'
-                                        target='_blank' class='black'>2019高校学生资助政策简介</a></div>
-                                <!--27-->
-                                <div style='float:right;margin-right:40px;'><span class="black">2019-11-02</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="im" style='float:left;'><span>* </span><a href=''
-                                        title='转发《关于印发《江西省学生资助工作“十不准”》的通知-赣教助字{2019}3号》文件的通知' target='_blank'
-                                        class='black'>转发《关于印发《江西省学生资助工作“十不准”》的通知-赣教助字{2019}3号》文件的通知</a></div>
-                                <!--27-->
-                                <div style='float:right;margin-right:40px;'><span class="black">2019-09-06</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="im" style='float:left;'><span>* </span><a href=''
-                                        title='关于转发《财务部 教育部 总参谋部关于对直接招收为士官的高等学校学生施行国家资助的通知》的通知' target='_blank'
-                                        class='black'>关于转发《财务部 教育部 总参谋部关于对直接招收为士官的高等学校学生施行国家资助的通知》的通知</a></div>
-                                <!--27-->
-                                <div style='float:right;margin-right:40px;'><span class="black">2018-11-24</span>
-                                </div>
-                            </li>
-                            <li style='width:100%;clear:both;'>
-                                <div class="im" style='float:left;'><span>* </span><a href=''
-                                        title='九江学院关于进一步规范学生资助工作的管理方法' target='_blank'
-                                        class='black'>九江学院关于进一步规范学生资助工作的管理方法</a></div>
-                                <!--27-->
-                                <div style='float:right;margin-right:40px;'><span class="black">2014-05-24</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="content2">
-                <div class="contents_l">
-
-                    <div class="section_top">
-                        <span>资助育人</span>
-                        <a href="javascript:void(0);" target="_blank">more >></a>
-                    </div>
-                    <div class="cle"></div>
-                    <div class="publish_M">
-                        <ul id="publicarea">
-                            <li>
-                                <video src="static/image/video.mp4" width="550px" height="236px" muted autoplay="autoplay" controls="controls" loop="loop"></video>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="contents_r">
-                    <div class="section_top">
-                        <span>思政专题</span>
-                        <a href="javascript:void(0);">more >></a>
-                    </div>
-                    <div class="ideological_T">
-                        <ul class="iapt">
-                            <li><span>2021-10-10</span><a href="">为党育人 为国育才——以习近平同志为核心的党中央关心学校思想政治...</a></li>
-                            <li><span>2021-11-21</span><a href="">为党育人 为国育才——以习近平同志为核心的党中央关心学校思想政治...</a></li>
-                            <li><span>2021-12-30</span><a href="">为党育人 为国育才——以习近平同志为核心的党中央关心学校思想政治...</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="content3">
-                <div class="contents_l">
-                    <div class="section_top">
-                        <span>公告栏</span>
-                        <a href="javascript:void(0);">more >></a>
-                    </div>
-                    <div>
-                        <ul id="bulletin"></ul>
-                    </div>
-                </div>
-                <div class="contents_r">
-                    <div class="section_top">
-                        <span>资料下载</span>
-                        <a href="javascript:void(0);" target="_blank">more >></a>
-                    </div>
-                    <div class="information_I">
-                        <ul id="download">
-                            <li>
-                                <div class="dl" style='float:left;'><span>> </span><a href='' title='九江学院生源地信用助学贷款证明'
-                                        target='_blank'></span>九江学院生源地信用助学贷款证明</a></div>
-                                <div style='float:right;margin-right:40px;'><span class='black'>2021-10-20</span></div>
-                            </li>
-                            <li style='width:100%;clear:both;' class="dl">
-                                <div class="dl" style='float:left;'><span>> </span><a href=''
-                                        title='助学金-4.4新鸿基郭氏双学位奖学金道义契约' target='_blank'></span>助学金-4.4新鸿基郭氏双学位奖学金</a>
-                                </div>
-                                <div style='float:right;margin-right:40px;'><span class='black'>2021-10-15</span></div>
-                            </li>
-                            <li>
-                                <div class="dl" style='float:left;'><span>> </span><a href=''
-                                        title='高等学校学生及其家庭情况调查表（本专科学生2021版）'
-                                        target='_blank'></span>高等学校学生及其家庭情况调查表（本专科学生2021版）</a></div>
-                                <div style='float:right;margin-right:40px;'><span class='black'>2021-09-22</span></div>
-                            </li>
-                            <li>
-                                <div class="dl" style='float:left;'><span>> </span><a href='' title='毕业生就业补助生源地信用贷款证明'
-                                        target='_blank'></span>毕业生就业补助生源地信用贷款证明</a></div>
-                                <div style='float:right;margin-right:40px;'><span class='black'>2020-12-22</span></div>
-                            </li>
-                            <li>
-                                <div class="dl" style='float:left;'><span>> </span><a href='' title='九江学院生源地信用助学贷款证明'
-                                        target='_blank'></span>九江学院生源地信用助学贷款证明</a></div>
-                                <div style='float:right;margin-right:40px;'><span class='black'>2020-09-12</span></div>
-                            </li>
-                            <li>
-                                <div class="dl" style='float:left;'><span>> </span><a href='' title='临时困难补助的工作流程'
-                                        target='_blank'></span>临时困难补助的工作流程</a></div>
-                                <div style='float:right;margin-right:40px;'><span class='black'>2019-07-02</span></div>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-            </div>
         </div>
         <div id="rpcontent">
             <p>·正在努力建设中</p>
+            <img src="static/image/passnot.png" style="position: relative;top: 40px;"/>
+        </div>
+        <div id="workframe" style="min-height:1100px; width: 100%">
+            <iframe name="workframe" style="height: 1230px;width: 100%;border: none" href="static/html/iframe.html"></iframe>
         </div>
         <div class="footer">
             <div class="friendlink">
@@ -297,135 +90,25 @@
 
     </form>
 </body>
-<script src="static/js/jquery.min.js" type="text/javascript"></script>
-<script src="static/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="static/js/jquery-3.4.1.min.js"></script>
 <script>
     $(function () {
-        var $bulletin = $("#bulletin")
-        if($.cookie() == null){
-            $bulletin.html("")
-        } else if($.cookie("subsidize") == "begin"){
-            $bulletin.append("<li>新的资助已发布，申请通道已开启</li>")
-        } else if($.cookie("roster") == "begin"){
-            $bulletin.html("<li>资助结果已发布，请自行登录查看</li>>")
-        }
+        window.open("static/html/iframe.html","workframe")
 
-        var container = document.getElementById('container');
-        var list = document.getElementById('list');
-        var buttons = document.getElementById('buttons').getElementsByTagName('span');
-        var prev = document.getElementById('prev');
-        var next = document.getElementById('next');
-        var index = 1;
-        var len = 5;
-        var animated = false;
-        var interval = 5000;
-        var timer;
-
-        function animate(offset) {
-            if (offset === 0) {
-                return;
-            }
-            animated = true;
-            var time = 400;
-            var inteval = 10;
-            var speed = offset / (time / inteval);
-            var left = parseInt(list.style.left) + offset;
-
-            var go = function () {
-                if ((speed > 0 && parseInt(list.style.left) < left) || (speed < 0 && parseInt(list.style.left) > left)) {
-                    list.style.left = parseInt(list.style.left) + speed + 'px';
-                    setTimeout(go, inteval);
-                }
-                else {
-                    list.style.left = left + 'px';
-                    if (left > -1225) {
-                        list.style.left = -1225 * len + 'px';
-                    }
-                    if (left < (-1225 * len)) {
-                        list.style.left = '-1225px';
-                    }
-                    animated = false;
-
-                }
-            }
-            go();
-        }
-
-        function showButton() {
-            for (var i = 0; i < buttons.length; i++) {
-                if (buttons[i].className === 'on') {
-                    buttons[i].className = '';
-                    break;
-                }
-            }
-            buttons[index - 1].className = 'on';
-        }
-
-        function play() {
-            timer = setTimeout(function () {
-                next.onclick();
-                play();
-            }, interval);
-        }
-        function stop() {
-            clearTimeout(timer);
-        }
-
-        next.onclick = function () {
-            if (animated) {
-                return;
-            }
-            if (index === 5) {
-                index = 1;
-            }
-            else {
-                index += 1;
-            }
-            animate(-1225);
-            showButton();
-        }
-        prev.onclick = function () {
-            if (animated) {
-                return;
-            }
-            if (index === 1) {
-                index = 5;
-            }
-            else {
-                index -= 1;
-            }
-            animate(1225);
-            showButton();
-        }
-
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].onclick = function () {
-                if (animated) {
-                    return;
-                }
-                if (this.className === 'on') {
-                    return;
-                }
-                var myIndex = parseInt(this.getAttribute('index'));
-                var offset = -1225 * (myIndex - index);
-
-                animate(offset);
-                index = myIndex;
-                showButton();
-            }
-        }
-        container.onmouseover = stop;
-        container.onmouseout = play;
-        play();
+        $("#Top_navigation li a").each(function(index){
+            $(this).click(function(){
+                $("#Top_navigation li a").removeClass("active").css("color","white")
+                $("#Top_navigation li a").eq(index).addClass("active").css("color","#ffff00")
+            });
+        });
         front = function () {
             $("#rpcontent").css("display", "none")
-            $("#content").css("display", "block")
+            $("#workframe").css("display", "block")
         }
         bulid = function () {
-            $("#content").css("display", "none")
+            $("#workframe").css("display", "none")
             $("#rpcontent").css("display", "block")
         }
-    });
+    })
 </script>
-
 </html>

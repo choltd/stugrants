@@ -4,6 +4,7 @@ import com.jjugrants.dao.StuDao;
 import com.jjugrants.domain.*;
 import com.jjugrants.service.StuService;
 import com.jjugrants.utils.SqlSessionUtil;
+import com.jjugrants.vo.StudentVo;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class StuServiceImpl implements StuService {
     private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
 
     @Override
-    public Student query(Student student) {
+    public StudentVo query(Student student) {
         return stuDao.query(student);
     }
 

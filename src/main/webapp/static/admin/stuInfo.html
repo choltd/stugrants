@@ -66,12 +66,14 @@
                     html += "<td>" + e.telephone + "</td>";
                     html += "<td>" + e.idcard + "</td>";
                     html += "<td>" + e.banknumber + "</td>";
-                    html +="<td><button class='b-delete' onclick='stuDel("+e.id+")'></button></td>";
+                    html +="<td><button class='b-delete' onclick='stuDel("+e.studentId+")'></button></td>";
                     html += "</tr>";
                 })
                 $tbody.html(html);
                 if (isFirst) {
                     pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
                 }
             }
         })
@@ -79,7 +81,7 @@
 
     function stuDel(id) {
         if(confirm("确认删除?")) {
-            $.post("/admin?act=stuDel", {"id": id}, function (data) {
+            $.post("/admin?act=stuDel", {"studentId": id}, function (data) {
                 if (!(JSON.parse(data).success)) {
                     alert("删除失败")
                 }

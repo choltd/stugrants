@@ -1,11 +1,12 @@
 package com.jjugrants.service;
 
 import com.jjugrants.domain.*;
+import com.jjugrants.vo.TeacherVo;
 
 import java.util.List;
 
 public interface TchService {
-    Teacher query(Teacher teacher);
+    TeacherVo query(Teacher teacher);
 
     PageBean<Teacher> queryList(PageBean<Teacher> pageBean);
 

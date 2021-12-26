@@ -1,6 +1,7 @@
 package com.jjugrants.dao;
 
 import com.jjugrants.domain.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,5 @@ public interface AdminDao {
 
     List<Tips> tips();
 
+    int applyAdd(@Param("apply") Apply apply, @Param("sequence") String sequence);
 }

@@ -38,9 +38,9 @@
                             <input type="text" class="form-control" id="apply-sex">
                         </div>
 
-                        <label for="apply-phone" class="col-sm-2 control-label">联系电话</label>
+                        <label for="apply-telephone" class="col-sm-2 control-label">联系电话</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-phone">
+                            <input type="text" class="form-control" id="apply-telephone">
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,25 +49,20 @@
                             <input type="text" class="form-control" id="apply-idcard">
                         </div>
 
-                        <label for="apply-bankcard" class="col-sm-2 control-label">银行卡号</label>
+                        <label for="apply-banknumber" class="col-sm-2 control-label">银行卡号</label>
                         <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-bankcard">
+                            <input type="text" class="form-control" id="apply-banknumber">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="apply-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-year">
+                        </div>
                         <label for="apply-time" class="col-sm-2 control-label">提交时间</label>
                         <div class="col-sm-10" style="width: 200px;">
                             <input type="text" class="form-control time" id="apply-time">
-
                         </div>
-<!--                        <label for="apply-rating" class="col-sm-2 control-label">成绩</label>-->
-<!--                        <div class="col-sm-10" style="width: 200px;">-->
-<!--                            <select class="form-control" id="apply-rating">-->
-<!--                                <option selected="selected"></option>-->
-<!--                                <option>优</option>-->
-<!--                                <option>良</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
                     </div>
                     <div class="form-group">
                         <label for="apply-illustrate" class="col-sm-2 control-label">申请理由</label>
@@ -123,9 +118,9 @@
                             <input type="text" class="form-control" id="edit-sex" readonly="readonly">
                         </div>
 
-                        <label for="edit-phone" class="col-sm-2 control-label">联系电话</label>
+                        <label for="edit-telephone" class="col-sm-2 control-label">联系电话</label>
                         <div class="col-sm-10" style="width:  250px;">
-                            <input type="text" class="form-control" id="edit-phone" readonly="readonly">
+                            <input type="text" class="form-control" id="edit-telephone" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group">
@@ -134,24 +129,20 @@
                             <input type="text" class="form-control" id="edit-idcard" readonly="readonly">
                         </div>
 
-                        <label for="edit-bankcard" class="col-sm-2 control-label">银行卡号</label>
+                        <label for="edit-banknumber" class="col-sm-2 control-label">银行卡号</label>
                         <div class="col-sm-10" style="width:  250px;">
-                            <input type="text" class="form-control" id="edit-bankcard" readonly="readonly">
+                            <input type="text" class="form-control" id="edit-banknumber" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="edit-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-year" readonly="readonly">
+                        </div>
                         <label for="edit-time" class="col-sm-2 control-label">提交时间</label>
                         <div class="col-sm-10" style="width:  250px;">
                             <input type="text" class="form-control time" id="edit-time">
 
-                        </div>
-                        <label for="edit-rating" class="col-sm-2 control-label">成绩</label>
-                        <div class="col-sm-10" style="width:  250px;">
-                            <select class="form-control" id="edit-rating">
-                                <option selected="selected"></option>
-                                <option>优</option>
-                                <option>良</option>
-                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -197,9 +188,6 @@
                 <button type="button" class="btn btn-default" id="applyEdit"><span
                         class="glyphicon glyphicon-pencil"></span> 修改
                 </button>
-                <button type="button" class="btn btn-danger" id="applyDel"><span
-                        class="glyphicon glyphicon-minus"></span> 删除
-                </button>
             </div>
 
         </div>
@@ -224,8 +212,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="hidden-id">
-<input type="hidden" id="hidden-stuId">
+<input type="hidden" id="hd-applyId">
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript"
@@ -260,22 +247,22 @@
             $("#apply-name").val(stuInfo().name)
             $("#apply-sequence").val(stuInfo().sequence)
             $("#apply-sex").val(stuInfo().sex)
-            $("#apply-phone").val(stuInfo().phone)
+            $("#apply-telephone").val(stuInfo().telephone)
             $("#apply-idcard").val(stuInfo().idcard)
-            $("#apply-bankcard").val(stuInfo().bankcard)
+            $("#apply-banknumber").val(stuInfo().banknumber)
+            $("#apply-year").val(stuInfo().year)
+            $("#apply-illustrate").val(stuInfo().illustrate)
         });
 
         $("#save").click(function () {
             if (applyAdd({
-                "studentId": stuInfo().id,
+                "studentId": stuInfo().studentId,
                 "illustrate": $("#apply-illustrate").val(),
-                "rating": $("#apply-rating").val(),
                 "remark": $("#apply-remark").val()
             })) {
                 $("#applyModal").modal("hide")
                 $("#apply-time").val("")
                 $("#apply-illustrate").val("")
-                $("#apply-rating").val("")
                 $("#apply-remark").val("")
                 pageShow(1, false)
             } else {
@@ -283,24 +270,6 @@
             }
         });
 
-        $("#applyDel").click(function () {
-            var $xz = $("input[name=xz]:checked")
-            if ($xz.length < 1) {
-                alert("请选择要删除项")
-            } else if ($xz.length > 1) {
-                alert("只能同时删除一项")
-            } else {
-                if(confirm("确认删除?")) {
-                    $.post("/stu?action=applyDel", {"id": $xz.val()}, function (data) {
-                        if (!(JSON.parse(data)).success) {
-                            alert("删除失败")
-                        } else {
-                            pageShow(1, false)
-                        }
-                    })
-                }
-            }
-        })
 
         $("#applyEdit").click(function () {
             var $xz = $("input[name=xz]:checked")
@@ -309,15 +278,16 @@
             } else if ($xz.length > 1) {
                 alert("只能同时修改一项")
             } else {
-                $.get("/stu?action=applyEdit", {"id": $xz.val()}, function (data) {
-                    $("#hidden-id").val(data.studentId)
+                $.get("/stu?action=applyEdit", {"applyId": $xz.val()}, function (data) {
+                    $("#hd-applyId").val(data.applyId)
                     $("#edit-name").val(data.name)
                     $("#edit-sequence").val(data.sequence)
                     $("#edit-sex").val(data.sex)
                     $("#edit-idcard").val(data.idcard)
-                    $("#edit-phone").val(data.telephone)
-                    $("#edit-bankcard").val(data.banknumber)
+                    $("#edit-telephone").val(data.telephone)
+                    $("#edit-banknumber").val(data.banknumber)
                     $("#edit-illustrate").val(data.illustrate)
+                    $("#edit-year").val(data.year)
                     $("#edit-time").val(convert(data.time))
                     $("#edit-remark").val(data.remark)
                     $("#editModal").modal("show")
@@ -328,9 +298,8 @@
 
         $("#update").click(function () {
             $.post("/stu?action=update", {
-                "id": $("#hidden-id").val(),
+                "applyId": $("#hd-applyId").val(),
                 "illustrate": $("#edit-illustrate").val(),
-                "rating": $("#edit-rating").val(),
                 "remark": $("#edit-remark").val(),
                 "time": $("#edit-time").val()
             }, function (data) {
@@ -356,7 +325,7 @@
                 $("#applyList").html(html);
                 $.each(data.list, function (i, e) {
                     html += '<tr class="active">';
-                    html += '<td><input type="checkbox" name="xz" value="' + e.id + '" stuId="' + e.studentId + '"/></td>';
+                    html += '<td><input type="checkbox" name="xz" value="' + e.applyId + '"/></td>';
                     html += '<td>' + e.sequence + '</td>';
                     html += '<td>' + e.name + '</td>';
                     html += '<td>' + e.telephone + '</td>';
@@ -366,6 +335,8 @@
                 $("#applyList").html(html);
                 if (isFirst) {
                     pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
                 }
             }
         })

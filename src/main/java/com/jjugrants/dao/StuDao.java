@@ -1,13 +1,14 @@
 package com.jjugrants.dao;
 
 import com.jjugrants.domain.*;
+import com.jjugrants.vo.StudentVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
 public interface StuDao {
-    Student query(Student student);//支持模糊查询学号和名字
+    StudentVo query(Student student);//支持模糊查询学号和名字
 
     Map<String, Object> count();
 

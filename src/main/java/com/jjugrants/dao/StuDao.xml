@@ -4,20 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jjugrants.dao.StuDao">
-    <select id="query" resultType="student">
-        select * from student
-        <where>
-            <if test="sequence != null and sequence != ''">
-                and sequence like '%' #{sequence} '%'
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-            <if test="name != null and name != ''">
-                and name like '%' #{name} '%'
-            </if>
-        </where>
-
+    <select id="query" resultType="com.jjugrants.vo.StudentVo">
+        select s.student_id,
+               s.name,
+               s.sequence,
+               s.sex,
+               s.idcard,
+               s.banknumber,
+               s.telephone,
+               s.year,
+               sc.teacher_id,
+               sc.classname,
+               sc.major,
+               sc.college
+        from student s
+                 join stuclass sc on s.stuclass_id = sc.stuclass_id
+        where sequence = #{sequence} and password = #{password}
     </select>
     <select id="count" resultType="map">
         select count(*) as value
@@ -62,7 +64,7 @@
         set illustrate=#{illustrate},
             time=#{time},
             remark=#{remark}
-        where apply_id = #{id}
+        where apply_id = #{applyId}
     </update>
 
     <select id="subsidizeCount" resultType="map">
@@ -97,7 +99,7 @@
     <select id="vaCount" resultType="map">
         select count(*) as value
         from viewApply
-        where sequence=#{sequence}
+        where sequence =#{sequence}
     </select>
 
     <select id="applyCountTeacherId" resultType="map">

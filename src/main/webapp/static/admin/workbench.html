@@ -16,6 +16,7 @@
             height: 3rem;
             width: 11.6rem;
             border: 0;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -47,7 +48,7 @@
     <div class="right">
         <p>系统信息</p>
         <ul id="info">
-            <li><span id="dot" style="margin-left: 42%;">......</span></li>
+
         </ul>
         <div style="position: absolute;bottom: 50px;">
             <button id="pg">发布资助</button>
@@ -60,29 +61,29 @@
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/echarts.min.js"></script>
 <script>
+
     $(function () {
-        if ($("#info li").length < 10) {
-            $("#pl").attr("disabled", "disabled")
-            setInterval(function () {
-                getCharts();
-                tips();
-            }, 5000)
-        }
         getCharts();
         tips();
+
         if ($.cookie("subsidize") != null) {
             $("#pg").attr("disabled", "disabled")
         }
         $("#pg").click(function () {
-            $.cookie("subsidize", "begin", {expires: 1, path: "/"})
+            $.cookie("subsidize", "begin", {expires: 3, path: "/"})
+            $.removeCookie("roster", {expires: 3, path: "/"})
+            $("#pg").attr("disabled", "disabled")
             alert("已发布资助信息")
         })
         $("#pl").click(function () {
-            $.cookie("roster", "begin", {expires: 1, path: "/"})
-            $.removeCookie("subsidize")
+            $.cookie("roster", "begin", {expires: 3, path: "/"})
+            $.removeCookie("subsidize",{expires: 3, path: "/"})
+            $("#pg").attr("disabled", "disabled")
+            $("#pl").attr("disabled", "disabled")
             alert("已发布资助名单")
         })
     })
+
 
     function getCharts() {
         $.ajax({
@@ -142,6 +143,9 @@
                     myChart.resize();
                 });
                 $("#ec").css({"background-color": "#fff", "margin-top": "15px"});
+
+                eq(data.dataList)
+
             }
         })
     }
@@ -169,14 +173,36 @@
     function tips() {
         $.get("/admin?act=tips", function (data) {
             var html = "";
+            $("#info").html(html)
             $.each(data, function (i, e) {
                 html += '<li><span style="display: inline-block;width: 20px;"> > </span>' + e.content + '</li>'
             })
-            $("#dot").before(html)
+            $("#info").html(html)
         })
     }
 
-
+    function eq(list) {
+        var val1
+        var val2
+        var time
+        $.each(list,function (i,e) {
+            if(e.name == "apply"){
+                val1 = e.value
+            }else if(e.name == "examine"){
+                val2 = e.value
+            }
+            if(val1 != val2){
+                $("#pl").attr("disabled","disabled")
+                time = setInterval(function () {
+                    getCharts();
+                    tips();
+                }, 600000)
+            }else{
+                $("#pl").removeAttr("disabled")
+                clearInterval(time)
+            }
+        })
+    }
 </script>
 
 </html>
