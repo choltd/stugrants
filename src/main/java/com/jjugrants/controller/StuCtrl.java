@@ -39,6 +39,7 @@ public class StuCtrl extends HttpServlet {
         student.setPassword(password);
         StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
         StudentVo studentVo = stuService.query(student);
+        req.getSession().setAttribute("studentVo",studentVo);
         PrintJson.printJsonObj(resp, studentVo);
     }
 

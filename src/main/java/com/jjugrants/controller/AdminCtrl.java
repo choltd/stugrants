@@ -43,6 +43,7 @@ public class AdminCtrl extends HttpServlet {
         admin.setPassword(password);
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
         Admin admin1 =  adminService.login(admin);
+        req.getSession().setAttribute("admin",admin1);
         PrintJson.printJsonObj(resp,admin1);
     }
 

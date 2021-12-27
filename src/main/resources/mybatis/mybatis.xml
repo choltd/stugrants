@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GBK" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -7,13 +7,13 @@
     <properties resource="mysql/db.properties"></properties>
 
     <settings>
-        <!--开启驼峰命名转换-->
+        <!--寮�鍚┘宄板懡鍚嶈浆鎹�-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-    <!--设置别名-->
+    <!--璁剧疆鍒悕-->
     <typeAliases>
-        <!--为实体类设置别名-->
+        <!--涓哄疄浣撶被璁剧疆鍒悕-->
         <package name="com.jjugrants.domain"/>
     </typeAliases>
 
@@ -29,7 +29,7 @@
         </environment>
     </environments>
 
-    <!--mapper文件位置-->
+    <!--mapper鏂囦欢浣嶇疆-->
     <mappers>
         <package name="com.jjugrants.dao"/>
     </mappers>

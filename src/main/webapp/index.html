@@ -34,9 +34,9 @@
                         </li>
                     </ul>
                     <div class="search">
-                        <input type="text" tooltip="请输入搜索内容" id="Edit"
-                            class="EditSearch" onkeypress=";" />
-                        <input type="button" onclick="" value="搜 索"
+                        <input type="text" placeholder="全网搜索" id="Edit"
+                            class="EditSearch" />
+                        <input type="button" id="query" value="搜 索"
                             style="width: 50px; height: 25px; border: 0; position: absolute; z-index: 3; right: 0" />
                     </div>
                 </div>
@@ -109,6 +109,19 @@
             $("#workframe").css("display", "none")
             $("#rpcontent").css("display", "block")
         }
+
+        $("#query").click(function (){
+            var val = $("#Edit").val();
+            if(val != ""){
+                location.href = "https://www.baidu.com/s?wd=" + val
+            }
+        })
+        $("#Edit").focus(function () {
+            $("#Edit").attr("placeholder","")
+        })
+        $("#Edit").blur(function(){
+            $("#Edit").attr("placeholder","全网搜索")
+        })
     })
 </script>
 </html>
