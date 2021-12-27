@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="GBK" ?>
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -7,13 +7,13 @@
     <properties resource="mysql/db.properties"></properties>
 
     <settings>
-        <!--å¼€å¯é©¼å³°å‘½åè½¬æ¢-->
+        <!--¿ªÆôÍÕ·åÃüÃû×ª»»-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-    <!--è®¾ç½®åˆ«å-->
+    <!--ÉèÖÃ±ðÃû-->
     <typeAliases>
-        <!--ä¸ºå®žä½“ç±»è®¾ç½®åˆ«å-->
+        <!--ÎªÊµÌåÀàÉèÖÃ±ðÃû-->
         <package name="com.jjugrants.domain"/>
     </typeAliases>
 
@@ -29,7 +29,7 @@
         </environment>
     </environments>
 
-    <!--mapperæ–‡ä»¶ä½ç½®-->
+    <!--mapperÎÄ¼þÎ»ÖÃ-->
     <mappers>
         <package name="com.jjugrants.dao"/>
     </mappers>
