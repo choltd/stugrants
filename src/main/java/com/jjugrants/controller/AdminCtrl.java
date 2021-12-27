@@ -42,8 +42,8 @@ public class AdminCtrl extends HttpServlet {
         admin.setAccount(account);
         admin.setPassword(password);
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag =  adminService.login(admin);
-        PrintJson.printJsonFlag(resp,flag);
+        Admin admin1 =  adminService.login(admin);
+        PrintJson.printJsonObj(resp,admin1);
     }
 
     private void getCharts(HttpServletRequest request, HttpServletResponse response){
@@ -92,8 +92,8 @@ public class AdminCtrl extends HttpServlet {
         PageBean<ViewResult> vePageBean = new PageBean<>();
         vePageBean.setPageSize(Integer.parseInt(pageSize));
         vePageBean.setPageNum(Integer.parseInt(pageNum));
-        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
-        PageBean<ViewResult> examinePageBean = tchService.examinePage(vePageBean);
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        PageBean<ViewResult> examinePageBean = adminService.examinePage(vePageBean);
         PrintJson.printJsonObj(response,examinePageBean);
     }
 
@@ -145,6 +145,11 @@ public class AdminCtrl extends HttpServlet {
         apply.setRemark(request.getParameter("remark"));
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
         boolean flag = adminService.applyAdd(apply,request.getParameter("sequence"));
+        PrintJson.printJsonFlag(response,flag);
+    }
+    private void pwdUpdate(HttpServletRequest request, HttpServletResponse response){
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        boolean flag = adminService.pwdUpdate(request.getParameter("adminId"),request.getParameter("password"),request.getParameter("change"));
         PrintJson.printJsonFlag(response,flag);
     }
 

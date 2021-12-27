@@ -42,7 +42,7 @@
     <select id="vaPage" resultType="viewApply">
         select *
         from viewApply
-        order by time limit #{startIndex}, #{pageSize}
+        order by time desc limit #{startIndex}, #{pageSize}
     </select>
 
     <select id="tips" resultType="tips">
@@ -55,4 +55,38 @@
         values ((select student_id from student where sequence = #{sequence}), #{apply.illustrate}, #{apply.time},
                 #{apply.remark})
     </insert>
+
+    <select id="examineCount" resultType="map">
+        select count(*) as value
+        from examine
+    </select>
+    <select id="vePage" resultType="viewResult">
+        select e.examine_id,
+               ss.sequence,
+               ss.name      studentName,
+               ss.telephone studentTelephone,
+               t.worknumber,
+               t.teacher_name,
+               t.telephone  teacherTelephone,
+               e.state
+        from examine e
+                 join teacher t on e.teacher_id = t.teacher_id
+                 join (select a.apply_id, s.name, s.sequence, s.telephone
+                       from apply a
+                                join student s on a.student_id = s.student_id) ss on
+            e.apply_id = ss.apply_id
+        order by e.time desc limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="verify" resultType="integer">
+        select count(*)
+        from admin
+        where admin_id = #{adminId}
+          and password = #{pwd}
+    </select>
+    <update id="pwdUpdate">
+        update admin
+        set password=#{chg}
+        where admin_id = #{adminId}
+    </update>
 </mapper>

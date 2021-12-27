@@ -100,4 +100,10 @@ public class TchCtrl extends HttpServlet {
         PrintJson.printJsonObj(response,viewResults);
     }
 
+    private void pwdUpdate(HttpServletRequest request, HttpServletResponse response){
+        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
+        boolean flag = tchService.pwdUpdate(request.getParameter("teacherId"),request.getParameter("password"),request.getParameter("change"));
+        PrintJson.printJsonFlag(response,flag);
+    }
+
 }

@@ -45,7 +45,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal"
-                        onclick="window.location.href='login.html';">更新</button>
+                        id="pwdUpdate">更新</button>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal"
-                        onclick="window.location.href='static/login.jsp';">确定</button>
+                        onclick="window.location.href='tchLogin.html';">确定</button>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
                     <ul class="dropdown-menu" style="min-width: 100px;">
-                        <li><a href="javascript:void(0)" data-toggle="modal" data-target="#editPwdModal"><span
+                        <li><a href="javascript:void(0);" data-toggle="modal" data-target="#editPwdModal"><span
                                     class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
                         <li><a href="javascript:void(0);" data-toggle="modal" data-target="#exitModal"><span
                                     class="glyphicon glyphicon-off"></span> 退出</a></li>
@@ -181,7 +181,7 @@
             } else if (edit !== confirm || edit === "" || confirm === "") {
                 alert("两次输入密码不一致")
             } else {
-                $.post("/tch?action=pwdUpdate", {"id": stu.id, "password": old, "change": confirm}, function (data) {
+                $.post("/tch?action=pwdUpdate", {"teacherId": tchInfo().teacherId, "password": old, "change": confirm}, function (data) {
                     if ((JSON.parse(data)).success) {
                         alert("修改成功")
                         location.href = "tchLogin.html"

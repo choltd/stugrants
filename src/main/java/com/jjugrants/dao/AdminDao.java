@@ -25,4 +25,12 @@ public interface AdminDao {
     List<Tips> tips();
 
     int applyAdd(@Param("apply") Apply apply, @Param("sequence") String sequence);
+
+    Map<String, Object> examineCount();
+
+    List<ViewResult> vePage(PageBean<ViewResult> vePageBean);
+
+    int verify(@Param("adminId") String adminId, @Param("pwd") String password);
+
+    int pwdUpdate(@Param("adminId") String adminId, @Param("chg") String change);
 }

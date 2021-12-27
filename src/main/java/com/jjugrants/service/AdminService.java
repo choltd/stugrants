@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface AdminService {
-    boolean login(Admin admin);
+    Admin login(Admin admin);
 
     Map<String, Object> getCharts();
 
@@ -21,4 +21,8 @@ public interface AdminService {
     List<Tips> tips();
 
     boolean applyAdd(Apply apply, String sequence);
+
+    PageBean<ViewResult> examinePage(PageBean<ViewResult> vePageBean);
+
+    boolean pwdUpdate(String adminId, String password, String change);
 }

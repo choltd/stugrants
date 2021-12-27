@@ -44,8 +44,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal"
-                        onclick="window.location.href='signin.html';">更新
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="pwdUpdate">更新
                 </button>
             </div>
         </div>
@@ -68,7 +67,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
-                        onclick="window.location.href='../../index.html';">确定
+                        onclick="window.location.href='signin.html';">确定
                 </button>
             </div>
         </div>
@@ -160,6 +159,7 @@
 </body>
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript">
 
     //页面加载完毕
@@ -185,6 +185,26 @@
             $(this).children("a").css("color", "white");
         });
         window.open("workbench.html", "workareaFrame");
+
+        $("#pwdUpdate").click(function () {
+            var old = $("#oldPwd").val()
+            var edit = $("#newPwd").val()
+            var confirm = $("#confirmPwd").val()
+            if (old === "" || old === null) {
+                alert("请输入原密码")
+            } else if (edit !== confirm || edit === "" || confirm === "") {
+                alert("两次输入密码不一致")
+            } else {
+                $.post("/admin?act=pwdUpdate", {"adminId": adminInfo().adminId, "password": old, "change": confirm}, function (data) {
+                    if ((JSON.parse(data)).success) {
+                        alert("修改成功")
+                        location.href = "signin.html"
+                    } else {
+                        alert("修改失败")
+                    }
+                })
+            }
+        })
     });
 
 </script>

@@ -19,6 +19,9 @@ function stuInfo() {
 function tchInfo() {
     return JSON.parse(localStorage.getItem("teacher"));
 }
+function adminInfo() {
+    return JSON.parse(localStorage.getItem("admin"));
+}
 function convert(time){
     var date = new Date(time)
     var datetime = date.toLocaleDateString() // date.toLocaleTimeString();

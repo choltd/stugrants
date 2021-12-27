@@ -32,4 +32,7 @@ public interface TchDao {
 
     Map<String, Object> viewResultCount();
 
+    int verify(@Param("teacherId") String teacherId, @Param("pwd") String password);
+
+    int pwdUpdate(@Param("teacherId") String teacherId, @Param("chg") String change);
 }

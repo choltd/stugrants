@@ -44,7 +44,7 @@
                                     join student s on sc.stuclass_id = s.stuclass_id
                            where teacher_id = #{teacherId})
           and apply_id not in (select apply_id from examine)
-        order by time
+        order by time desc
             limit #{va.startIndex}, #{va.pageSize}
     </select>
 
@@ -76,4 +76,14 @@
     <select id="viewResultCount" resultType="map">
         select count(*) as value from viewResult
     </select>
+
+    <select id="verify" resultType="integer">
+        select count(*) from teacher where teacher_id=#{teacherId} and password=#{pwd}
+    </select>
+
+    <update id="pwdUpdate">
+        update teacher
+        set password=#{chg}
+        where teacher_id = #{teacherId}
+    </update>
 </mapper>

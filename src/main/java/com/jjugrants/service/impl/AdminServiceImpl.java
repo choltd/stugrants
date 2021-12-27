@@ -19,8 +19,8 @@ public class AdminServiceImpl implements AdminService {
     private final TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
 
     @Override
-    public boolean login(Admin admin) {
-        return adminDao.login(admin) != null;
+    public Admin login(Admin admin) {
+        return adminDao.login(admin);
     }
 
     @Override
@@ -92,5 +92,28 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean applyAdd(Apply apply, String sequence) {
         return adminDao.applyAdd(apply,sequence) == 1;
+    }
+
+    @Override
+    public PageBean<ViewResult> examinePage(PageBean<ViewResult> vePageBean) {
+        int count = 0;
+        Map<String, Object> map = adminDao.examineCount();
+        for (Object value : map.values()) {
+            count = Integer.parseInt(String.valueOf(value));
+        }
+        if (count != 0) {
+            vePageBean.setTotalRecord(count);
+        }
+        vePageBean.setList(adminDao.vePage(vePageBean));
+        return vePageBean;
+    }
+
+    @Override
+    public boolean pwdUpdate(String adminId, String password, String change) {
+        if (adminDao.verify(adminId, password) == 1) {
+            return adminDao.pwdUpdate(adminId, change) == 1;
+        } else {
+            return false;
+        }
     }
 }

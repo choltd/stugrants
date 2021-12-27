@@ -23,4 +23,6 @@ public interface TchService {
     boolean examine(Examine examine);
 
     List<ViewResult> searchClassname(String classname);
+
+    boolean pwdUpdate(String teacherId, String password, String change);
 }

@@ -64,6 +64,9 @@ $(function () {
             type: "get",
             success: function (data) {
                 if (data !== null) {
+                    if(window.localStorage){
+                        localStorage.setItem("admin",JSON.stringify(data));
+                    }
                     $("#txt").text("loading").css({"display":"block","color":"#fff"});
                     var delay = setTimeout(function () {
                         window.location.href = "../admin/workspace.html";

@@ -91,4 +91,13 @@ public class TchServiceImpl implements TchService {
     public List<ViewResult> searchClassname(String classname) {
         return tchDao.searchClassname(classname);
     }
+
+    @Override
+    public boolean pwdUpdate(String teacherId, String password, String change) {
+        if (tchDao.verify(teacherId, password) == 1) {
+            return tchDao.pwdUpdate(teacherId, change) == 1;
+        } else {
+            return false;
+        }
+    }
 }
