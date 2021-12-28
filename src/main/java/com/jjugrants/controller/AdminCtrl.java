@@ -117,7 +117,7 @@ public class AdminCtrl extends HttpServlet {
 
     private void subsidizeDel(HttpServletRequest request, HttpServletResponse response){
         AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.subsidizeDel(request.getParameter("id"));
+        boolean flag = adminService.subsidizeDel(request.getParameter("examineId"));
         PrintJson.printJsonFlag(response,flag);
     }
 

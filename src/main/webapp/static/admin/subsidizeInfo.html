@@ -63,7 +63,7 @@
                     html += "<td>" + e.worknumber + "</td>";
                     html += "<td>" + e.teacherName + "</td>";
                     html += "<td>" + e.state + "</td>";
-                    html +="<td><button class='b-delete' onclick='subsidizeDel("+e.id+")'></button></td>";
+                    html +="<td><button class='b-delete' onclick='subsidizeDel("+e.examineId+")'></button></td>";
                     html += "</tr>";
                 })
                 $tbody.html(html);
@@ -78,9 +78,11 @@
 
     function subsidizeDel(id) {
         if(confirm("确认删除?")) {
-            $.post("/admin?act=subsidizeDel", {"id": id}, function (data) {
+            $.post("/admin?act=subsidizeDel", {"examineId": id}, function (data) {
                 if (!(JSON.parse(data).success)) {
                     alert("删除失败")
+                }else {
+                    pageShow(1,false)
                 }
             })
         }

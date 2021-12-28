@@ -67,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean subsidizeDel(String id) {
-        return adminDao.subsidizeDel(id) == 1;
+        return adminDao.examineDel(id) == 1;
     }
 
     @Override

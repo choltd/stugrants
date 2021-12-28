@@ -16,8 +16,6 @@ public interface AdminDao {
 
     List<ViewResult> vrPage(PageBean<ViewResult> pageBean);
 
-    int subsidizeDel(String id);
-
     Map<String, Object> vaCount();
 
     List<ViewApply> vaPage(PageBean<ViewApply> vaPageBean);

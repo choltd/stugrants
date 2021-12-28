@@ -28,12 +28,6 @@
         order by subsidize_id limit #{startIndex}, #{pageSize}
     </select>
 
-    <delete id="subsidizeDel">
-        delete
-        from subsidize
-        where examine_id = #{examineId}
-    </delete>
-
     <select id="vaCount" resultType="map">
         select count(*) as value
         from viewApply
