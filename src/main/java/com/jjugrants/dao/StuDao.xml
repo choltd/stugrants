@@ -19,7 +19,8 @@
                sc.college
         from student s
                  join stuclass sc on s.stuclass_id = sc.stuclass_id
-        where sequence = #{sequence} and password = #{password}
+        where sequence = #{sequence}
+          and password = #{password}
     </select>
     <select id="count" resultType="map">
         select count(*) as value
@@ -107,6 +108,16 @@
         from apply
         where student_id in (select student_id from stuclass sc join student s on s.stuclass_id=sc.stuclass_id where teacher_id=#{teacherId})
     </select>
+
+    <select id="classname" resultType="stuclass">
+        select *
+        from stuclass
+    </select>
+    <insert id="stuAdd">
+        insert into student(stuclass_id, name, sequence, sex, telephone, idcard, banknumber, year, password)
+        values (#{stuclassId}, #{name}, #{sequence}, #{sex}, #{telephone}, #{idcard}, #{banknumber}, #{year},
+                #{password})
+    </insert>
 </mapper>
 
 

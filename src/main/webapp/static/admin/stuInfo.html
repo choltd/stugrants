@@ -3,17 +3,97 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title></title>
     <link href="../bootstrap_3.3.0/css/bootstrap.min.css"
           rel="stylesheet">
     <link href="../css/common.css"
           rel="stylesheet">
+    <style>
+        #stuAdd{
+            border: 0;
+            background: url("../image/add2.png") 0 0 / 30px 30px no-repeat;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+        }
+        #stuAdd:active{
+            opacity: .3;
+        }
+    </style>
 </head>
 
 <body>
+<div class="modal fade" id="stuModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">新建学生</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="stu-name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-name"/>
+                        </div>
+                        <label for="stu-sequence" class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-sequence">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stu-sex" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-sex">
+                        </div>
+
+                        <label for="stu-telephone" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-telephone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stu-idcard" class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-idcard">
+                        </div>
+
+                        <label for="stu-banknumber" class="col-sm-2 control-label">银行卡号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-banknumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stu-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="stu-year">
+                        </div>
+                        <label for="stu-classname" class="col-sm-2 control-label">班级</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <select class="form-control" id="stu-classname" >
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="head" style="margin: 30px 20px;">
         <h1>学生信息</h1>
+    </div>
+    <div class="btn-toolbar" role="toolbar" style="border:none;height: 80px;position: absolute;top: 40px;left: 1167px;">
+        <button id="stuAdd"></button>
     </div>
     <div class="content">
         <table class="table table-bordered table-striped">
@@ -45,6 +125,39 @@
     var pageInfo = {"pageNum": 1, "pageSize": 5}
     $(function () {
         pageShow(1, true);
+
+        $("#stuAdd").click(function () {
+            $.get("/admin?act=classname",function(data){
+                if(data != null) {
+                    var html = ""
+                    $.each(data, function (i, e) {
+                        html += '<option value="'+e.stuclassId+'">' + e.classname + '</option>'
+                    })
+                    $("#stu-classname").append(html)
+                    $("#stuModal").modal("show")
+                }
+            })
+        })
+
+        $("#save").click(function(){
+            $.post("/admin?act=stuAdd",{
+                "name":$("#stu-name").val(),
+                "sequence":$("#stu-sequence").val(),
+                "sex":$("#stu-sex").val(),
+                "telephone":$("#stu-telephone").val(),
+                "idcard":$("#stu-idcard").val(),
+                "banknumber":$("#stu-banknumber").val(),
+                "stuclassId":$("#stu-classname").val(),
+                "year":$("#stu-year").val()
+            },function(data){
+                if(!(JSON.parse(data).success)){
+                    alert("添加失败")
+                }else{
+                    $("#stuModal").modal("hide")
+                    pageShow(1,true)
+                }
+            })
+        })
     })
 
     function pageShow(num, isFirst) {
@@ -84,6 +197,8 @@
             $.post("/admin?act=stuDel", {"studentId": id}, function (data) {
                 if (!(JSON.parse(data).success)) {
                     alert("删除失败")
+                }else{
+                    pageShow(1,true)
                 }
             })
         }

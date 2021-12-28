@@ -25,4 +25,10 @@ public interface AdminService {
     PageBean<ViewResult> examinePage(PageBean<ViewResult> vePageBean);
 
     boolean pwdUpdate(String adminId, String password, String change);
+
+    List<Stuclass> classname();
+
+    boolean stuAdd(Student student);
+
+    boolean tchAdd(Teacher teacher);
 }

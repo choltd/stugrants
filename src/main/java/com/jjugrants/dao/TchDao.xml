@@ -5,7 +5,14 @@
 
 <mapper namespace="com.jjugrants.dao.TchDao">
     <select id="query" resultType="com.jjugrants.vo.TeacherVo">
-        select t.teacher_id,t.teacher_name, t.worknumber, t.sex, t.telephone, sc.major, sc.college, sc.classname
+        select t.teacher_id,
+               t.teacher_name,
+               t.worknumber,
+               t.sex,
+               t.telephone,
+               sc.major,
+               sc.college,
+               sc.classname
         from teacher t
                  join stuclass sc on t.teacher_id = sc.teacher_id
         where worknumber = #{worknumber}
@@ -74,11 +81,15 @@
     </select>
 
     <select id="viewResultCount" resultType="map">
-        select count(*) as value from viewResult
+        select count(*) as value
+        from viewResult
     </select>
 
     <select id="verify" resultType="integer">
-        select count(*) from teacher where teacher_id=#{teacherId} and password=#{pwd}
+        select count(*)
+        from teacher
+        where teacher_id = #{teacherId}
+          and password = #{pwd}
     </select>
 
     <update id="pwdUpdate">
@@ -86,4 +97,9 @@
         set password=#{chg}
         where teacher_id = #{teacherId}
     </update>
+
+    <insert id="tchAdd">
+        insert into teacher(teacher_name, worknumber, sex, telephone, password)
+        values (#{teacherName}, #{worknumber}, #{sex}, #{telephone}, #{password})
+    </insert>
 </mapper>

@@ -39,4 +39,8 @@ public interface StuDao {
     Map<String, Object> vaCount(String sequence);
 
     Map<String, Object> applyCountTeacherId(String teacherId);
+
+    List<Stuclass> classname();
+
+    int stuAdd(Student student);
 }

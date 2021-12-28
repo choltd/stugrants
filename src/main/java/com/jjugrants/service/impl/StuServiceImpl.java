@@ -74,11 +74,14 @@ public class StuServiceImpl implements StuService {
         for (Object value : map.values()) {
             count = Integer.parseInt(String.valueOf(value));
         }
-        if (count != 0) {
+        //10个名额才返回
+        if (count != 0 ) {
             pageBean.setTotalRecord(count);
         }
-        List<ViewResult> viewResults = stuDao.viewResultPage(pageBean);
-        pageBean.setList(viewResults);
+        if(count == 10){
+            List<ViewResult> viewResults = stuDao.viewResultPage(pageBean);
+            pageBean.setList(viewResults);
+        }
         return pageBean;
     }
 

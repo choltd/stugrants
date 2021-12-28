@@ -116,4 +116,19 @@ public class AdminServiceImpl implements AdminService {
             return false;
         }
     }
+
+    @Override
+    public List<Stuclass> classname() {
+        return stuDao.classname();
+    }
+
+    @Override
+    public boolean stuAdd(Student student) {
+        return stuDao.stuAdd(student) == 1;
+    }
+
+    @Override
+    public boolean tchAdd(Teacher teacher) {
+        return tchDao.tchAdd(teacher) == 1;
+    }
 }

@@ -154,4 +154,39 @@ public class AdminCtrl extends HttpServlet {
         PrintJson.printJsonFlag(response,flag);
     }
 
+    private void classname(HttpServletRequest request, HttpServletResponse response){
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        List<Stuclass> stuclasses = adminService.classname();
+        PrintJson.printJsonObj(response,stuclasses);
+
+    }
+    private void stuAdd(HttpServletRequest request, HttpServletResponse response){
+        Student student = new Student();
+        student.setSequence(request.getParameter("sequence"));
+        student.setName(request.getParameter("name"));
+        student.setIdcard(request.getParameter("idcard"));
+        student.setBanknumber(request.getParameter("banknumber"));
+        student.setSex(request.getParameter("sex"));
+        student.setYear(request.getParameter("year"));
+        student.setTelephone(request.getParameter("telephone"));
+        student.setStuclassId(Integer.parseInt(request.getParameter("stuclassId")));
+        student.setPassword(request.getParameter("idcard").substring(12));
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        boolean flag = adminService.stuAdd(student);
+        PrintJson.printJsonFlag(response,flag);
+    }
+
+    private void tchAdd(HttpServletRequest request, HttpServletResponse response){
+        Teacher teacher = new Teacher();
+        teacher.setTeacherName(request.getParameter("teacherName"));
+        teacher.setSex(request.getParameter("sex"));
+        teacher.setTelephone(request.getParameter("telephone"));
+        teacher.setWorknumber(request.getParameter("worknumber"));
+        teacher.setPassword("123456");
+        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
+        boolean flag = adminService.tchAdd(teacher);
+        PrintJson.printJsonFlag(response,flag);
+
+    }
+
 }

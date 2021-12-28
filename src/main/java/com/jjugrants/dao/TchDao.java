@@ -35,4 +35,6 @@ public interface TchDao {
     int verify(@Param("teacherId") String teacherId, @Param("pwd") String password);
 
     int pwdUpdate(@Param("teacherId") String teacherId, @Param("chg") String change);
+
+    int tchAdd(Teacher teacher);
 }
