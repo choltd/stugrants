@@ -78,7 +78,9 @@ public class StuServiceImpl implements StuService {
         if (count != 0 ) {
             pageBean.setTotalRecord(count);
         }
-        if(count == 10){
+        int count1 = stuDao.applyCount1();
+        int count2 = stuDao.examineCount1();
+        if(count == 10 && count1 == count2){
             List<ViewResult> viewResults = stuDao.viewResultPage(pageBean);
             pageBean.setList(viewResults);
         }

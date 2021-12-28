@@ -118,6 +118,12 @@
         values (#{stuclassId}, #{name}, #{sequence}, #{sex}, #{telephone}, #{idcard}, #{banknumber}, #{year},
                 #{password})
     </insert>
+    <select id="applyCount1" resultType="integer">
+        select count(*) from apply
+    </select>
+    <select id="examineCount1" resultType="integer">
+        select count(*) from examine
+    </select>
 </mapper>
 
 

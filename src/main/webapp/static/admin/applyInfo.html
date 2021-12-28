@@ -8,85 +8,6 @@
     <title></title>
 </head>
 <body>
-<!-- 申请资助的模态窗口 -->
-<div class="modal fade" id="applyModal" role="dialog">
-    <div class="modal-dialog" role="document" style="width: 60%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">申请资助</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="apply-name" class="col-sm-2 control-label">姓名</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-name"/>
-                        </div>
-                        <label for="apply-sequence" class="col-sm-2 control-label">学号</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-sequence">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="apply-sex" class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-sex">
-                        </div>
-
-                        <label for="apply-telephone" class="col-sm-2 control-label">联系电话</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-telephone">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="apply-idcard" class="col-sm-2 control-label">身份证号</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-idcard">
-                        </div>
-
-                        <label for="apply-banknumber" class="col-sm-2 control-label">银行卡号</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-banknumber">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="apply-year" class="col-sm-2 control-label">学年</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control" id="apply-year">
-                        </div>
-                        <label for="apply-time" class="col-sm-2 control-label">提交时间</label>
-                        <div class="col-sm-10" style="width: 200px;">
-                            <input type="text" class="form-control time" id="apply-time">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="apply-illustrate" class="col-sm-2 control-label">申请理由</label>
-                        <div class="col-sm-10" style="width: 70.5%;">
-                            <textarea class="form-control" rows="3" id="apply-illustrate"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="apply-remark" class="col-sm-2 control-label">备注</label>
-                        <div class="col-sm-10" style="width: 70.5%;">
-                            <textarea class="form-control" rows="3" id="apply-remark"></textarea>
-                        </div>
-                    </div>
-                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="save">提交</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- 修改申请的模态窗口 -->
 <div class="modal fade" id="editModal" role="dialog">
     <div class="modal-dialog" role="document" style="width: 72%;">
@@ -169,18 +90,15 @@
     <div class="page-header">
         <h3>申请记录</h3>
     </div>
-    <div style="position: relative; height: 0px; width: 250px;  top: -72px; left: 920px;">
+    <div style="position: relative; height: 0; width: 250px;  top: -72px; left: 920px;">
     </div>
 </div>
 
-<div style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
+<div style="position: relative; top: -20px; left: 0; width: 100%; height: 100%;">
     <div style="width: 100%; position: absolute;top: 5px; left: 10px;">
         <div class="btn-toolbar" role="toolbar"
              style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
             <div class="btn-group" style="position: relative; top: 18%;">
-                <button type="button" class="btn btn-primary" id="applyAdd">
-                    <span class="glyphicon glyphicon-plus"></span> 创建
-                </button>
                 <button type="button" class="btn btn-default" id="applyEdit"><span
                         class="glyphicon glyphicon-pencil"></span> 修改
                 </button>
@@ -240,38 +158,6 @@
         })
 
         pageShow(1, true);
-
-        $("#applyAdd").click(function () {
-            $("#applyModal").modal("show")
-        });
-
-        $("#save").click(function () {
-            $.post("/admin?act=applyAdd",{
-                "name":$("#apply-name").val(),
-                "sequence":$("#apply-sequence").val(),
-                "sex":$("#apply-sex").val(),
-                "idcard":$("#apply-idcard").val(),
-                "telephone":$("#apply-telephone").val(),
-                "banknumber":$("#apply-banknumber").val(),
-                "year":$("#apply-year").val(),
-                "illustrate":$("#apply-illustrate").val(),
-                "remark":$("#apply-remark").val(),
-            },function (data) {
-                if(JSON.parse(data).success) {
-                    $("#applyModal").modal("hide")
-                    $("#apply-name").val("")
-                    $("#apply-sequence").val("")
-                    $("#apply-sex").val("")
-                    $("#apply-idcard").val("")
-                    $("#apply-banknumber").val("")
-                    $("#apply-telephone").val("")
-                    $("#apply-year").val("")
-                    $("#apply-time").val("")
-                    $("#apply-illustrate").val("")
-                    $("#apply-remark").val("")
-                }
-            })
-        });
 
         $("#applyDel").click(function () {
             var $xz = $("input[name=xz]:checked")

@@ -43,4 +43,9 @@ public interface StuDao {
     List<Stuclass> classname();
 
     int stuAdd(Student student);
+
+    int applyCount1();
+
+    int examineCount1();
+
 }
