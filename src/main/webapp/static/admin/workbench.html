@@ -193,7 +193,7 @@
             }else if(e.name == "examine"){
                 val2 = e.value
             }
-            if(val1 != val2){
+            if(val1 != val2 && val2 != 10){
                 $("#pl").attr("disabled","disabled")
                 time = setInterval(function () {
                     getCharts();

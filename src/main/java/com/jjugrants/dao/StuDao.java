@@ -48,4 +48,11 @@ public interface StuDao {
 
     int examineCount1();
 
+    int examineDel(String id);
+
+    int examine(String id);
+
+    int applyCount2(String id);
+
+    int getApplyId(String id);
 }

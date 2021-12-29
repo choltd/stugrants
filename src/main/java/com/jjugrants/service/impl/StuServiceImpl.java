@@ -54,6 +54,9 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public boolean applyDel(String id) {
+        if(stuDao.examine(id) == 1){
+            stuDao.examineDel(id);
+        }
         return stuDao.applyDel(id) == 1;
     }
 
@@ -98,6 +101,11 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public boolean stuDel(String id) {
-        return stuDao.stuDel(id) == 1;
+        if(stuDao.applyCount2(id) ==1){
+            if(applyDel(String.valueOf(stuDao.getApplyId(id)))){
+                return stuDao.stuDel(id) == 1;
+            }
+        }
+        return false;
     }
 }

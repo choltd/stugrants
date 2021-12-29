@@ -48,6 +48,15 @@
             , #{va.pageSize}
     </select>
 
+    <select id="examine" resultType="integer">
+        select count(*) from examine where apply_id=#{id}
+    </select>
+    <delete id="examineDel">
+        delete
+        from examine
+        where apply_id = #{id}
+    </delete>
+
     <delete id="applyDel">
         delete
         from apply
@@ -119,10 +128,20 @@
                 #{password})
     </insert>
     <select id="applyCount1" resultType="integer">
-        select count(*) from apply
+        select count(*)
+        from apply
     </select>
     <select id="examineCount1" resultType="integer">
-        select count(*) from examine
+        select count(*)
+        from examine
+    </select>
+
+    <select id="applyCount2" resultType="integer">
+        select count(*) from apply where apply_id=#{id}
+    </select>
+
+    <select id="getApplyId" resultType="integer">
+        select apply_id from apply where student_id=#{id}
     </select>
 </mapper>
 
