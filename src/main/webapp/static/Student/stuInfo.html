@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+
+<!-- 申请的模态窗口 -->
+<div class="modal fade" id="infoModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">申请资助</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="info-name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-name">
+                        </div>
+                        <label for="info-sequence" class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-sequence">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="info-sex" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-sex">
+                        </div>
+                        <label for="info-telephone" class="col-sm-2 control-label">联系电话</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-telephone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="info-idcard" class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-idcard">
+                        </div>
+                        <label for="info-banknumber" class="col-sm-2 control-label">银行卡号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-banknumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="info-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="info-year">
+                        </div>
+                        <label for="info-time" class="col-sm-2 control-label">提交时间</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control time" id="info-time">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="info-illustrate" class="col-sm-2 control-label">申请理由</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="info-illustrate"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="info-remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="info-remark"></textarea>
+                        </div>
+                    </div>
+                    <div style="position: relative;top: 15px;">
+                    </div>
+                    <!--                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="applyAdd">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 大标题 -->
+<div style="position: relative;margin-left: 100px; top: 10px;">
+    <div class="page-header" style="border: none;">
+        <h3>个人信息</h3>
+    </div>
+    <div style="position: relative; height: 50px; width: 250px;  top: -70px; left: 888px;">
+        <button type="button" class="btn btn-default" id="apply"><span class="glyphicon glyphicon-edit"></span> 申请
+        </button>
+
+    </div>
+</div>
+
+<!-- 详细信息 -->
+<div style="position: relative;top: 5rem;right: 10rem">
+    <div style="position: relative; height: 70px;margin-left: 250px;">
+        <div style="width: 300px; color: gray;">姓名</div>
+        <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-name"></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">学号</div>
+        <div style="width: 300px;position: absolute;left: 720px;top:0;"><b id="xx-sequence"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
+    </div>
+    <div style="position: relative; height: 70px;margin-left: 250px;">
+        <div style="width: 300px; color: gray;">性別</div>
+        <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-sex"></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">身份证号</div>
+        <div style=" width: 300px;position: absolute;left: 720px;top:0;"><b id="xx-idcard"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
+    </div>
+    <div style="position: relative;height: 70px;margin-left: 250px;">
+        <div style="width: 300px; color: gray;">电话</div>
+        <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-telephone"></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">银行卡号</div>
+        <div style="width: 300px;position: absolute; left: 720px;top: 0;"><b id="xx-banknumber"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
+    </div>
+    <div style="position: relative;height: 70px;margin-left: 250px;">
+        <div style="width: 300px; color: gray;">班级</div>
+        <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-classname"></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">学院</div>
+        <div style=" width: 300px;position: absolute; left: 720px; top:0;"><b id="xx-college"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
+    </div>
+    <div style="position: relative; height: 70px;margin-left: 250px;">
+        <div style="width: 300px; color: gray;">年级</div>
+        <div style="width: 300px;position: relative; left: 200px; top: -20px;"><b id="xx-year"></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">专业</div>
+        <div style=" width: 300px;position: absolute; left: 720px;top:  0;"><b id="xx-major"></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top:  -40px; left: 550px;">
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+</body>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var stu = stuInfo();
+        $("#xx-name").text(stu.name);
+        $("#xx-sequence").text(stu.sequence);
+        $("#xx-sex").text(stu.sex);
+        $("#xx-idcard").text(stu.idcard);
+        $("#xx-telephone").text(stu.telephone);
+        $("#xx-banknumber").text(stu.banknumber);
+        $("#xx-college").text(stu.college);
+        $("#xx-major").text(stu.major);
+        $("#xx-classname").text(stu.classname);
+        $("#xx-year").text(stu.year);
+
+        $(".time").datetimepicker({
+            minView: "month",
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "top-left"
+        });
+
+        $("#apply").click(function () {
+            $("#infoModal").modal("show");
+            $("#info-name").val(stu.name);
+            $("#info-sequence").val(stu.sequence)
+            $("#info-sex").val(stu.sex)
+            $("#info-telephone").val(stu.telephone)
+            $("#info-idcard").val(stu.idcard)
+            $("#info-banknumber").val(stu.banknumber)
+            $("#info-year").val(stu.year)
+        })
+
+        $("#applyAdd").click(function () {
+            if (applyAdd({
+                "studentId": stu.studentId,
+                "illustrate": $("#info-illustrate").val(),
+                "remark": $("#info-remark").val()
+            })) {
+                $("#infoModal").modal("hide")
+                $("#info-time").val("")
+                $("#info-illustrate").val("")
+                $("#info-remark").val("")
+            } else {
+                alert("申请失败")
+            }
+
+        })
+    });
+</script>
+
+</html>

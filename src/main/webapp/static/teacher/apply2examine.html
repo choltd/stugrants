@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css"
+          rel="stylesheet"/>
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+    <title></title>
+
+</head>
+<body>
+
+<!-- 资助审核的模态窗口 -->
+<div class="modal fade" id="examineModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">资助审核</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="examine-name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-name" readonly="readonly"/>
+                        </div>
+                        <label for="examine-sequence" class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-sequence" readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="examine-sex" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-sex" readonly="readonly"/>
+                        </div>
+
+                        <label for="examine-telephone" class="col-sm-2 control-label">联系电话</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-telephone" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="examine-idcard" class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-idcard" readonly="readonly"/>
+                        </div>
+
+                        <label for="examine-banknumber" class="col-sm-2 control-label">银行卡号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-banknumber" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="examine-time" class="col-sm-2 control-label">提交时间</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control time" id="examine-time" readonly="readonly"/>
+
+                        </div>
+                        <label for="examine-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-year" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="examine-college" class="col-sm-2 control-label">学院</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control time" id="examine-college" readonly="readonly"/>
+
+                        </div>
+                        <label for="examine-major" class="col-sm-2 control-label">专业</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="examine-major" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="examine-illustrate" class="col-sm-2 control-label">申请理由</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="examine-illustrate" readonly="readonly"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="examine-remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="examine-remark" readonly="readonly"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="applyPass">通过</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h3>申请记录</h3>
+    </div>
+    <div style="position: relative; height: 30px; width: 250px;  top: -72px; left: 920px;">
+    </div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>联系电话</td>
+                <td>申请原因</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="applyList">
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
+        </ul>
+    </div>
+</div>
+<input type="hidden" id="pass-id">
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="../js/jq-paginator.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    var pageInfo = {"pageNum": 1, "pageSize": 5}
+    $(function () {
+        $(".time").datetimepicker({
+            minView: "month",
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "bottom-right"
+        });
+
+        pageShow(1, true);
+
+        $("#applyPass").click(function () {
+            $.post("/tch?action=examine", {
+                "applyId": $("#pass-id").val(),
+                "teacherId": tchInfo().teacherId
+            }, function (data) {
+                if (JSON.parse(data).success) {
+                    alert("操作成功")
+                    $("#examineModal").modal("hide")
+                    pageShow(1, false)
+                }
+            })
+        })
+    });
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/tch?action=viewApplyPage",
+            data: {"pageSize": pageInfo.pageSize, "pageNum": pageInfo.pageNum, "teacherId": tchInfo().teacherId},
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var html = "";
+                $("#applyList").html(html);
+                $.each(data.list, function (i, e) {
+                    html += '<tr class="">';
+                    html += '<td>' + e.sequence + '</td>';
+                    html += '<td>' + e.name + '</td>';
+                    html += '<td>' + e.sex + '</td>';
+                    html += '<td>' + e.telephone + '</td>';
+                    html += '<td>' + e.illustrate + '</td>';
+                    html += '<td><button class="b-show" onclick="applyShow(' + e.applyId + ')"></button><button class="b-no" onclick="applyFail(' + e.applyId + ')"></button></td>';
+                    html += '</tr>';
+                })
+                $("#applyList").html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                } else if (data.list.length < 1) {
+                    $("#pagination").html("")
+                }
+            }
+        })
+    }
+
+    function applyShow(applyId) {
+        $.ajax({
+            url: "/tch?action=applyShow",
+            data: {"applyId": applyId},
+            dataType: "json",
+            type: "get",
+            success: function (data) {
+                if (data !== null) {
+                    $("#examineModal").modal("show")
+                    $("#pass-id").val(data.applyId)
+                    $("#examine-name").val(data.name)
+                    $("#examine-sequence").val(data.sequence)
+                    $("#examine-sex").val(data.sex)
+                    $("#examine-telephone").val(data.telephone)
+                    $("#examine-idcard").val(data.idcard)
+                    $("#examine-banknumber").val(data.banknumber)
+                    $("#examine-time").val(convert(data.time))
+                    $("#examine-year").val(data.year)
+                    $("#examine-college").val(data.college)
+                    $("#examine-major").val(data.major)
+                    $("#examine-illustrate").val(data.illustrate)
+                    $("#examine-remark").val(data.remark)
+                } else {
+                    alert("暂时无法操作，请联系管理员")
+                }
+            }
+        })
+    }
+
+    function applyFail(applyId) {
+        $.post("/tch?action=applyFail", {"applyId": applyId, "teacherId": tchInfo().teacherId}, function () {
+            pageShow(1, false)
+        })
+    }
+</script>
+</body>
+</html>

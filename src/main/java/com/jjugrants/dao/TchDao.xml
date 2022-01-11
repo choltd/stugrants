@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjugrants.dao.TchDao">
+    <select id="query" resultType="com.jjugrants.vo.TeacherVo">
+        select t.teacher_id,
+               t.teacher_name,
+               t.worknumber,
+               t.sex,
+               t.telephone,
+               sc.major,
+               sc.college,
+               sc.classname
+        from teacher t
+                 join stuclass sc on t.teacher_id = sc.teacher_id
+        where worknumber = #{worknumber}
+          and password = #{password}
+    </select>
+    <select id="count" resultType="map">
+        select count(*) as value
+        from teacher
+    </select>
+    <select id="examineCount" resultType="map">
+        select count(*) as value
+        from examine
+    </select>
+    <select id="tchPage" resultType="teacher">
+        select *
+        from teacher
+        order by teacher_id limit #{startIndex}, #{pageSize}
+    </select>
+
+    <delete id="tchDel">
+        delete
+        from teacher
+        where teacherId = #{id}
+    </delete>
+
+    <select id="examinePage" resultType="viewResult">
+        select *
+        from viewresult limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="viewApplyPage" resultType="viewApply">
+        select *
+        from viewapply
+        where sequence in (select s.sequence
+                           from stuclass sc
+                                    join student s on sc.stuclass_id = s.stuclass_id
+                           where teacher_id = #{teacherId})
+          and apply_id not in (select apply_id from examine)
+        order by time desc
+            limit #{va.startIndex}, #{va.pageSize}
+    </select>
+
+    <select id="applyShow" resultType="viewApply">
+        select *
+        from viewApply
+        where apply_id = #{applyId}
+    </select>
+
+    <insert id="applyFail">
+        insert into examine(teacher_id, apply_id, state, time)
+        values (#{teacherId}, #{applyId}, #{state}, #{time})
+    </insert>
+
+    <insert id="examine">
+        insert into examine(teacher_id, apply_id, state, time)
+        values (#{teacherId}, #{applyId}, #{state}, #{time})
+    </insert>
+
+    <select id="searchClassname" resultType="viewResult">
+        SELECT *
+        from viewresult
+        where examine_id in (SELECT e.examine_id
+                             from stuclass sc
+                                      join examine e on sc.teacher_id = e.teacher_id
+                             where classname = #{classname})
+    </select>
+
+    <select id="viewResultCount" resultType="map">
+        select count(*) as value
+        from viewResult
+    </select>
+
+    <select id="verify" resultType="integer">
+        select count(*)
+        from teacher
+        where teacher_id = #{teacherId}
+          and password = #{pwd}
+    </select>
+
+    <update id="pwdUpdate">
+        update teacher
+        set password=#{chg}
+        where teacher_id = #{teacherId}
+    </update>
+
+    <insert id="tchAdd">
+        insert into teacher(teacher_name, worknumber, sex, telephone, password)
+        values (#{teacherName}, #{worknumber}, #{sex}, #{telephone}, #{password})
+    </insert>
+</mapper>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/admin/workbench.css" type="text/css" rel="stylesheet">
+    <title></title>
+    <style>
+        div button:active {
+            opacity: 0.3;
+        }
+
+        div button {
+            border-radius: 2rem;
+            height: 3rem;
+            width: 11.6rem;
+            border: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div id="content">
+    <div class="left">
+        <div class="form">
+            <p>统计</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>学生</td>
+                    <td>申请</td>
+                    <td>教师</td>
+                    <td>审核</td>
+                    <td>资助</td>
+                </tr>
+                </thead>
+                <tbody id="tjb">
+
+                </tbody>
+            </table>
+        </div>
+        <div id="ec" class="echarts">
+
+        </div>
+    </div>
+    <div class="right">
+        <p>系统信息</p>
+        <div style=" width: 372px; height: 380px; overflow: hidden;">
+            <ul id="info">
+
+            </ul>
+        </div>
+        <div style="position: absolute;bottom: 50px;">
+            <button id="pg">发布资助</button>
+            <button id="pl">发布名单</button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script>
+
+    $(function () {
+        getCharts();
+        tips();
+
+        if ($.cookie("subsidize") != null) {
+            $("#pg").attr("disabled", "disabled")
+        }
+        $("#pg").click(function () {
+            $.cookie("subsidize", "begin", {expires: 3, path: "/"})
+            $.removeCookie("roster", {expires: 3, path: "/"})
+            $("#pg").attr("disabled", "disabled")
+            alert("已发布资助信息")
+        })
+        $("#pl").click(function () {
+            $.cookie("roster", "begin", {expires: 3, path: "/"})
+            $.removeCookie("subsidize",{expires: 3, path: "/"})
+            $("#pg").attr("disabled", "disabled")
+            $("#pl").attr("disabled", "disabled")
+            alert("已发布资助名单")
+        })
+    })
+
+
+    function getCharts() {
+        $.ajax({
+            url: "/admin?act=getCharts",
+            dataType: "json",
+            type: "get",
+            success: function (data) {
+                var html = "<tr>";
+                var arr = [];
+                $.each(data.dataList, function (i, e) {
+                    html += '<td><a class="tja" href="javascript:void(0);" onclick="goto(\'' + e.name + '\')">' + e.value + '</a></td>';
+                    arr.push(e.name);
+                })
+                $("#tjb").html(html);
+                var chartDom = document.getElementById('ec');
+                var myChart = echarts.init(chartDom);
+                var option;
+
+                option = {
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        right: '10%',
+                        top: 'center',
+                        data: arr
+                    },
+                    series: [
+                        {
+                            name: '统计',
+                            type: 'pie',
+                            center: ['45%', '50%'],
+                            radius: ['40%', '70%'],
+                            avoidLabelOverlap: false,
+                            itemStyle: {
+                                normal: {
+                                    borderColor: '#fff',
+                                    borderWidth: 2
+                                }
+                            },
+                            label: {
+                                show: true
+                            },
+
+                            labelLine: {
+                                show: true
+                            },
+                            data: data.dataList
+                        }
+                    ]
+                };
+
+                option && myChart.setOption(option);
+
+                window.addEventListener("resize", function () {
+                    myChart.resize();
+                });
+                $("#ec").css({"background-color": "#fff", "margin-top": "15px"});
+
+                eq(data.dataList)
+
+            }
+        })
+    }
+
+    function goto(name) {
+        switch (name) {
+            case 'student':
+                window.location.href = "stuInfo.html";
+                break;
+            case 'teacher':
+                window.location.href = "tchInfo.html";
+                break;
+            case 'apply':
+                window.location.href = "applyInfo.html";
+                break;
+            case 'examine':
+                window.location.href = "examineInfo.html";
+                break;
+            case 'subsidize':
+                window.location.href = "subsidizeInfo.html";
+                break;
+        }
+    }
+
+    function tips() {
+        $.get("/admin?act=tips", function (data) {
+            var html = "";
+            $("#info").html(html)
+            $.each(data, function (i, e) {
+                html += '<li><span style="display: inline-block;width: 20px;"> > </span>' + e.content + '</li>'
+            })
+            $("#info").html(html)
+        })
+    }
+
+    function eq(list) {
+        var val1
+        var val2
+        var time
+        $.each(list,function (i,e) {
+            if(e.name == "apply"){
+                val1 = e.value
+            }else if(e.name == "examine"){
+                val2 = e.value
+            }
+            if(val1 != val2 && val2 != 10){
+                $("#pl").attr("disabled","disabled")
+                time = setInterval(function () {
+                    getCharts();
+                    tips();
+                }, 600000)
+            }else{
+                $("#pl").removeAttr("disabled")
+                clearInterval(time)
+            }
+        })
+    }
+</script>
+
+</html>

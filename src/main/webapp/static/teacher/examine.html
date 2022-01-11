@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <title></title>
+    <style>
+        #updateBtn{
+            border: 0;
+            background: url("../image/update.png") 0 0 / 20px 20px no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+        }
+        #updateBtn:active{
+            opacity: .4;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h3>审核信息</h3>
+    </div>
+    <div style="position: relative; height: 30px; width: 250px;  top: -72px; left: 920px;"></div>
+    <div class="btn-toolbar" role="toolbar" style="height: 80px;margin-left: 500px;position: absolute;top: 25px">
+        <form class="form-inline" role="form" style="position: relative;top: 8%; left: 5px;">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="search-classname" placeholder="班级">
+                    </div>
+                </div>
+            <button type="button" id="searchBtn" class="btn btn-default">查询</button>
+        </form>
+    </div>
+    <div class="btn-toolbar" role="toolbar" style="border:none;height: 80px;position: absolute;top: 35px;left: 1130px;">
+        <button id="updateBtn"></button>
+    </div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>学号</td>
+                <td>学生姓名</td>
+                <td>性别</td>
+                <td>学生电话</td>
+                <td>教师工号</td>
+                <td>教师姓名</td>
+                <td>教师电话</td>
+                <td>时间</td>
+                <td>审核结果</td>
+            </tr>
+            </thead>
+            <tbody id="examineList">
+
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jq-paginator.js"></script>
+<script src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+    var pageInfo = {"pageNum": 1, "pageSize": 5}
+    $(function () {
+        pageShow(1, true)
+
+        $("#updateBtn").click(function () {
+            pageShow(1,true)
+        })
+
+        $("#searchBtn").click(function () {
+            var classname = $("#search-classname").val()
+            if(classname != ""){
+                $.get("/tch?action=searchClassname",{"classname":classname},function (data) {
+                    var html = "";
+                    $("#examineList").html(html);
+                    $.each(data, function (i, e) {
+                        html += '<tr class="active">';
+                        html += '<td>' + e.sequence + '</td>';
+                        html += '<td>' + e.studentName + '</td>';
+                        html += '<td>' + e.studentSex + '</td>'
+                        html += '<td>' + e.studentTelephone + '</td>';
+                        html += '<td>' + e.worknumber + '</td>';
+                        html += '<td>' + e.teacherName + '</td>';
+                        html += '<td>' + e.teacherTelephone + '</td>';
+                        html += '<td>' + convert(e.time) + '</td>';
+                        html += '<td>' + e.state + '</td>';
+                        html += '</tr>';
+                    })
+                    $("#examineList").html(html);
+                    $("#pagination").html("")
+                })
+            }
+        })
+    })
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/tch?action=examinePage",
+            data: pageInfo,
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var html = "";
+                $("#examineList").html(html);
+                $.each(data.list, function (i, e) {
+                    html += '<tr class="active">';
+                    html += '<td>' + e.sequence + '</td>';
+                    html += '<td>' + e.studentName + '</td>';
+                    html += '<td>' + e.studentSex + '</td>'
+                    html += '<td>' + e.studentTelephone + '</td>';
+                    html += '<td>' + e.worknumber + '</td>';
+                    html += '<td>' + e.teacherName + '</td>';
+                    html += '<td>' + e.teacherTelephone + '</td>';
+                    html += '<td>' + convert(e.time) + '</td>';
+                    html += '<td>' + e.state + '</td>';
+                    html += '</tr>';
+                })
+                $("#examineList").html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
+                }
+            }
+        })
+    }
+</script>
+</html>

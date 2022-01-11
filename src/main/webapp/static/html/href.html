@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>江西省学生资助政策简介</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+/*边框*/
+.bor {
+    border: 1px solid #0000FF;
+}
+
+.bor1 {
+    border: 1px solid #0C0;
+}
+
+/*去除文本框的边框*/
+input {
+    border: 1px solid #ccc;
+    background: none;
+    vertical-align: center;
+}
+/*颜色*/
+.red {
+    color: #F00;
+}
+
+.yellow {
+    color: #ffff00;
+}
+
+.green {
+    color: #f36d00;
+}
+
+.blue {
+    color: #256aaa;
+}
+
+.black {
+    color: #000;
+}
+
+.white {
+    color: #FFF;
+}
+
+.blue1 {
+    color: #1523af;
+}
+
+/*清除浮动*/
+/*.cle{ clear:both;}*/
+/*a标签*/
+td a, li a {
+    text-decoration: none;
+    color: #333;
+}
+
+div a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+ul, li, dl, dd, dt, p, input, span, form, h1 {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+body {
+    margin: 0px;
+    padding: 20px;
+    color: #000;
+    font-size: 12px;
+    font-family: 宋体;
+}
+.header {
+    width: 1200px;
+    height: 161px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 0px;
+    top: 24px;
+}
+
+.text {
+    position: absolute;
+    left: 135px;
+    top: 60px;
+    font-family: "STXingkai";
+    font-size: 30px;
+    color: #18884b;
+}
+
+.header_R {
+    width: 264px;
+    height: 64px;
+    position: absolute;
+    right: 48px;
+    top: 59px;
+}
+
+.header_T {
+    width: 262px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.header_T a {
+    font-size: 14px;
+    margin: 0px 4px 0px 4px;
+}
+
+.header_T span {
+    font-size: 14px;
+}
+
+.search {
+    width: 261px;
+    height: 26px;
+    background: url("../image/search_bg_03.png") no-repeat;
+    margin-top: 10px;
+    margin-right: 30px;
+}
+
+.search input {
+    color: #9f9f9f;
+}
+
+.EditSearch {
+    width: 100%;
+    height: 25px;
+    border: 0px;
+    background-color: transparent;
+    padding: 2px 0px 0px 5px;
+    line-height: 22px;
+    z-index: 2;
+    position: absolute;
+    left: 0px;
+}
+
+#rpcontent{
+    display: none;
+    width: auto;
+    height: 100px;
+}
+#rpcontent p{
+    margin: 20px;
+    font-size: 2rem;
+    margin-bottom: 100px;
+}
+.nav {
+    width: 1225px;
+    height: 40px;
+    margin: 0 auto;
+    background: url("../image/nav_bg_03.png") no-repeat;
+}
+.nav ul li {
+    width: 10%;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 40px;
+    text-align: center;
+    margin-left: 5%;
+}
+.nav ul li a {
+    width: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    color: white;
+}
+
+.nav ul li :hover {
+    background: url("../image/li_bf_03.png") no-repeat;
+}
+
+.nav ul li a:hover {
+    color: #ffff00;
+}
+.essay{
+    width: 1225px;
+    height: 1600px;
+    position: relative;
+    
+}
+/*第一个大盒子*/
+.essaytext{
+    width: 1155px;
+    height: 1500px;
+    color: honeydew;
+    margin-left: 35px;
+}
+/*左上角的内容*/
+.essaytext .li {
+    width: 1155px;
+    height: 30px;
+    color: black;
+    position: relative;
+    font-size: 20px;
+    top: 10px;
+    border-bottom: 2px solid #18884b
+}
+.li a{
+    color: black;
+}
+.li a:hover{
+    color: #F00;
+}
+/*文本内容*/
+.essaytext .content{
+    line-height: 22px;
+    font-size: 16px;
+    margin-top: 40px;
+    color:black;
+    margin-left: 50px;
+    margin-right: 40px;
+}
+/*标题*/
+.essaytext h1{
+    text-align: center;
+    font-size: 25px;
+}
+/*首行*/
+.essaytext .start{
+    text-indent: 25px;
+    margin-top: 20px;
+}
+/*小标题*/
+.essaytext .title{
+    line-height: 40px;
+    font-size: 16px;
+    color:black;
+}
+.essay .time{
+    width: 100px;
+    height: 60px;
+    font-size: 20px;
+    margin-top: 25px;
+    margin-left: 1050px;
+}
+element.style {
+    position: relative;
+    z-index: 10000;
+}
+body, div, a, ul, li {
+    margin: 0;
+    padding: 0;
+}   
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.footer {
+    width: 1225px;
+    height: 157px;
+    background: white;
+    margin: 0 auto;
+}
+.friendlink {
+    width: 1225px;
+    height: 48px;
+    border-top: 2px solid #228247;
+    margin: 0 auto;
+    margin-top: 24px;
+}
+.friendlink_M {
+    width: 100%;
+    height: 48px;
+    margin: 0 auto;
+    line-height: 48px;
+    background-color: #d3d3d3;
+}
+.friendlink_M ul {
+    margin-left: 100px;
+}
+.friendlink_M ul li {
+    display: inline-block;
+    float: left;
+    margin-left: 50px;
+}
+
+.friendlink_M ul li span {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.friendlink_M ul li a {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.footer_M {
+    width: 820px;
+    height: 155px;
+    margin: 0 auto;
+    position: relative;
+}
+.logo1 {
+    position: absolute;
+    left: 145px;
+    top: 20px;
+}
+.footer_t {
+    width: 500px;
+    height: 78px;
+    line-height: 24px;
+    position: absolute;
+    left: 270px;
+    top: 40px;
+}
+.flexslider {
+    width: 1225px;
+    margin: 0 auto;
+}
+.organization_I li, .information_M li {
+    clear: both;
+}
+a {
+    text-decoration: none;
+}
+li a {
+    font-size: 14px;
+}
+li span {
+    font-size: 14px;
+}
+a:visited {
+    color: #000;
+}
+
+    </style>
+</head>
+<body style="width: 1225px; margin: 0 auto">
+    <form method="post" action="default-02l8n4Jmu^a.html?activeNum=0" id="form1" />
+        <div style="width: 1225px; margin: 0 auto;">
+            <div class="header">
+                <div class="logo">
+                    <a><img src="../image/logo1.jpg" /></a>
+                </div>
+                <div class="text">
+                    <h1>学生资助中心</h1>
+                </div>
+                <div class="header_R">
+                    <ul class="header_T">
+                        <li>
+                            <a href="../Student/stuLogin.jsp" target="_blank">学生</a>
+                            <span>|</span>
+                            <a href="http://xszz.bjmu.edu.cn/JC/OneLogin.aspx" target="_blank">老师</a>
+                            <span>|</span>
+                            <a href="http://xszz.bjmu.edu.cn/Sys/UserLogin.aspx" target="_blank"style="font-size: 14px">管理员</a>
+                        </li>
+                    </ul>
+                    <div class="search">
+                        <input type="text" name="" value="全网搜索" tooltip="请输入搜索内容" placeholder="搜 索" id="Edit" class="EditSearch" onkeypress="testEnter();" />
+                        <input type="button" onclick="checkZN()" value="搜 索" style="width: 50px; height: 25px; border: 0; position: absolute; z-index: 3; right: 0" />
+                    </div>
+                </div>
+            </div>
+            <div class="nav">
+                <ul id="Top_navigation">
+                    <li name='nav' style='background: url(../image/li_bf.png) no-repeat;'><a href='javascript:void(0)' onclick="ge();" style='color: #ffff00;'>首页</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="goo();">中心概况</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="goo();">勤工助学</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="goo();">助学金</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="goo();">助学贷款</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="goo();">办事指南</a></li>
+                </ul>
+            </div>
+            <div class="essay">
+                <div class="essaytext" >
+                    <div class="li">
+                        <a href="../../index.html">首页</a>
+                        <span>>>通知公告</span>
+                    </div>
+                    <div class="content">
+                        <h1>江西省学生资助政策简介</h1>
+                        <p class="start">实行国家资助政策以来，我省不断完善从学前教育至研究生教育的学生资助政策体系，实现了“三个全覆盖”，即各个教育阶段全覆盖、公办民办学校全覆盖、家庭经济困难学生全覆盖，在制度上保障了“不让一名学生因家庭经济困难而失学”。具体政策如下：</p> 
+                        <p class="title"><strong>学前教育——</strong></p> 
+                        <p><strong>1.</strong><strong>学前教育资助金 </strong>对象：符合入园年龄，在经县以上教育行政部门审批设立的公办、公办性质幼儿园及普惠性的民办幼儿园就读的家庭经济困难儿童、孤儿和残疾儿童等；标准：每人每年不低于500元，具体标准由各地根据当地实际情况制定。建档立卡家庭儿童在原有500元标准的基础上，新增1000元,即按每人每年1500元标准发放学前教育资助金。</p> 
+                        <p class="title"><strong>义务教育——</strong></p> 
+                        <p><strong>2.</strong><strong>义务教育免学杂费免教科书&nbsp;</strong>义务教育免学费对象：义务教育阶段所有在校学生；民办学校学生免除学杂费标准按照生均公用经费基准定额执行，年生均公用经费基准定额为：普通小学每生每年600元、普通初中每生每年800元。义务教育免费教科书对象：义务教育阶段所有在校学生；标准：小学每生每年90元，初中每生每年180元。</p> 
+                        <p><strong>3.</strong><strong>义务教育寄宿生生活补助 </strong>对象：小学、初中学校家庭经济困难寄宿学生；资助比率：平均资助面为寄宿生的30%（其中城市小学按10%执行）,特教学校寄宿生的100%；标准：小学每人每年1000元，初中每人每年1250元，特教学校在此基础上加200元。</p> 
+                        <p><strong>4.</strong><strong>义务教育</strong><strong>非寄宿生生活补助 </strong>对象：小学、初中学校建档立卡家庭学生以及非建档立卡家庭经济困难残疾学生、农村低保家庭学生、农村特困救助供养学生等四类家庭经济困难非寄宿生。标准：年生均补助标准为小学500元、初中625元。（2019年秋季学期开始实施）</p> 
+                        <p class="title"><strong>普通高中——</strong></p> 
+                        <p><strong>5.</strong><strong>普通高中国家助学金 </strong>对象：全日制普通高中学校（含民办普通高中学校）和完全中学的高中部在校学生中的家庭经济困难学生；资助比率：约占在校生人数的20%；标准：平均每生每年2000元，分为1500元、2000元、2500元三档。</p> 
+                        <p><strong>6.</strong><strong>普通高中建档立卡等家庭经济困难学生免学杂费 </strong>对象：普通高中在校在籍的建档立卡家庭经济困难学生、家庭经济困难残疾学生、农村低保家庭学生、农村特困救助供养学生；资助比率：资助对象的100%；标准：免学杂费标准按照省人民政府及价格、财政主管部门批准的学费标准执行（不含住宿费，即免学费）。对于公办普通高中就读的符合免学杂费政策条件的学生免收学杂费，标准按学校性质，从200元/年/生至800元/年/生不等。对在政府教育行政管理部门依法批准的民办普通高中就读的符合免学杂费政策条件的学生按照当地同类型公办普通高中免除学杂费标准给予补助。民办学校学杂费标准高于补助的部分，学校可以按规定继续向学生收取。</p> 
+                        <p><strong>7.</strong><strong>贫困家庭学生高考入学政府资助金 </strong>对象：面向全省当年考取全日制普通高等学校（含独立院校和民办高校）的江西籍家庭经济困难本、专科新生；资助比率：约占录取新生的10%；标准：每生一次性资助5000元。</p> 
+                        <p class="title"><strong>中等职业教育——</strong></p> 
+                        <p><strong>8.</strong><strong>中职国家助学金 </strong>对象：全日制一、二年级涉农专业和非涉农专业家庭经济困难学生，非涉农专业家庭经济困难学生按一、二年级在校生的15%确定；标准：每人每年2000元。</p> 
+                        <p><strong>9.</strong><strong>中职国家免学费 </strong>对象：全日制一、二、三年级农村学生（含县镇）、城市涉农专业学生及家庭经济困难学生（艺术类相关表演专业学生除外），城市家庭经济困难学生按在校城市学生的10%确定；标准：根据学生所学专业不同，从850元/年至4500元/年不等。</p> 
+                        <p class="title"><strong>普通高校——</strong></p> 
+                        <p><strong>10.</strong><strong>高校国家奖学金 </strong>对象：高校全日制普通本专科（含高职、第二学士学位）二年级（含）以上在校生中特别优秀的学生；标准：每人每年8000元。</p> 
+                        <p><strong>11.</strong><strong>高校国家励志奖学金 </strong>对象：高校全日制普通本专科（含高职、第二学士学位）二年级（含）以上在校生中品学兼优的家庭经济困难学生，按在校生的3%确定；标准：每人每年5000元。</p> 
+                        <p><strong>12.</strong><strong>高校国家助学金 </strong>对象：高校全日制普通本专科（含高职、第二学士学位）在校生中的家庭经济困难学生，按在校生的20%确定；标准：可分为三个档次，一档4000元、二档3000元、三档2000元，平均每人每年3000元。</p> 
+                        <p><strong>13.</strong><strong>服兵役高等学校学生国家教育资助 </strong>对象：对应征入伍服义务兵役、招收为士官、退役后复学或入学的高等学校学生，实行学费补偿、国家助学贷款代偿、学费减免。标准：学费补偿或国家助学贷款代偿金额，按学生实际缴纳的学费或获得的国家助学贷款（包括本金及其全部偿还之前产生的利息，下同）两者金额较高者执行；复学或新生入学后学费减免金额，按高等学校实际收取学费金额执行。本专科生每生每年最高不超过8000元，研究生每生每年最高不超过12000元。超出标准部分不予补偿、代偿或减免。</p> 
+                        <p><strong>14.</strong><strong>生源地信用助学贷款 </strong>对象：被全日制普通本科高校、高等职业学校和高等专科学校正式录取，取得真实、合法、有效的录取通知书的新生或高校在读的本专科学生、研究生和第二学士学生，做到“应贷尽贷”；标准：全日制普通本专科学生每年贷款额度不超过8000元，全日制研究生（含硕士研究生和博士研究生）每年贷款额度不超过12000元。</p> 
+                        <p class="title"><strong>研究生教育——</strong></p> 
+                        <p><strong>15.</strong><strong>研究生国家奖学金&nbsp;</strong>对象：普通高等学校中表现优异的全日制在读研究生，须具有中华人民共和国国籍；标准：硕士每生每年20000元，博士每生每年30000元。</p> 
+                        <p><strong>16.</strong><strong>研究生国家助学金 </strong>对象：普通高等学校纳入全国研究生招生计划的所有全日制研究生（有固定工资收入的除外），须具有中华人民共和国国籍；标准：硕士每生每年6000元，博士每生每年13000元。</p> 
+                        <p><strong>17.</strong><strong>江西省高等学校研究生学业奖学金 </strong>对象：在江西省高校入学的全国研究生招生计划内的全日制研究生，获得奖励的研究生须具有中华人民共和国国籍；标准：硕士每生每年8000元，博士每生每年10000元；比例：硕士40%，博士70%。</p> 
+                        <p><strong>18.</strong><strong>江西省政府研究生奖学金 </strong>对象：普通高等学校的全日制二年级以上（含二年级）在读研究生，休学、保留学籍及延期毕业研究生不参加当年政府奖学金评审；标准：硕士每生每年10000元，博士每生每年20000元；人数：硕士500人，博士25人。</p> 
+                        <p class="title"><strong>中国教育发展基金会项目</strong><strong>（社会资助）——</strong></p> 
+                        <p><strong>19.</strong><strong>高校新生入学资助金&nbsp;</strong>对象：用于普通高校家庭经济困难新生到校报到；标准：省内院校录取的新生每人500元，省外院校录取的新生每人1000元。</p> 
+                        <p><strong>20.</strong><strong>滋蕙计划 </strong>对象：普通高中在校在籍品学兼优的家庭经济困难学生，重点是建档立卡贫困家庭学生；标准：每人2000元。</p> 
+                        <p><strong>21.</strong><strong>励耕计划 </strong>对象：小学、初中、普通高中和中职学校在编在岗家庭经济特别困难教师；标准:每人1万元。</p> 
+                        <p class="vsbcontent_end"><strong>22.</strong><strong>润雨计划 </strong>对象：经县级以上（含县级）教育行政部门审批设立的各类普惠性幼儿园家庭经济特别困难教师；标准：每人1万元。</p>
+                    </div>
+                </div>
+                <div class="time">
+                    <p>九江学院</p>
+                    <p>2014-12-08</p>
+                </div>
+            </div>
+            <div class="footer" >
+                <div class="friendlink">
+                    <div class="friendlink_M">
+                        <ul id="Buttom_links">
+                            <li><span>友情链接：</span></li>
+                            <li><a title='' href='http://www.xszz.cee.edu.cn/' target='_blank'>全国学生资助管理中心</a></li>
+                            <li><a title='' href='http://jiangxi.gov.cn/' target='_blank'>江西省人民政府</a></li>
+                            <li><a title='' href='http://www.jxeea.cn/' target='_blank'>江西省教育考试院</a></li>
+                            <li><a title='' href='http://jje.jiujiang.gov.cn/' target='_blank'>九江教育网</a></li>
+                            <li><a title='' href='https://www.jju.edu.cn/' target='_blank'>九江学院</a></li>
+                        </ul>
+                    </div>
+                    <div class="cle"></div>
+                </div>
+                <div class="footer_M">
+                    <div class="logo1">
+                        <a href=""><img src="../image/logo2.jpg"  /></a>
+                    </div>
+                    <div class="footer_t">
+                        <p>沃兹·基德学生资助中心<span style="display: inline-block; width: 12%;"></span>技术支持：<a href=""
+                                                                                                          target="_blank">沃兹·基德科技有限公司</a></p>
+                        <p>
+                            地址：江西省九江市前进东路551号 &nbsp
+                            邮编：332005
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>   
+</body>
+</html>

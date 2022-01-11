@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+    <style>
+        #tchAdd{
+            border: 0;
+            background: url("../image/add2.png") 0 0 / 30px 30px no-repeat;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+        }
+        #tchAdd:active{
+            opacity: .3;
+        }
+    </style>
+</head>
+<body>
+<div class="modal fade" id="tchModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">新建教师</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="tch-teacherName" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="tch-teacherName"/>
+                        </div>
+                        <label for="tch-worknumber" class="col-sm-2 control-label">工号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="tch-worknumber">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tch-sex" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="tch-sex">
+                        </div>
+
+                        <label for="tch-telephone" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="tch-telephone">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h1>教师信息</h1>
+    </div>
+    <div class="btn-toolbar" role="toolbar" style="border:none;height: 80px;position: absolute;top: 40px;left: 1080px;">
+        <button id="tchAdd"></button>
+    </div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>工号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>联系电话</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="tchList">
+
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jq-paginator.js"></script>
+<script src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script>
+    var pageInfo = {"pageNum": 1, "pageSize": 5}
+    $(function () {
+        pageShow(1, true);
+
+        $("#tchAdd").click(function () {
+            $("#tchModal").modal("show")
+        })
+
+        $("#save").click(function(){
+            $.post("/admin?act=tchAdd",{
+                "teacherName":$("#tch-teacherName").val(),
+                "worknumber":$("#tch-worknumber").val(),
+                "sex":$("#tch-sex").val(),
+                "telephone":$("#tch-telephone").val()
+            },function(data){
+                if(!(JSON.parse(data).success)){
+                    alert("添加失败")
+                }else{
+                    $("#tchModal").modal("hide")
+                    pageShow(1,true)
+                }
+            })
+        })
+    })
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/admin?act=tchPage",
+            data: pageInfo,
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var $tbody = $("#tchList");
+                var html = "";
+                $tbody.html(html);
+                $.each(data.list, function (i, e) {
+                    html += "<tr>";
+                    html += "<td>" + e.worknumber + "</td>";
+                    html += "<td>" + e.teacherName + "</td>";
+                    html += "<td>" + e.sex + "</td>";
+                    html += "<td>" + e.telephone + "</td>";
+                    html +="<td><button class='b-delete' onclick='tchDel("+e.id+")'></button></td>";
+                    html += "</tr>";
+                })
+                $tbody.html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
+                }
+            }
+        })
+    }
+    function tchDel(id) {
+        if(confirm("确认删除?")) {
+            $.post("/admin?act=tchDel", {"id": id}, function (data) {
+                if (!(JSON.parse(data).success)) {
+                    alert("删除失败")
+                }else{
+                    pageShow(1,true)
+                }
+            })
+        }
+    }
+</script>
+
+</html>

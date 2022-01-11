@@ -2,14 +2,14 @@ body {
     margin: 0;
 }
 
-.stu_page_wrappers {
+.tch_page_wrappers {
     width: 100%;
     height: 100vh;
     min-width: 600px;
     min-height: 600px;
     overflow: auto;
     position: relative;
-    background: url(../../image/bg3.jpg) no-repeat;
+    background: url(../../image/xue5.png) no-repeat;
     background-size: 100% 1080px;
 }
 
@@ -30,7 +30,7 @@ body {
     display: block;
 }
 
-.stu_login_content .stu_login_left {
+.tch_login_content .tch_login_left {
     width: 50%;
     height: 287px;
     float: left;
@@ -38,7 +38,7 @@ body {
     display: none;
 }
 
-.stuLogin {
+.tchLogin {
     font-size: 20px;
     color: #000;
     padding-left: 35px;
@@ -48,7 +48,7 @@ body {
     margin-bottom: 14px;
 }
 
-.stuLogin:after {
+.tchLogin:after {
     content: '';
     width: 40px;
     height: 2px;
@@ -58,28 +58,28 @@ body {
     bottom: -10px;
 }
 
-.stu_tab {
+.tch_tab {
     width: 100%;
 }
 
-.stu_tab_content {
+.tch_tab_content {
     padding: 25px 35px 0 35px;
     /* background: rgba(255, 255, 255, .7); */
     /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5ffffff, endColorstr=#E5ffffff); */
     min-height: 205px;
 }
 
-.stu_tab_content_item {
+.tch_tab_content_item {
     position: relative;
 }
 
-.stu_tab_content_item p {
+.tch_tab_content_item p {
     position: relative;
     margin-top: 0;
     margin-bottom: 17px;
 }
 
-.stu_tab_content_item p label {
+.tch_tab_content_item p label {
     font-size: 12px;
     margin-left: 5px;
     color: #666666;
@@ -108,7 +108,7 @@ body {
     display: block;
 }
 
-.stu_input {
+.tch_input {
     border: none;
     border-bottom: 1px solid #ccc;
     padding: 10px 0px 6px 0;
@@ -119,11 +119,11 @@ body {
     background-color: rgba(255, 255, 255, .3);
 }
 
-.stu_input:focus {
+.tch_input:focus {
     outline: none;
 }
 
-.stu_login_btn {
+.tch_login_btn {
     color: #fff;
     padding: 6px 12px;
     font-size: 14px;
@@ -138,10 +138,9 @@ body {
     width: 100%;
     margin-top: 40px;
 }
-.stu_login_btn:active{
+.tch_login_btn:active{
     opacity: 0.3;
 }
-
 .primary {
     background-color: #017575;
     border-color: #017575;
@@ -157,7 +156,7 @@ body {
     display: block;
 }
 
-.stu_login_wjmm {
+.tch_login_wjmm {
     text-decoration: none;
     color: #017575;
     float: left;
@@ -173,16 +172,16 @@ body {
 }
 
 
-.stu_login_wjmm:hover {
+.tch_login_wjmm:hover {
     color: #017575;
 }
 
-.stu_login_wjmm small {
+.tch_login_wjmm small {
     font-size: 12px;
 }
 
 
-.stu_error {
+.tch_error {
     position: absolute;
     color: #ED5565;
     font-size: 12px;
@@ -195,7 +194,7 @@ body {
 }
 
 @media screen and (min-width: 1001px) {
-    .stu_login_content {
+    .tch_login_content {
         width: 56%;
         margin: 7% auto 0;
         background: rgba(255, 255, 255, .8);
@@ -205,7 +204,7 @@ body {
         overflow: hidden;
     }
 
-    .stu_login_right {
+    .tch_login_right {
         width: 42%;
         float: right;
         position: relative;
@@ -213,7 +212,7 @@ body {
 }
 
 @media screen and (max-width: 1000px) {
-    .stu_login_content {
+    .tch_login_content {
         width: 339px;
         margin: 7% auto 0;
         background: rgba(255, 255, 255, .8);
@@ -226,7 +225,7 @@ body {
         display: none !important;
     }
 
-    .stu_login_right {
+    .tch_login_right {
         width: 100%;
         float: right;
         position: relative;
@@ -236,7 +235,7 @@ body {
         display: none !important;
     }
 
-    .stu_tab_content {
+    .tch_tab_content {
         padding-bottom: 20px;
     }
 

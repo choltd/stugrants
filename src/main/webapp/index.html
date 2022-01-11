@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>学生资助管理系统</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <style>
+        .active{
+            background:url("static/image/li_bf.png");
+            color:#ffff00;
+        }
+    </style>
+</head>
+
+<body style="width: 1225px; margin: 0 auto">
+    <form method="post" id="form1">
+        <div style="width: 1225px; margin: 0 auto;">
+            <div class="header">
+                <div class="logo">
+                    <a><img src="static/image/logo1.png" /></a>
+                </div>
+                <div class="text">
+                    <h1>学生资助中心</h1>
+                </div>
+                <div class="header_R">
+                    <ul class="header_T">
+                        <li>
+                            <a href="static/Student/stuLogin.html" target="_blank">学生</a>
+                            <span>|</span>
+                            <a href="static/teacher/tchLogin.html" target="_blank">老师</a>
+                            <span>|</span>
+                            <a href="static/admin/signin.html" target="_blank" style="font-size: 14px">管理员</a>
+                        </li>
+                    </ul>
+                    <div class="search">
+                        <input type="text" placeholder="全网搜索" id="Edit"
+                            class="EditSearch" />
+                        <input type="button" id="query" value="搜 索"
+                            style="width: 50px; height: 25px; border: 0; position: absolute; z-index: 3; right: 0" />
+                    </div>
+                </div>
+            </div>
+            <div class="nav">
+                <ul id="Top_navigation">
+                    <li name='nav'><a class="active" style="color: #ffff00;" href='static/html/iframe.html' target="workframe" onclick="front();">首页</a></li>
+                    <li name='nav'><a href='static/html/center.html' target="workframe" onclick="front();">中心概况</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="bulid();">勤工助学</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="bulid();">助学金</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="bulid();">助学贷款</a></li>
+                    <li name='nav'><a href='javascript:void(0)' onclick="bulid();">办事指南</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="rpcontent">
+            <p>·正在努力建设中</p>
+            <img src="static/image/passnot.png" style="position: relative;top: 40px;"/>
+        </div>
+        <div id="workframe" style="min-height:1100px; width: 100%">
+            <iframe name="workframe" style="height: 1230px;width: 100%;border: none" href="static/html/iframe.html"></iframe>
+        </div>
+        <div class="footer">
+            <div class="friendlink">
+                <div class="friendlink_M">
+                    <ul id="Buttom_links">
+                        <li><span>友情链接：</span></li>
+                        <li><a title='' href='http://www.xszz.cee.edu.cn/' target='_blank'>全国学生资助管理中心</a></li>
+                        <li><a title='' href='http://jiangxi.gov.cn/' target='_blank'>江西省人民政府</a></li>
+                        <li><a title='' href='http://www.jxeea.cn/' target='_blank'>江西省教育考试院</a></li>
+                        <li><a title='' href='http://jje.jiujiang.gov.cn/' target='_blank'>九江教育网</a></li>
+                        <li><a title='' href='https://www.jju.edu.cn/' target='_blank'>九江学院</a></li>
+                    </ul>
+                </div>
+                <div class="cle"></div>
+            </div>
+            <div class="footer_M">
+                <div class="logo1">
+                    <a href=""><img src="static/image/logo2.png" /></a>
+                </div>
+                <div class="footer_t">
+                    <p>沃兹·基德学生资助中心<span style="display: inline-block; width: 12%;"></span>技术支持：<a href=""
+                            target="_blank">沃兹·基德科技有限公司</a></p>
+                    <p>
+                        地址：江西省九江市前进东路551号 &nbsp
+                        邮编：332005
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</body>
+<script src="static/js/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        window.open("static/html/iframe.html","workframe")
+
+        $("#Top_navigation li a").each(function(index){
+            $(this).click(function(){
+                $("#Top_navigation li a").removeClass("active").css("color","white")
+                $("#Top_navigation li a").eq(index).addClass("active").css("color","#ffff00")
+            });
+        });
+        front = function () {
+            $("#rpcontent").css("display", "none")
+            $("#workframe").css("display", "block")
+        }
+        bulid = function () {
+            $("#workframe").css("display", "none")
+            $("#rpcontent").css("display", "block")
+        }
+
+        $("#query").click(function (){
+            var val = $("#Edit").val();
+            if(val != ""){
+                location.href = "https://www.baidu.com/s?wd=" + val
+            }
+        })
+        $("#Edit").focus(function () {
+            $("#Edit").attr("placeholder","")
+        })
+        $("#Edit").blur(function(){
+            $("#Edit").attr("placeholder","全网搜索")
+        })
+    })
+</script>
+</html>

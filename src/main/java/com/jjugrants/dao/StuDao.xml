@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjugrants.dao.StuDao">
+    <select id="query" resultType="com.jjugrants.vo.StudentVo">
+        select s.student_id,
+               s.name,
+               s.sequence,
+               s.sex,
+               s.idcard,
+               s.banknumber,
+               s.telephone,
+               s.year,
+               sc.teacher_id,
+               sc.classname,
+               sc.major,
+               sc.college
+        from student s
+                 join stuclass sc on s.stuclass_id = sc.stuclass_id
+        where sequence = #{sequence}
+          and password = #{password}
+    </select>
+    <select id="count" resultType="map">
+        select count(*) as value
+        from student
+    </select>
+    <select id="applyCount" resultType="map">
+        select count(*) as value
+        from apply
+    </select>
+    <select id="stuPage" resultType="student">
+        select *
+        from student
+        order by student_id limit #{startIndex}, #{pageSize}
+    </select>
+
+    <insert id="applyAdd">
+        insert into apply(student_id, illustrate, time, remark)
+        values (#{studentId}, #{illustrate}, #{time}, #{remark})
+    </insert>
+
+    <select id="viewApplyPage" resultType="viewApply">
+        select *
+        from viewapply
+        where sequence = #{sq} limit #{va.startIndex}
+            , #{va.pageSize}
+    </select>
+
+    <select id="examine" resultType="integer">
+        select count(*) from examine where apply_id=#{id}
+    </select>
+    <delete id="examineDel">
+        delete
+        from examine
+        where apply_id = #{id}
+    </delete>
+
+    <delete id="applyDel">
+        delete
+        from apply
+        where apply_id = #{id}
+    </delete>
+
+    <select id="getApply" resultType="viewApply">
+        select *
+        from viewapply
+        where apply_id = #{id}
+    </select>
+
+    <update id="update">
+        update apply
+        set illustrate=#{illustrate},
+            time=#{time},
+            remark=#{remark}
+        where apply_id = #{applyId}
+    </update>
+
+    <select id="subsidizeCount" resultType="map">
+        select count(*) as value
+        from subsidize
+    </select>
+
+    <select id="viewResultPage" resultType="viewresult">
+        select *
+        from viewresult
+        order by subsidize_id limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="verify" resultType="integer">
+        select count(*)
+        from student
+        where student_id = #{id}
+          and password = #{pwd};
+    </select>
+    <update id="pwdUpdate">
+        update student
+        set password=#{chg}
+        where student_id = #{id}
+    </update>
+
+    <delete id="stuDel">
+        delete
+        from student
+        where student_id = #{id}
+    </delete>
+
+    <select id="vaCount" resultType="map">
+        select count(*) as value
+        from viewApply
+        where sequence =#{sequence}
+    </select>
+
+    <select id="applyCountTeacherId" resultType="map">
+        select count(*) as value
+        from apply
+        where student_id in (select student_id from stuclass sc join student s on s.stuclass_id=sc.stuclass_id where teacher_id=#{teacherId})
+    </select>
+
+    <select id="classname" resultType="stuclass">
+        select *
+        from stuclass
+    </select>
+    <insert id="stuAdd">
+        insert into student(stuclass_id, name, sequence, sex, telephone, idcard, banknumber, year, password)
+        values (#{stuclassId}, #{name}, #{sequence}, #{sex}, #{telephone}, #{idcard}, #{banknumber}, #{year},
+                #{password})
+    </insert>
+    <select id="applyCount1" resultType="integer">
+        select count(*)
+        from apply
+    </select>
+    <select id="examineCount1" resultType="integer">
+        select count(*)
+        from examine
+    </select>
+
+    <select id="applyCount2" resultType="integer">
+        select count(*) from apply where apply_id=#{id}
+    </select>
+
+    <select id="getApplyId" resultType="integer">
+        select apply_id from apply where student_id=#{id}
+    </select>
+</mapper>
+
+
+
+
+

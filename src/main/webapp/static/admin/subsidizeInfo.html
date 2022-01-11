@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h1>资助信息</h1>
+    </div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>学生学号</td>
+                <td>学生姓名</td>
+                <td>教师工号</td>
+                <td>教师姓名</td>
+                <td>通过</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="subsidizeList">
+
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jq-paginator.js"></script>
+<script src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script>
+    var pageInfo = {"pageNum": 1, "pageSize": 5}
+    $(function () {
+        pageShow(1, true);
+    })
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/admin?act=vrPage",
+            data: pageInfo,
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var $tbody = $("#subsidizeList");
+                var html = "";
+                $tbody.html(html);
+                $.each(data.list, function (i, e) {
+                    html += "<tr>";
+                    html += "<td>" + e.sequence + "</td>";
+                    html += "<td>" + e.studentName + "</td>";
+                    html += "<td>" + e.worknumber + "</td>";
+                    html += "<td>" + e.teacherName + "</td>";
+                    html += "<td>" + e.state + "</td>";
+                    html +="<td><button class='b-delete' onclick='subsidizeDel("+e.examineId+")'></button></td>";
+                    html += "</tr>";
+                })
+                $tbody.html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
+                }
+            }
+        })
+    }
+
+    function subsidizeDel(id) {
+        if(confirm("确认删除?")) {
+            $.post("/admin?act=subsidizeDel", {"examineId": id}, function (data) {
+                if (!(JSON.parse(data).success)) {
+                    alert("删除失败")
+                }else {
+                    pageShow(1,true)
+                }
+            })
+        }
+    }
+</script>
+
+</html>

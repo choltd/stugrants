@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css"
+          rel="stylesheet"/>
+    <title></title>
+</head>
+<body>
+
+<!-- 申请资助的模态窗口 -->
+<div class="modal fade" id="applyModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">申请资助</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="apply-name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-name"/>
+                        </div>
+                        <label for="apply-sequence" class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-sequence">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apply-sex" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-sex">
+                        </div>
+
+                        <label for="apply-telephone" class="col-sm-2 control-label">联系电话</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-telephone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apply-idcard" class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-idcard">
+                        </div>
+
+                        <label for="apply-banknumber" class="col-sm-2 control-label">银行卡号</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-banknumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apply-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control" id="apply-year">
+                        </div>
+                        <label for="apply-time" class="col-sm-2 control-label">提交时间</label>
+                        <div class="col-sm-10" style="width: 200px;">
+                            <input type="text" class="form-control time" id="apply-time">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apply-illustrate" class="col-sm-2 control-label">申请理由</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="apply-illustrate"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apply-remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10" style="width: 70.5%;">
+                            <textarea class="form-control" rows="3" id="apply-remark"></textarea>
+                        </div>
+                    </div>
+                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="save">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改申请的模态窗口 -->
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 72%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">申请资助</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="edit-name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-name">
+
+                            </input>
+                        </div>
+                        <label for="edit-sequence" class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-sequence">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-sex" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-sex">
+                        </div>
+
+                        <label for="edit-telephone" class="col-sm-2 control-label">联系电话</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-telephone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-idcard" class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-idcard">
+                        </div>
+
+                        <label for="edit-banknumber" class="col-sm-2 control-label">银行卡号</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-banknumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-year" class="col-sm-2 control-label">学年</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control" id="edit-year">
+                        </div>
+                        <label for="edit-time" class="col-sm-2 control-label">提交时间</label>
+                        <div class="col-sm-10" style="width:  250px;">
+                            <input type="text" class="form-control time" id="edit-time">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-illustrate" class="col-sm-2 control-label">申请理由</label>
+                        <div class="col-sm-10" style="width: 72%;">
+                            <textarea class="form-control" rows="3" id="edit-illustrate"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10" style="width: 72%;">
+                            <textarea class="form-control" rows="3" id="edit-remark"></textarea>
+                        </div>
+                    </div>
+                    <!--                    <div style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top : 10px;"></div>                   -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="update">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 大标题 -->
+<div >
+    <div class="page-header">
+        <h3 style="margin-left: 50px;">申请记录</h3>
+    </div>
+    <div style="position: relative; height: 0; width: 250px;  top: -72px; left: 920px;">
+    </div>
+</div>
+
+<div style="position: relative; top: -20px; left: 0; width: 100%; height: 100%;">
+    <div style="width: 100%; position: absolute;top: 5px;">
+        <div class="btn-toolbar" role="toolbar"
+             style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
+            <div class="btn-group" style="position: relative; top: 18%;margin-left: 25px">
+                <button type="button" class="btn btn-primary" id="applyAdd">
+                    <span class="glyphicon glyphicon-plus"></span> 创建
+                </button>
+                <button type="button" class="btn btn-default" id="applyEdit"><span
+                        class="glyphicon glyphicon-pencil"></span> 修改
+                </button>
+            </div>
+
+        </div>
+        <div style="position: relative;top: 10px;">
+            <table class="table table-hover">
+                <thead>
+                <tr style="color: #B3B3B3;">
+                    <td><input type="checkbox" id="qx"/></td>
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>电话</td>
+                    <td>提交时间</td>
+                </tr>
+                </thead>
+                <tbody id="applyList">
+
+                </tbody>
+            </table>
+            <ul class="pagination" id="pagination" style="cursor: pointer;margin-left: 25px">
+
+            </ul>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hd-applyId">
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+        src="../bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="../js/jq-paginator.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    var pageInfo = {"pageNum": 1, "pageSize": 5}
+    $(function () {
+        $(".time").datetimepicker({
+            minView: "month",
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "bottom-right"
+        });
+
+        $("#qx").click(function () {
+            $("input[name=xz]").prop("checked", this.checked);
+        })
+        $("#applyList").on("click", $("input[name=xz]"), function () {
+            $("#qx").prop("checked", $("input[name=xz]").length === $("input[name=xz]:checked").length);
+        })
+
+        pageShow(1, true);
+
+        $("#applyAdd").click(function () {
+            $("#applyModal").modal("show")
+            $("#apply-name").val(stuInfo().name)
+            $("#apply-sequence").val(stuInfo().sequence)
+            $("#apply-sex").val(stuInfo().sex)
+            $("#apply-telephone").val(stuInfo().telephone)
+            $("#apply-idcard").val(stuInfo().idcard)
+            $("#apply-banknumber").val(stuInfo().banknumber)
+            $("#apply-year").val(stuInfo().year)
+            $("#apply-illustrate").val(stuInfo().illustrate)
+        });
+
+        $("#save").click(function () {
+            if (applyAdd({
+                "studentId": stuInfo().studentId,
+                "illustrate": $("#apply-illustrate").val(),
+                "remark": $("#apply-remark").val()
+            })) {
+                $("#applyModal").modal("hide")
+                $("#apply-time").val("")
+                $("#apply-illustrate").val("")
+                $("#apply-remark").val("")
+                pageShow(1, false)
+            } else {
+                alert("失败")
+            }
+        });
+
+
+        $("#applyEdit").click(function () {
+            var $xz = $("input[name=xz]:checked")
+            if ($xz.length < 1) {
+                alert("请选择要修改项")
+            } else if ($xz.length > 1) {
+                alert("只能同时修改一项")
+            } else {
+                $.get("/stu?action=applyEdit", {"applyId": $xz.val()}, function (data) {
+                    $("#hd-applyId").val(data.applyId)
+                    $("#edit-name").val(data.name)
+                    $("#edit-sequence").val(data.sequence)
+                    $("#edit-sex").val(data.sex)
+                    $("#edit-idcard").val(data.idcard)
+                    $("#edit-telephone").val(data.telephone)
+                    $("#edit-banknumber").val(data.banknumber)
+                    $("#edit-illustrate").val(data.illustrate)
+                    $("#edit-year").val(data.year)
+                    $("#edit-time").val(convert(data.time))
+                    $("#edit-remark").val(data.remark)
+                    $("#editModal").modal("show")
+                })
+
+            }
+        })
+
+        $("#update").click(function () {
+            $.post("/stu?action=update", {
+                "applyId": $("#hd-applyId").val(),
+                "illustrate": $("#edit-illustrate").val(),
+                "remark": $("#edit-remark").val(),
+                "time": $("#edit-time").val()
+            }, function (data) {
+                if (!(JSON.parse(data)).success) {
+                    alert("更新失败")
+                } else {
+                    $("#editModal").modal("hide")
+                    pageShow(1, false)
+                }
+            })
+        })
+    });
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/stu?action=viewApplyPage",
+            data: {"pageNum":pageInfo.pageNum,"pageSize":pageInfo.pageSize,"sequence":stuInfo().sequence},
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var html = "";
+                $("#applyList").html(html);
+                $.each(data.list, function (i, e) {
+                    html += '<tr class="active">';
+                    html += '<td><input type="checkbox" name="xz" value="' + e.applyId + '"/></td>';
+                    html += '<td>' + e.sequence + '</td>';
+                    html += '<td>' + e.name + '</td>';
+                    html += '<td>' + e.telephone + '</td>';
+                    html += '<td>' + convert(e.time) + '</td>';
+                    html += '</tr>';
+                })
+                $("#applyList").html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

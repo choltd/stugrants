@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <title></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="head" style="margin: 30px 20px;">
+        <h3>审核信息</h3>
+    </div>
+    <div style="position: relative; height: 30px; width: 250px;  top: -72px; left: 920px;"></div>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>学号</td>
+                <td>学生姓名</td>
+                <td>学生电话</td>
+                <td>教师工号</td>
+                <td>教师姓名</td>
+                <td>教师电话</td>
+                <td>审核结果</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="examineList">
+
+            </tbody>
+        </table>
+        <ul class="pagination" id="pagination" style="cursor: pointer">
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jq-paginator.js"></script>
+<script src="../bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script>
+    var pageInfo = {"pageNum":1,"pageSize":5}
+    $(function(){
+        pageShow(1,true)
+    })
+
+    function pageShow(num, isFirst) {
+        pageInfo.pageNum = num;
+        $.ajax({
+            url: "/admin?act=examinePage",
+            data: pageInfo,
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var html = "";
+                $("#examineList").html(html);
+                $.each(data.list, function (i, e) {
+                    html += '<tr className="active">';
+                    html += '<td>' + e.sequence + '</td>';
+                    html += '<td>' + e.studentName + '</td>';
+                    html += '<td>' + e.studentTelephone + '</td>';
+                    html += '<td>' + e.worknumber + '</td>';
+                    html += '<td>' + e.teacherName + '</td>';
+                    html += '<td>' + e.teacherTelephone + '</td>';
+                    html += '<td>' + e.state + '</td>'
+                    html += '<td><button class="b-delete" onclick="examineDel('+e.examineId+')"></button></td>';
+                    html += '</tr>';
+                })
+                $("#examineList").html(html);
+                if (isFirst) {
+                    pagination("#pagination", data);
+                }else if(data.list.length < 1){
+                    $("#pagination").html("")
+                }
+            }
+        })
+    }
+
+    function examineDel(id){
+        if(confirm("确认删除")) {
+            $.post("/admin?act=examineDel", {"id": id}, function (data) {
+                if (!(JSON.parse(data).success)) {
+                    alert("删除失败")
+                }else{
+                    pageShow(1,true)
+                }
+            })
+        }
+    }
+</script>
+</html>
