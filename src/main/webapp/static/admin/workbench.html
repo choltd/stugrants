@@ -89,7 +89,7 @@
 
     function getCharts() {
         $.ajax({
-            url: "/admin?act=getCharts",
+            url: "admin/getCharts",
             dataType: "json",
             type: "get",
             success: function (data) {
@@ -173,7 +173,7 @@
     }
 
     function tips() {
-        $.get("/admin?act=tips", function (data) {
+        $.get("admin/tips", function (data) {
             var html = "";
             $("#info").html(html)
             $.each(data, function (i, e) {

@@ -28,7 +28,7 @@ function sign() {
         $("#passwordError").text("请输入密码").css("display", "block");
     } else{
         $.ajax({
-            url:"/stu?action=login",
+            url:"stu/login",
             data:{"account":$("#account").val(),"password":$("#password").val()},
             dataType:"json",
             type:"post",

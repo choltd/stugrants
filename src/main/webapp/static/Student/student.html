@@ -185,7 +185,7 @@
             } else if (edit !== confirm || edit === "" || confirm === "") {
                 alert("两次输入密码不一致")
             } else {
-                $.post("/stu?action=pwdUpdate", {"studentId": stu.studentId, "password": old, "change": confirm}, function (data) {
+                $.post("stu/pwdUpdate", {_method:"put","studentId": stu.studentId, "password": old, "change": confirm}, function (data) {
                     if ((JSON.parse(data)).success) {
                         alert("修改成功")
                         location.href = "stuLogin.html"

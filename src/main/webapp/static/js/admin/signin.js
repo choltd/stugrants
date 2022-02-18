@@ -55,7 +55,7 @@ $(function () {
         $signin.css({"left": "44%", "top": "40%"});
         $signin.attr("id", "active");
         $.ajax({
-            url: "/admin?act=login",
+            url: "admin/login",
             data: {
                 "account": $("#account").val(),
                 "password": $("#password").val()

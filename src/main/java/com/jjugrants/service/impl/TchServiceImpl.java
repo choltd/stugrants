@@ -4,15 +4,22 @@ import com.jjugrants.dao.StuDao;
 import com.jjugrants.dao.TchDao;
 import com.jjugrants.domain.*;
 import com.jjugrants.service.TchService;
+import com.jjugrants.utils.DateTimeUtil;
 import com.jjugrants.utils.SqlSessionUtil;
 import com.jjugrants.vo.TeacherVo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class TchServiceImpl implements TchService {
-    private final TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
-    private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
+    @Resource
+    private TchDao tchDao;
+    @Resource
+    private StuDao stuDao;
 
     @Override
     public TeacherVo query(Teacher teacher) {
@@ -79,11 +86,15 @@ public class TchServiceImpl implements TchService {
 
     @Override
     public boolean applyFail(Examine examine) {
+        examine.setTime(DateTimeUtil.getTimestamp());
+        examine.setState("否");
         return tchDao.applyFail(examine) == 1;
     }
 
     @Override
     public boolean examine(Examine examine) {
+        examine.setTime(DateTimeUtil.getTimestamp());
+        examine.setState("是");
         return tchDao.examine(examine) == 1;
     }
 
@@ -92,6 +103,7 @@ public class TchServiceImpl implements TchService {
         return tchDao.searchClassname(classname);
     }
 
+    @Transactional
     @Override
     public boolean pwdUpdate(String teacherId, String password, String change) {
         if (tchDao.verify(teacherId, password) == 1) {

@@ -10,6 +10,8 @@ import com.jjugrants.service.impl.TchServiceImpl;
 import com.jjugrants.utils.DateTimeUtil;
 import com.jjugrants.utils.PrintJson;
 import com.jjugrants.utils.ServiceFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.annotation.WebServlet;
@@ -20,173 +22,99 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/admin")
-public class AdminCtrl extends HttpServlet {
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) {
-        String action = req.getParameter("act");
-        Method method = null;
-        try {
-            method = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
-            method.setAccessible(true);
-            method.invoke(this, req, resp);//调用方法
-        } catch (Exception e) {
-            e.printStackTrace();
+@RestController
+@RequestMapping("/admin")
+public class AdminCtrl {
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private StuService stuService;
+    @Autowired
+    private TchService tchService;
+
+    @GetMapping("/login")
+    private boolean login(Admin admin, HttpServletRequest req) {
+        if (adminService.login(admin) != null) {
+            req.getSession().setAttribute("LOGIN", "1");
+            return true;
+        } else {
+            return false;
         }
     }
 
-    private void login(HttpServletRequest req, HttpServletResponse resp) {
-        String account = req.getParameter("account");
-        String password = req.getParameter("password");
-        Admin admin = new Admin();
-        admin.setAccount(account);
-        admin.setPassword(password);
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        Admin admin1 =  adminService.login(admin);
-        req.getSession().setAttribute("admin",admin1);
-        PrintJson.printJsonObj(resp,admin1);
+    @GetMapping("/getCharts")
+    private Map<String, Object> getCharts() {
+        return adminService.getCharts();
     }
 
-    private void getCharts(HttpServletRequest request, HttpServletResponse response){
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        Map<String, Object> map = adminService.getCharts();
-        PrintJson.printJsonObj(response, map);
+    @GetMapping("/stuPage")
+    private PageBean<Student> stuPage(PageBean<Student> pageBean) throws Exception {
+        return stuService.queryList(pageBean);
     }
 
-    private void stuPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String pageNum = request.getParameter("pageNum");
-        String pageSize = request.getParameter("pageSize");
-        PageBean<Student> pageBean = new PageBean<>();
-        pageBean.setPageNum(Integer.parseInt(pageNum));
-        pageBean.setPageSize(Integer.parseInt(pageSize));
-        StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        PageBean<Student> studentPageBean = stuService.queryList(pageBean);
-        PrintJson.printJsonObj(response, studentPageBean);
-    }
-
-    private void stuDel(HttpServletRequest request, HttpServletResponse response){
-        StuService stuService = (StuService) ServiceFactory.getService(new StuServiceImpl());
-        boolean flag = stuService.stuDel(request.getParameter("studentId"));
-        PrintJson.printJsonFlag(response, flag);
-    }
-
-    private void tchPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String pageNum = request.getParameter("pageNum");
-        String pageSize = request.getParameter("pageSize");
-        PageBean<Teacher> pageBean = new PageBean<>();
-        pageBean.setPageNum(Integer.parseInt(pageNum));
-        pageBean.setPageSize(Integer.parseInt(pageSize));
-        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
-        PageBean<Teacher> teacherPageBean = tchService.queryList(pageBean);
-        PrintJson.printJsonObj(response, teacherPageBean);
-    }
-
-    private void tchDel(HttpServletRequest request, HttpServletResponse response){
-        TchService tchService = (TchService) ServiceFactory.getService(new TchServiceImpl());
-        boolean flag = tchService.tchDel(request.getParameter("id"));
-        PrintJson.printJsonFlag(response, flag);
-    }
-
-    private void examinePage(HttpServletRequest request, HttpServletResponse response){
-        String pageSize = request.getParameter("pageSize");
-        String pageNum = request.getParameter("pageNum");
-        PageBean<ViewResult> vePageBean = new PageBean<>();
-        vePageBean.setPageSize(Integer.parseInt(pageSize));
-        vePageBean.setPageNum(Integer.parseInt(pageNum));
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        PageBean<ViewResult> examinePageBean = adminService.examinePage(vePageBean);
-        PrintJson.printJsonObj(response,examinePageBean);
-    }
-
-    private void examineDel(HttpServletRequest request, HttpServletResponse response){
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.examineDel(request.getParameter("id"));
-        PrintJson.printJsonFlag(response,flag);
-    }
-
-    private void vrPage(HttpServletRequest request, HttpServletResponse response){
-        String pageSize = request.getParameter("pageSize");
-        String pageNum = request.getParameter("pageNum");
-        PageBean<ViewResult> pageBean = new PageBean<>();
-        pageBean.setPageNum(Integer.parseInt(pageNum));
-        pageBean.setPageSize(Integer.parseInt(pageSize));
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        PageBean<ViewResult> vrPageBean = adminService.vrPage(pageBean);
-        PrintJson.printJsonObj(response,vrPageBean);
-    }
-
-    private void subsidizeDel(HttpServletRequest request, HttpServletResponse response){
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.subsidizeDel(request.getParameter("examineId"));
-        PrintJson.printJsonFlag(response,flag);
-    }
-
-    private void viewApplyPage(HttpServletRequest request, HttpServletResponse response){
-        String pageNum = request.getParameter("pageNum");
-        String pageSize = request.getParameter("pageSize");
-        PageBean<ViewApply> vaPageBean = new PageBean<>();
-        vaPageBean.setPageSize(Integer.parseInt(pageSize));
-        vaPageBean.setPageNum(Integer.parseInt(pageNum));
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        PageBean<ViewApply> pageBean = adminService.vaPage(vaPageBean);
-        PrintJson.printJsonObj(response,pageBean);
-    }
-
-    private void tips(HttpServletRequest request, HttpServletResponse response){
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        List<Tips> tips = adminService.tips();
-        PrintJson.printJsonObj(response, tips);
+    @DeleteMapping("/stuDel")
+    private boolean stuDel(String studentId) {
+        return stuService.stuDel(studentId);
 
     }
 
-    private void applyAdd(HttpServletRequest request, HttpServletResponse response){
-        Apply apply = new Apply();
-        apply.setIllustrate(request.getParameter("illustrate"));
-        apply.setTime(DateTimeUtil.getTimestamp());
-        apply.setRemark(request.getParameter("remark"));
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.applyAdd(apply,request.getParameter("sequence"));
-        PrintJson.printJsonFlag(response,flag);
-    }
-    private void pwdUpdate(HttpServletRequest request, HttpServletResponse response){
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.pwdUpdate(request.getParameter("adminId"),request.getParameter("password"),request.getParameter("change"));
-        PrintJson.printJsonFlag(response,flag);
+    @GetMapping("/tchPage")
+    private PageBean<Teacher> tchPage(PageBean<Teacher> pageBean) throws Exception {
+        return tchService.queryList(pageBean);
     }
 
-    private void classname(HttpServletRequest request, HttpServletResponse response){
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        List<Stuclass> stuclasses = adminService.classname();
-        PrintJson.printJsonObj(response,stuclasses);
-
-    }
-    private void stuAdd(HttpServletRequest request, HttpServletResponse response){
-        Student student = new Student();
-        student.setSequence(request.getParameter("sequence"));
-        student.setName(request.getParameter("name"));
-        student.setIdcard(request.getParameter("idcard"));
-        student.setBanknumber(request.getParameter("banknumber"));
-        student.setSex(request.getParameter("sex"));
-        student.setYear(request.getParameter("year"));
-        student.setTelephone(request.getParameter("telephone"));
-        student.setStuclassId(Integer.parseInt(request.getParameter("stuclassId")));
-        student.setPassword(request.getParameter("idcard").substring(12));
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.stuAdd(student);
-        PrintJson.printJsonFlag(response,flag);
+    @DeleteMapping("/tchDel")
+    private boolean tchDel(String id) {
+        return tchService.tchDel(id);
     }
 
-    private void tchAdd(HttpServletRequest request, HttpServletResponse response){
-        Teacher teacher = new Teacher();
-        teacher.setTeacherName(request.getParameter("teacherName"));
-        teacher.setSex(request.getParameter("sex"));
-        teacher.setTelephone(request.getParameter("telephone"));
-        teacher.setWorknumber(request.getParameter("worknumber"));
-        teacher.setPassword("123456");
-        AdminService adminService = (AdminService) ServiceFactory.getService(new AdminServiceImpl());
-        boolean flag = adminService.tchAdd(teacher);
-        PrintJson.printJsonFlag(response,flag);
-
+    @GetMapping("/examinePage")
+    private PageBean<ViewResult> examinePage(PageBean<ViewResult> pageBean) {
+        return adminService.examinePage(pageBean);
     }
 
+    @DeleteMapping("/examineDel")
+    private boolean examineDel(String id) {
+        return adminService.examineDel(id);
+    }
+
+    @GetMapping("/vrPage")
+    private PageBean<ViewResult> vrPage(PageBean<ViewResult> pageBean) {
+        return adminService.vrPage(pageBean);
+    }
+
+    @DeleteMapping("/subsidizeDel")
+    private boolean subsidizeDel(String examineId) {
+        return adminService.subsidizeDel(examineId);
+    }
+
+    @GetMapping("/vaPage")
+    private PageBean<ViewApply> viewApplyPage(PageBean<ViewApply> pageBean) {
+        return adminService.vaPage(pageBean);
+    }
+
+    @GetMapping("/tips")
+    private List<Tips> tips() {
+        return adminService.tips();
+    }
+
+    @PutMapping("/pwdUpdate")
+    private boolean pwdUpdate(String adminId, String password, String change) {
+        return adminService.pwdUpdate(adminId, password, change);
+    }
+
+    @GetMapping("/classname")
+    private List<Stuclass> classname() {
+        return adminService.classname();
+    }
+
+    @PostMapping("/stuAdd")
+    private boolean stuAdd(Student student) {
+        return adminService.stuAdd(student);
+    }
+
+    @PostMapping("/tchAdd")
+    private boolean tchAdd(Teacher teacher) {
+        return adminService.tchAdd(teacher);
+    }
 }

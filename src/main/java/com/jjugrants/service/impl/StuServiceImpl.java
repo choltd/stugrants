@@ -3,14 +3,20 @@ package com.jjugrants.service.impl;
 import com.jjugrants.dao.StuDao;
 import com.jjugrants.domain.*;
 import com.jjugrants.service.StuService;
-import com.jjugrants.utils.SqlSessionUtil;
+import com.jjugrants.utils.DateTimeUtil;
 import com.jjugrants.vo.StudentVo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class StuServiceImpl implements StuService {
-    private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
+    @Resource
+    private StuDao stuDao;
 
     @Override
     public StudentVo query(Student student) {
@@ -34,6 +40,8 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public boolean applydAdd(Apply apply) {
+        Timestamp timestamp = DateTimeUtil.getTimestamp();
+        apply.setTime(timestamp);
         return stuDao.applyAdd(apply) == 1;
     }
 
@@ -52,6 +60,7 @@ public class StuServiceImpl implements StuService {
         return pageBean;
     }
 
+    @Transactional
     @Override
     public boolean applyDel(String id) {
         if(stuDao.examine(id) == 1){
@@ -67,6 +76,7 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public boolean update(Apply apply) {
+        apply.setTime(DateTimeUtil.getTimestamp());
         return stuDao.update(apply) == 1;
     }
 
@@ -90,6 +100,7 @@ public class StuServiceImpl implements StuService {
         return pageBean;
     }
 
+    @Transactional
     @Override
     public boolean pwdUpdate(String id, String password, String change) {
         if (stuDao.verify(id, password) == 1) {
@@ -99,6 +110,7 @@ public class StuServiceImpl implements StuService {
         }
     }
 
+    @Transactional
     @Override
     public boolean stuDel(String id) {
         if(stuDao.applyCount2(id) ==1){

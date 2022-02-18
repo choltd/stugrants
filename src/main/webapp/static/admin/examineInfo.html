@@ -48,7 +48,7 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/admin?act=examinePage",
+            url: "admin/examinePage",
             data: pageInfo,
             dataType: "json",
             type: "post",
@@ -79,7 +79,7 @@
 
     function examineDel(id){
         if(confirm("确认删除")) {
-            $.post("/admin?act=examineDel", {"id": id}, function (data) {
+            $.post("admin/examineDel", {_method:"delete","id": id}, function (data) {
                 if (!(JSON.parse(data).success)) {
                     alert("删除失败")
                 }else{

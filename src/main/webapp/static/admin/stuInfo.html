@@ -127,7 +127,7 @@
         pageShow(1, true);
 
         $("#stuAdd").click(function () {
-            $.get("/admin?act=classname",function(data){
+            $.get("admin/classname",function(data){
                 if(data != null) {
                     var html = ""
                     $.each(data, function (i, e) {
@@ -140,7 +140,7 @@
         })
 
         $("#save").click(function(){
-            $.post("/admin?act=stuAdd",{
+            $.post("admin/stuAdd",{
                 "name":$("#stu-name").val(),
                 "sequence":$("#stu-sequence").val(),
                 "sex":$("#stu-sex").val(),
@@ -163,7 +163,7 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/admin?act=stuPage",
+            url: "admin/stuPage",
             data: pageInfo,
             dataType: "json",
             type: "post",
@@ -194,7 +194,7 @@
 
     function stuDel(id) {
         if(confirm("确认删除?")) {
-            $.post("/admin?act=stuDel", {"studentId": id}, function (data) {
+            $.post("admin/stuDel", {_method:"delete","studentId": id}, function (data) {
                 if (!(JSON.parse(data).success)) {
                     alert("删除失败")
                 }else{

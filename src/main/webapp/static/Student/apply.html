@@ -278,7 +278,7 @@
             } else if ($xz.length > 1) {
                 alert("只能同时修改一项")
             } else {
-                $.get("/stu?action=applyEdit", {"applyId": $xz.val()}, function (data) {
+                $.get("stu/applyEdit", {"applyId": $xz.val()}, function (data) {
                     $("#hd-applyId").val(data.applyId)
                     $("#edit-name").val(data.name)
                     $("#edit-sequence").val(data.sequence)
@@ -297,7 +297,8 @@
         })
 
         $("#update").click(function () {
-            $.post("/stu?action=update", {
+            $.post("stu/update", {
+                _method:"put",
                 "applyId": $("#hd-applyId").val(),
                 "illustrate": $("#edit-illustrate").val(),
                 "remark": $("#edit-remark").val(),
@@ -316,10 +317,10 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/stu?action=viewApplyPage",
+            url: "stu/vaPage",
             data: {"pageNum":pageInfo.pageNum,"pageSize":pageInfo.pageSize,"sequence":stuInfo().sequence},
             dataType: "json",
-            type: "post",
+            type: "get",
             success: function (data) {
                 var html = "";
                 $("#applyList").html(html);

@@ -167,7 +167,7 @@
                 alert("只能同时删除一项")
             } else {
                 if(confirm("确认删除?")) {
-                    $.post("/stu?action=applyDel", {"applyId": $xz.val()}, function (data) {
+                    $.post("stu/applyDel", {_method:"delete","applyId": $xz.val()}, function (data) {
                         if (!(JSON.parse(data)).success) {
                             alert("删除失败")
                         } else {
@@ -185,7 +185,7 @@
             } else if ($xz.length > 1) {
                 alert("只能同时修改一项")
             } else {
-                $.get("/stu?action=applyEdit", {"applyId": $xz.val()}, function (data) {
+                $.get("stu/applyEdit", {"applyId": $xz.val()}, function (data) {
                     $("#hidden-edit-applyId").val(data.id)
                     $("#edit-name").val(data.name)
                     $("#edit-sequence").val(data.sequence)
@@ -204,7 +204,8 @@
         })
 
         $("#update").click(function () {
-            $.post("/stu?action=update", {
+            $.post("stu/update", {
+                _method: "put",
                 "applyId": $("#hidden-edit-applyId").val(),
                 "illustrate": $("#edit-illustrate").val(),
                 "remark": $("#edit-remark").val(),
@@ -223,10 +224,10 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/admin?act=viewApplyPage",
+            url: "admin/vaPage",
             data: pageInfo,
             dataType: "json",
-            type: "post",
+            type: "get",
             success: function (data) {
                 var html = "";
                 $("#applyList").html(html);

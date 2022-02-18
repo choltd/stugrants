@@ -6,17 +6,25 @@ import com.jjugrants.dao.TchDao;
 import com.jjugrants.domain.*;
 import com.jjugrants.service.AdminService;
 import com.jjugrants.utils.SqlSessionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class AdminServiceImpl implements AdminService {
-    private final AdminDao adminDao = SqlSessionUtil.getSqlSession().getMapper(AdminDao.class);
-    private final StuDao stuDao = SqlSessionUtil.getSqlSession().getMapper(StuDao.class);
-    private final TchDao tchDao = SqlSessionUtil.getSqlSession().getMapper(TchDao.class);
+
+    @Resource
+    private AdminDao adminDao;
+    @Resource
+    private StuDao stuDao;
+    @Resource
+    private TchDao tchDao;
 
     @Override
     public Admin login(Admin admin) {
@@ -108,6 +116,7 @@ public class AdminServiceImpl implements AdminService {
         return vePageBean;
     }
 
+    @Transactional
     @Override
     public boolean pwdUpdate(String adminId, String password, String change) {
         if (adminDao.verify(adminId, password) == 1) {
@@ -124,11 +133,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean stuAdd(Student student) {
+        student.setPassword(student.getIdcard().substring(12));
         return stuDao.stuAdd(student) == 1;
     }
 
     @Override
     public boolean tchAdd(Teacher teacher) {
+        teacher.setPassword("123456");
         return tchDao.tchAdd(teacher) == 1;
     }
 }

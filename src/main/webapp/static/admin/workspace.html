@@ -195,7 +195,7 @@
             } else if (edit !== confirm || edit === "" || confirm === "") {
                 alert("两次输入密码不一致")
             } else {
-                $.post("/admin?act=pwdUpdate", {"adminId": adminInfo().adminId, "password": old, "change": confirm}, function (data) {
+                $.post("admin/pwdUpdate", {_method:"put","adminId": adminInfo().adminId, "password": old, "change": confirm}, function (data) {
                     if ((JSON.parse(data)).success) {
                         alert("修改成功")
                         location.href = "signin.html"

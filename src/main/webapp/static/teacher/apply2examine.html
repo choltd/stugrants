@@ -149,7 +149,8 @@
         pageShow(1, true);
 
         $("#applyPass").click(function () {
-            $.post("/tch?action=examine", {
+            $.post("tch/examine", {
+                _method: "put",
                 "applyId": $("#pass-id").val(),
                 "teacherId": tchInfo().teacherId
             }, function (data) {
@@ -165,10 +166,10 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/tch?action=viewApplyPage",
+            url: "tch/vaPage",
             data: {"pageSize": pageInfo.pageSize, "pageNum": pageInfo.pageNum, "teacherId": tchInfo().teacherId},
             dataType: "json",
-            type: "post",
+            type: "get",
             success: function (data) {
                 var html = "";
                 $("#applyList").html(html);
@@ -194,7 +195,7 @@
 
     function applyShow(applyId) {
         $.ajax({
-            url: "/tch?action=applyShow",
+            url: "tch/applyShow",
             data: {"applyId": applyId},
             dataType: "json",
             type: "get",
@@ -222,7 +223,7 @@
     }
 
     function applyFail(applyId) {
-        $.post("/tch?action=applyFail", {"applyId": applyId, "teacherId": tchInfo().teacherId}, function () {
+        $.post("tch/applyFail", {_method:"put","applyId": applyId, "teacherId": tchInfo().teacherId}, function () {
             pageShow(1, false)
         })
     }

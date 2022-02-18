@@ -77,7 +77,7 @@
         $("#searchBtn").click(function () {
             var classname = $("#search-classname").val()
             if(classname != ""){
-                $.get("/tch?action=searchClassname",{"classname":classname},function (data) {
+                $.get("tch/searchClassname",{"classname":classname},function (data) {
                     var html = "";
                     $("#examineList").html(html);
                     $.each(data, function (i, e) {
@@ -103,7 +103,7 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/tch?action=examinePage",
+            url: "tch/examinePage",
             data: pageInfo,
             dataType: "json",
             type: "post",

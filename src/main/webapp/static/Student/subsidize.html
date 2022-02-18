@@ -65,10 +65,10 @@
     function pageShow(num, isFirst) {
         pageInfo.pageNum = num;
         $.ajax({
-            url: "/stu?action=viewResultPage",
+            url: "stu/vrPage",
             data: pageInfo,
             dataType: "json",
-            type: "post",
+            type: "get",
             success: function (data) {
                 var $tbody = $("#subsidizeList");
                 var html = "";

@@ -1,7 +1,7 @@
 applyAdd = function (data){
     var flag = ""
     $.ajax({
-        url:"/stu?action=applyAdd",
+        url:"stu/applyAdd",
         async:false,
         data:data,
         dataType:"json",

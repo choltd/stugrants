@@ -181,7 +181,7 @@
             } else if (edit !== confirm || edit === "" || confirm === "") {
                 alert("两次输入密码不一致")
             } else {
-                $.post("/tch?action=pwdUpdate", {"teacherId": tchInfo().teacherId, "password": old, "change": confirm}, function (data) {
+                $.post("tch/pwdUpdate", {_method:"put","teacherId": tchInfo().teacherId, "password": old, "change": confirm}, function (data) {
                     if ((JSON.parse(data)).success) {
                         alert("修改成功")
                         location.href = "tchLogin.html"
